@@ -1,0 +1,58 @@
+<mat-drawer-container class="example-container" hasBackdrop="True" autosize>
+  <mat-drawer style="height: 100%" #drawer class="example-sidenav" mode="over">
+    <h2
+      style="
+        border-bottom: 2px solid red;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      "
+    >
+      Expense Tracker
+    </h2>
+    <div>
+      <div style="margin-top: 20px">
+        <button mat-raised-button color="primary">
+          <mat-icon>equalizer</mat-icon>View Expenses
+        </button>
+      </div>
+      <div style="margin-top: 20px">
+        <button mat-raised-button color="primary" (click)="openDialog()">
+          <mat-icon>perm_identity</mat-icon>Profile
+        </button>
+      </div>
+      <div  style="margin-top: 20px">
+        <button mat-raised-button color="primary" >
+          <mat-icon>logout</mat-icon>Logout
+        </button>
+      </div>
+    </div>
+  </mat-drawer>
+  <div>
+    <mat-toolbar style="border-bottom: 1px solid black">
+      <button
+        mat-icon-button
+        class="example-icon"
+        (click)="drawer.toggle()"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Expense Tracker</span>
+      <span class="example-spacer"></span>
+      <button
+        mat-mini-fab
+        color="accent"
+        matTooltip="View Expenses"
+        style="margin-right: 6px"
+        (click)="onView()"
+      >
+        <mat-icon>equalizer</mat-icon>
+      </button>
+      <button mat-raised-button color="accent">
+        <mat-icon>logout</mat-icon>Logout
+      </button>
+    </mat-toolbar>
+  </div>
+  <div>
+    <app-dashboard></app-dashboard>
+  </div>
+</mat-drawer-container>

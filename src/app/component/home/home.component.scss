@@ -1,0 +1,29 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding-left: 50px;
+  padding-right: 100px;
+  padding-top: 50px;
+}
+.btns{
+  position: fixed;
+  bottom: 10%;
+  right: 5%;
+  z-index: 100;
+}
+.mainlogin{
+  background-image: url(../../../assets/image/save.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: auto;
+}

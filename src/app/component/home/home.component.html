@@ -1,0 +1,91 @@
+<mat-drawer-container
+  class="example-container"
+  hasBackdrop="True"
+  autosize
+  style="height: 100vh"
+>
+  <mat-drawer style="height: 100%" #drawer class="example-sidenav" mode="over">
+    <h2
+      style="
+        border-bottom: 2px solid red;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      "
+    >
+      Expense Tracker
+    </h2>
+    <div>
+      <div *ngIf="!isLogging">
+        <button mat-raised-button color="primary">
+          <mat-icon>login</mat-icon>Login
+        </button>
+        <div style="margin-top: 20px">
+          <button mat-raised-button color="primary" (click)="onSignUp()">
+            <mat-icon>perm_identity</mat-icon>Sign Up
+          </button>
+        </div>
+      </div>
+      <div *ngIf="isLogging">
+        <button mat-raised-button color="primary" (click)="Profile()">
+          <mat-icon>perm_identity</mat-icon>Profile
+        </button>
+        <div style="margin-top: 20px">
+        <button mat-raised-button color="primary" (click)="onAdd()">
+          <mat-icon>add-chart</mat-icon>Add Expenses
+        </button>
+        </div>
+        <div style="margin-top: 20px">
+        <button mat-raised-button color="primary" (click)="onLogout()">
+          <mat-icon>logout</mat-icon>Logout
+        </button>
+        </div>
+      </div>
+    </div>
+  </mat-drawer>
+  <div>
+    <mat-toolbar style="border-bottom: 1px solid black">
+      <button
+        mat-icon-button
+        class="example-icon"
+        (click)="drawer.toggle()"
+        aria-label="Example icon-button with menu icon"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Expense Tracker</span>
+      <span class="example-spacer"></span>
+      <button
+        *ngIf="!isLogging"
+        mat-mini-fab
+        class="example-icon favorite-icon"
+        aria-label="Example icon-button with heart icon"
+        matTooltip="Sign Up"
+        (click)="onSignUp()"
+      >
+        <mat-icon>perm_identity</mat-icon>
+      </button>
+      <button *ngIf="isLogging" mat-raised-button color="accent">
+        <mat-icon>logout</mat-icon>Logout
+      </button>
+      <!-- <button *ngIf="isLogging" mat-raised-button color="accent">
+        <mat-icon>addchart</mat-icon>Add New
+      </button> -->
+    </mat-toolbar>
+  </div>
+  <div *ngIf="!isLogging">
+    <app-login></app-login>
+  </div>
+  <div class="mainlogin" *ngIf="isLogging">
+    <app-view-expenses></app-view-expenses>
+  </div>
+  <div *ngIf="isLogging">
+    <button
+      (click)="onAdd()"
+      matTooltip="Add Expense"
+      class="btns"
+      mat-mini-fab
+      color="accent"
+    >
+      <mat-icon>add-chart</mat-icon>
+    </button>
+  </div>
+</mat-drawer-container>

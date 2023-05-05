@@ -1,0 +1,29 @@
+<div>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title
+        >User Information <mat-icon>verified_user</mat-icon></mat-card-title
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <div class="main">
+        <img
+          src="../../../assets/image/man.png"
+          alt="man image"
+          height="60px"
+          width="60px"
+        />
+        <p>{{ user_name }}</p>
+      </div>
+      <div class="row row-col-3 mains">
+        <div class="col" *ngFor="let line of lines">
+          <p style="text-align: center">{{ line.content }}</p>
+          <p style="text-align: center">{{ line.text }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button mat-dialog-close cdkFocusInitial>Ok</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

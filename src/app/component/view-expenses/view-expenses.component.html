@@ -1,0 +1,67 @@
+<div class="main">
+  <div class="row row-col-4">
+    <div
+      class="col-lg-3 col-xs-3 col-md-12 col-sm-6"
+      *ngFor="let card of cards"
+    >
+      <mat-card  class="matContnet">
+        <mat-card-content>
+          <p class="icons">
+            <mat-icon
+              role="img"
+              style="font-size: 48px; width: 50px; height: 50px"
+              >{{ card.icon }}</mat-icon
+            >
+          </p>
+          <p>{{ card.content }}</p>
+          <p>{{ card.title }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row row-col-2">
+    <div class="col-sm-6 col-xs-12">
+      <mat-card>
+        <mat-card-content>
+          <mat-card-title>Category Summary</mat-card-title>
+          <app-show-chart [chartType]="'pie'"></app-show-chart>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-sm-6 col-xs-12">
+      <mat-card>
+        <mat-card-title class="content">
+          <p>Expense Monthly Summary</p>
+          <mat-form-field appearance="outline">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" />
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="picker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker
+              #picker
+              startView="year"
+              [startAt]="startDate"
+            ></mat-datepicker>
+          </mat-form-field>
+        </mat-card-title>
+        <mat-card-content style="height: 270px">
+          <app-show-chart [chartType]="'bar'"></app-show-chart>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row row-col-1">
+    <div class="col col-xs-12 col-sm-12">
+      <mat-card>
+        <mat-card-title style="padding: 10px 20px;">Detail Summary</mat-card-title>
+        <mat-card-subtitle>Click on row to Edit/Delete Expense</mat-card-subtitle>
+        <mat-card-content class="tableContent">
+            
+          <app-show-chart [chartType]="'table'"></app-show-chart>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

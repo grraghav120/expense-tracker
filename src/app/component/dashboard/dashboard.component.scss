@@ -1,0 +1,23 @@
+.container-fluid {
+  background-image: url(../../../assets/image/ruppe2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+}
+.example-form-field {
+  width: 100%;
+}
+
+.example-button-container > button {
+  margin: 0 12px;
+}
+
+.myCard{
+    margin-top: 25px;
+}
+.btns{
+    position: fixed;
+    bottom: 10%;
+    right: 5%;
+    z-index: 100;
+}

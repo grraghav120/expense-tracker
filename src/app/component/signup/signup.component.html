@@ -1,0 +1,71 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6 col-xs-12 col-md-6 myimage">
+      <img src="../../../assets/image/save.jpg" alt="image" />
+    </div>
+    <div class="col-sm-6 col-xs-12 col-md-6" style="padding: 20px">
+      <p class="paragraph">Create an Expense Tracker Account</p>
+      <form [formGroup]="signUpForm">
+        <div class="inputs">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Full Name</mat-label>
+            <input matInput placeholder="Full Name" formControlName="name" />
+            <mat-hint *ngIf="signUpForm.get('name')?.errors &&
+            signUpForm.get('name')?.hasError('required') && signUpForm.get('name')?.touched" style="color: red;" >Name is required</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="inputs">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Username</mat-label>
+            <input matInput placeholder="Username" formControlName="username" />
+            <mat-hint *ngIf="signUpForm.get('username')?.errors &&
+            signUpForm.get('username')?.hasError('required') && signUpForm.get('username')?.touched "style="color: red;">Username is required</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="inputs">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Your Gmail</mat-label>
+            <input
+              matInput
+              type="email"
+              placeholder="abc@gmail.com"
+              formControlName="gmail"
+            />
+            <mat-hint *ngIf="signUpForm.get('gmail')?.errors &&
+            signUpForm.get('gmail')?.hasError('required') && signUpForm.get('gmail')?.touched" style="color: red;">
+              Email Address is required
+            </mat-hint>
+            <mat-hint *ngIf="signUpForm.get('gmail')?.errors &&
+            signUpForm.get('gmail')?.hasError('email') && signUpForm.get('gmail')?.touched" style="color: red;">
+              Email Address is invalid
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="inputs">
+          <mat-form-field appearance="outline">
+            <mat-label>Enter Password</mat-label>
+            <input
+              matInput
+              
+              formControlName="password"
+              type="password"
+            />
+            <mat-hint *ngIf="signUpForm.get('password')?.errors &&
+            signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched" style="color: red;">Password is required</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="text-align: center">
+          <button
+            style="margin: 10px 20px 10px 20px"
+            mat-raised-button
+            color="primary"
+            [disabled]="signUpForm.invalid"
+            (click)="onProceed()"
+          >
+            Proceed
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,35 @@
+.main{
+    padding: 30px 25px;
+    // background-image: url(../../../assets/image/ruppe2.png);
+    // image-resolution: 200;
+}
+mat-card{
+    margin: 0px 25px;
+    margin-bottom: 20px;
+}
+mat-card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.icons{
+    font-size: 25px;
+    font-weight: bold;
+}
+.content{
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.tableContent{
+    overflow:hidden;
+    position: relative;
+    display: contents;
+}
+.matContnet:hover{
+    transform: scale(1.1);
+    transition: .5s;
+}

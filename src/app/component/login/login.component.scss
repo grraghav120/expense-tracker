@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+}
+
+.content {
+  text-align: center;
+  flex-direction: column;
+  font-size: 18px;
+  font-weight: 200;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  padding-top: 50px;
+  margin: 0px 20px;
+}
+
+.line{
+    height: 2px;
+    background-color: blue;
+    margin: 2px 70px;
+}
+
+.content1 {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+.content1 button{
+    border: 1px solid grey;
+}
+
+.loginp{
+    // display: box;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom: 2px solid red;
+    padding-bottom: 20px;
+}
+
+.loginp:hover{
+    transform: scale(1.1);
+    transition: 1s;
+}
+
+.forms{
+    box-sizing: border-box; 
+    border: 1px solid grey;
+    padding: 20px 30px;
+    border-radius: 5px;
+}
