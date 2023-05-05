@@ -1,81 +1,145 @@
 <div>
-    <mat-card class="example-card">
-        <mat-card-header>
-          <mat-card-title>Add New Expense</mat-card-title>
-          <mat-card-subtitle
-            >Enter all the required fields to save new
-            expense</mat-card-subtitle
-          >
-        </mat-card-header>
-        <mat-card-content style="margin-top: 10px;">
-          <form [formGroup]="expenseForm">
-            <div class="row">
-                <div class="col-sm-6">
-                    <mat-form-field appearance="outline" style="width: 100%;">
-                        <mat-label>Expense Name</mat-label>
-                        <input matInput placeholder=""  formControlName="name">
-                        <!-- <mat-hint>Hint</mat-hint> -->
-                    </mat-form-field>
-                </div>
-                <div class="col-sm-6">
-                    <mat-form-field appearance="outline" style="width: 100%;">
-                        <mat-label>Amount</mat-label>
-                        <input matInput placeholder="" formControlName="amount" type="number">
-                        <!-- <mat-hint>Hint</mat-hint> -->
-                      </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <mat-form-field appearance="outline" style="width: 100%;">
-                        <mat-label>Choose a Expense date</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="date">
-                        <mat-hint>MM/DD/YYYY</mat-hint>
-                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                      </mat-form-field>
-                </div>
-                <div class="col-sm-6">
-                    <mat-form-field appearance="outline" style="width: 100%;">
-                        <mat-label>Expense Category</mat-label>
-                        <mat-select formControlName="category">
-                            <mat-option *ngFor="let item of keywords" value="item">{{item}}</mat-option>
-                          </mat-select>
-                        <!-- <mat-hint>Hint</mat-hint> -->
-                      </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <mat-form-field appearance="outline" style="width: 100%;">
-                        <mat-label>Expense Payment Type</mat-label>
-                        <mat-select formControlName="payment">
-                            <mat-option  *ngFor="let item of payments" value="item">{{item}}</mat-option>
-                          </mat-select>
-                        <!-- <mat-hint>Hint</mat-hint> -->
-                      </mat-form-field>
-                </div>
-            </div>
-            <div class="row">
-                <mat-form-field appearance="outline" style="width: 100%;">
-                    <mat-label>Comments</mat-label>
-                    <textarea matInput formControlName="comments"></textarea>
-                </mat-form-field>
-            </div>
-          </form>
-        </mat-card-content>
-        <mat-card-actions align="end">
-          <button mat-raised-button (click)=onReset()><mat-icon>autorenew</mat-icon>Reset</button>
-          <button mat-raised-button (click)="onSaveExpense()" [disabled]="expenseForm.invalid">
-            <mat-icon>save</mat-icon> Save
-          </button>
-        </mat-card-actions>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Add New Expense</mat-card-title>
+      <mat-card-subtitle
+        >Enter all the required fields to save new expense</mat-card-subtitle
+      >
+    </mat-card-header>
+    <mat-card-content style="margin-top: 10px">
+      <form [formGroup]="expenseForm">
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Expense Name</mat-label>
+              <input matInput placeholder="" formControlName="name" />
+              <mat-hint
+                *ngIf="
+                  expenseForm.get('name')?.errors &&
+                  expenseForm.get('name')?.hasError('required') &&
+                  expenseForm.get('name')?.touched
+                "
+                style="color: red"
+              >
+                Expense Name is required
+              </mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Amount</mat-label>
+              <input
+                matInput
+                placeholder=""
+                formControlName="amount"
+                type="number"
+              />
+              <mat-hint
+                *ngIf="
+                  expenseForm.get('amount')?.errors &&
+                  expenseForm.get('amount')?.hasError('required') &&
+                  expenseForm.get('amount')?.touched
+                "
+                style="color: red"
+              >
+                Expense Amount is required
+              </mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Choose a Expense date</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date" />
+              <mat-hint
+                *ngIf="
+                  expenseForm.get('date')?.errors &&
+                  expenseForm.get('date')?.hasError('required') &&
+                  expenseForm.get('date')?.touched
+                "
+                style="color: red"
+              >
+                Expense Date is required
+              </mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Expense Category</mat-label>
+              <mat-select formControlName="category">
+                <mat-option *ngFor="let item of keywords" value="item">{{
+                  item
+                }}</mat-option>
+              </mat-select>
+              <mat-hint
+                *ngIf="
+                  expenseForm.get('category')?.errors &&
+                  expenseForm.get('category')?.hasError('required') &&
+                  expenseForm.get('category')?.touched
+                "
+                style="color: red"
+              >
+                Expense Category is required
+              </mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-form-field appearance="outline" style="width: 100%">
+              <mat-label>Expense Payment Type</mat-label>
+              <mat-select formControlName="payment">
+                <mat-option *ngFor="let item of payments" value="item">{{
+                  item
+                }}</mat-option>
+              </mat-select>
+              <mat-hint
+                *ngIf="
+                  expenseForm.get('payment')?.errors &&
+                  expenseForm.get('payment')?.hasError('required') &&
+                  expenseForm.get('payment')?.touched
+                "
+                style="color: red"
+              >
+                Expense Payment is required
+              </mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Comments</mat-label>
+            <textarea matInput formControlName="comments"></textarea>
+          </mat-form-field>
+        </div>
+      </form>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <button mat-raised-button (click)="onReset()">
+        <mat-icon>autorenew</mat-icon>Reset
+      </button>
+      <button
+        mat-raised-button
+        (click)="onSaveExpense()"
+        [disabled]="expenseForm.invalid"
+      >
+        <mat-icon>save</mat-icon> Save
+      </button>
+    </mat-card-actions>
 
-        <mat-card-actions align="end" *ngIf="actions==='view'">
-          <button mat-raised-button (click)=onEdit() color="primary"><mat-icon>edit</mat-icon>Edit</button>
-          <button mat-raised-button (click)="onDelete()" color="warn">
-            <mat-icon>delete</mat-icon> Delete
-          </button>
-        </mat-card-actions>
-      </mat-card>
+    <mat-card-actions align="end" *ngIf="actions === 'view'">
+      <button mat-raised-button (click)="onEdit()" color="primary">
+        <mat-icon>edit</mat-icon>Edit
+      </button>
+      <button mat-raised-button (click)="onDelete()" color="warn">
+        <mat-icon>delete</mat-icon> Delete
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>
