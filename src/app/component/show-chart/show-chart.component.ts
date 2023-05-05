@@ -3,7 +3,7 @@ import { ChartOptions } from 'chart.js';
 import { ChartConfiguration } from 'chart.js';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ExpenseContent } from './show-charts';
+import { ExpenseContent } from './show-charts.modal';
 import { MatDialog } from '@angular/material/dialog';
 import { AddExpenseComponent } from '../add-expense/add-expense.component';
 @Component({
