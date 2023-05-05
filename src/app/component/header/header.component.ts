@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ProfileComponent } from '../profile/profile.component';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { ProfileComponent } from '../profile/profile.component';
 })
 export class HeaderComponent implements OnInit{
   isLogging:boolean=true;
-  constructor(private route:Router,public dialog: MatDialog,){}
+  constructor(private route:Router,public dialog: MatDialog,public businessData:BusinessDataService){}
   ngOnInit(): void {
     
   }
@@ -20,6 +21,9 @@ export class HeaderComponent implements OnInit{
     })
   }
   onView(){
-    this.route.navigate(['welcome']);
+    this.route.navigate(['dashboard']);
+  }
+  onLogout(){
+    this.businessData.onLogout();
   }
 }

@@ -17,4 +17,7 @@ export class BusinessDataService {
   onView(){
     this.route.navigate(['welcome']);
   }
+  onLogout(){
+    this.route.navigate(['welcome']);
+  }
 }

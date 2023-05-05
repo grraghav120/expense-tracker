@@ -10,7 +10,7 @@
     </h2>
     <div>
       <div style="margin-top: 20px">
-        <button mat-raised-button color="primary">
+        <button mat-raised-button color="primary" (click)="onView()" >
           <mat-icon>equalizer</mat-icon>View Expenses
         </button>
       </div>
@@ -20,7 +20,7 @@
         </button>
       </div>
       <div  style="margin-top: 20px">
-        <button mat-raised-button color="primary" >
+        <button mat-raised-button color="primary" (click)="onLogout()">
           <mat-icon>logout</mat-icon>Logout
         </button>
       </div>
@@ -47,7 +47,7 @@
       >
         <mat-icon>equalizer</mat-icon>
       </button>
-      <button mat-raised-button color="accent">
+      <button mat-raised-button color="accent" (click)="onLogout()">
         <mat-icon>logout</mat-icon>Logout
       </button>
     </mat-toolbar>
