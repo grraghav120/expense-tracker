@@ -56,6 +56,6 @@ export class DashboardComponent implements OnInit {
     });
   }
   onView() {
-    this.route.navigate(['welcome']);
+    this.route.navigate(['dashboard']);
   }
 }

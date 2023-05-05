@@ -15,11 +15,8 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
     this.isLogging=this.businessData.isLogging;
   }
-  onSignUp(){
-    this.route.navigate(['signUp']);
-  }
   onAdd(){
-    this.route.navigate(['dashboard']);
+    this.route.navigate(['home']);
   }
   Profile(){
     this.openDialog();
@@ -30,7 +27,6 @@ export class HomeComponent implements OnInit{
     })
   }
   onLogout(){
-    this.isLogging=false;
-    this.businessData.isLogging=false;
+    this.businessData.onLogout();
   }
 }

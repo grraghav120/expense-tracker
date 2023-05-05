@@ -33,6 +33,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { ShowChartComponent } from './component/show-chart/show-chart.component';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { WelcomeComponent } from './component/welcome/welcome.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     AddCategoryComponent,
     ViewExpensesComponent,
     ShowChartComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
