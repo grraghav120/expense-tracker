@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 @Component({
   selector: 'app-view-expenses',
   templateUrl: './view-expenses.component.html',
   styleUrls: ['./view-expenses.component.scss']
 })
 export class ViewExpensesComponent implements OnInit{
+  // @Output() ELEMENT_DATA:any;
   text1:any='raghav ';
   text2:any='rghav1';
   text3:any='raghav2';
@@ -16,7 +18,8 @@ export class ViewExpensesComponent implements OnInit{
     {icon:'numbers',title:'Number of Expenses',content:this.text3},
     {icon:'monetization_on',title:'Total Amount',content:this.text4},
   ]
-  constructor(){}
+  // ELEMENT_DATA: any;
+  constructor(public businessData:BusinessDataService){}
   ngOnInit(): void {
     
   }

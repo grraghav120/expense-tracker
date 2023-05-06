@@ -34,6 +34,9 @@ import { ShowChartComponent } from './component/show-chart/show-chart.component'
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { WelcomeComponent } from './component/welcome/welcome.component';
+import { HttpClientModule } from '@angular/common/http';
+import { TableviewComponent } from './component/tableview/tableview.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +52,7 @@ import { WelcomeComponent } from './component/welcome/welcome.component';
     ViewExpensesComponent,
     ShowChartComponent,
     WelcomeComponent,
+    TableviewComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,8 +60,10 @@ import { WelcomeComponent } from './component/welcome/welcome.component';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatDialogModule,
+    HttpClientModule,
     MatPaginatorModule,
     FormsModule,
+    MatSnackBarModule,
     NgChartsModule,
     MatNativeDateModule,
     MatSelectModule,

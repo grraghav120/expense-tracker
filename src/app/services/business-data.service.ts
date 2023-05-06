@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,7 +8,8 @@ import { Router } from '@angular/router';
 export class BusinessDataService {
   isLogging:boolean=false;
   keywords:any=[];
-  constructor(private route:Router) { }
+  apiUrl='http://localhost:3000/v1/api/'
+  constructor(private route:Router,public http:HttpClient) { }
 
   onSignUp(values:any){
     console.log(values);
@@ -20,4 +22,13 @@ export class BusinessDataService {
   onLogout(){
     this.route.navigate(['welcome']);
   }
+
+  onGetAllExpense(){
+    return this.http.get(this.apiUrl+'GET_ALL_EXPENSE');
+  }
+
+  onCreateExpense(body:any){
+    return this.http.post(this.apiUrl+'CREATE_EXPENSE',body);
+  }
+
 }

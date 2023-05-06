@@ -73,7 +73,7 @@
             <mat-form-field appearance="outline" style="width: 100%">
               <mat-label>Expense Category</mat-label>
               <mat-select formControlName="category">
-                <mat-option *ngFor="let item of keywords" value="item">{{
+                <mat-option *ngFor="let item of keywords" [value]="item">{{
                   item
                 }}</mat-option>
               </mat-select>
@@ -95,7 +95,7 @@
             <mat-form-field appearance="outline" style="width: 100%">
               <mat-label>Expense Payment Type</mat-label>
               <mat-select formControlName="payment">
-                <mat-option *ngFor="let item of payments" value="item">{{
+                <mat-option *ngFor="let item of payments" [value]="item">{{
                   item
                 }}</mat-option>
               </mat-select>

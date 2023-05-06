@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatFormFieldAppearance } from '@angular/material/form-field';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 @Component({
   selector: 'app-add-expense',
@@ -13,7 +14,7 @@ export class AddExpenseComponent implements OnInit {
   keywords: any = [];
   payments: any = ['Card', 'Cash', 'UPI', 'Net Banking', 'Paypal'];
   actions: any = '';
-  constructor(public businessData: BusinessDataService) {}
+  constructor(public businessData: BusinessDataService,private _snackBar: MatSnackBar) {}
   ngOnInit(): void {
     this.keywords = this.businessData.keywords;
     this.expenseForm = new FormGroup({
@@ -28,7 +29,14 @@ export class AddExpenseComponent implements OnInit {
   onReset() {
     this.expenseForm.reset();
   }
-  onSaveExpense() {}
+  onSaveExpense() {
+    this.businessData.onCreateExpense(this.expenseForm.value).subscribe((res:any)=>{
+      if(res.status===true){
+        this._snackBar.open('Expense Added','',{duration:2000});
+        this.onReset();
+      }
+    })
+  }
   onEdit() {}
   onDelete() {}
 }
