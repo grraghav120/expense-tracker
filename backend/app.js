@@ -5,7 +5,10 @@ const app = express(); //express app, act as a middleware
 const bodyParser = require("body-parser"); //imnport body-parser
 
 const CreateExpense = require("./models/createExpense"); //import the Schema of Create Expense\
-const CreateCategory = require('./models/createCategory')
+const CreateCategory = require('./models/createCategory');
+
+const userRoutes=require('./routes/user');
+
 const mongoose = require("mongoose");
 
 
@@ -83,25 +86,28 @@ app.post("/v1/api/CREATE_EXPENSE", (req, res, next) => {
     payment: req.body.payment,
     comment: req.body.comment,
   });
-  newExpense.save(); //database command to insert the data see manogoDB
-  res.status(201).json({
-    message: "Successfully Created",
-    status: true,
-  });
-  next();
+  newExpense.save().then((result)=>{
+    res.status(201).json({
+      message: "Successfully Created",
+      status: true,
+    });
+    next();
+  }) //database command to insert the data see manogoDB
 });
 
 app.post('/v1/api/CREATE_CATEGORY',(req,res,next)=>{
   const allCategory=new CreateCategory({
     categories:req.body.categories,
   })
-  allCategory.save();
-  // console.log(req.body.categories);
-  res.status(201).json({
-    message:"Successfully Added",
-    status:"200",
+  allCategory.save().then((res)=>{
+    res.status(201).json({
+      message:"Successfully Added",
+      status:"200",
+    })
+    next();
   })
-  next();
+  // console.log(req.body.categories);
+  
 });
 
 app.get('/v1/api/GET_ALL_CATEGORY',(req,res,next)=>{
@@ -117,5 +123,6 @@ app.get('/v1/api/GET_ALL_CATEGORY',(req,res,next)=>{
   });
 });
 
+app.use('/v1/api/USER',userRoutes);
 
 module.exports = app;

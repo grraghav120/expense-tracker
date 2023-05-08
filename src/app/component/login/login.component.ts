@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
   loginForm!:FormGroup;
   constructor(public route:Router,public businessData:BusinessDataService){}
   ngOnInit(): void {
-    // this.isLogging=this.businessData.isLogging;
     this.loginForm=new FormGroup({
       gmail:new FormControl('',[Validators.required,Validators.email]),
       pass:new FormControl('',Validators.required),
@@ -27,10 +26,6 @@ export class LoginComponent implements OnInit {
     this.businessData.isLogging=true;
     this.route.navigate(['welcome']);
     
-  }
-
-  onSignUp(){
-    this.route.navigate(['signUp']);
   }
 
 }

@@ -19,3 +19,10 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-align: center;
 }
+.singUpBtn{
+    text-align: center;
+}
+.singUpBtn:hover{
+    transform: scale(1.1);
+    transition: .5s;
+}

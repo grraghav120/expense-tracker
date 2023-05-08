@@ -10,16 +10,16 @@
           <mat-form-field appearance="outline">
             <mat-label>Enter Full Name</mat-label>
             <input matInput placeholder="Full Name" formControlName="name" />
-            <mat-hint *ngIf="signUpForm.get('name')?.errors &&
-            signUpForm.get('name')?.hasError('required') && signUpForm.get('name')?.touched" style="color: red;" >Name is required</mat-hint>
+            <mat-error *ngIf="signUpForm.get('name')?.errors &&
+            signUpForm.get('name')?.hasError('required') && signUpForm.get('name')?.touched"  >Name is required</mat-error>
           </mat-form-field>
         </div>
         <div class="inputs">
           <mat-form-field appearance="outline">
             <mat-label>Enter Username</mat-label>
             <input matInput placeholder="Username" formControlName="username" />
-            <mat-hint *ngIf="signUpForm.get('username')?.errors &&
-            signUpForm.get('username')?.hasError('required') && signUpForm.get('username')?.touched "style="color: red;">Username is required</mat-hint>
+            <mat-error *ngIf="signUpForm.get('username')?.errors &&
+            signUpForm.get('username')?.hasError('required') && signUpForm.get('username')?.touched ">Username is required</mat-error>
           </mat-form-field>
         </div>
         <div class="inputs">
@@ -31,14 +31,14 @@
               placeholder="abc@gmail.com"
               formControlName="gmail"
             />
-            <mat-hint *ngIf="signUpForm.get('gmail')?.errors &&
-            signUpForm.get('gmail')?.hasError('required') && signUpForm.get('gmail')?.touched" style="color: red;">
+            <mat-error *ngIf="signUpForm.get('gmail')?.errors &&
+            signUpForm.get('gmail')?.hasError('required') && signUpForm.get('gmail')?.touched">
               Email Address is required
-            </mat-hint>
-            <mat-hint *ngIf="signUpForm.get('gmail')?.errors &&
-            signUpForm.get('gmail')?.hasError('email') && signUpForm.get('gmail')?.touched" style="color: red;">
+            </mat-error>
+            <mat-error *ngIf="signUpForm.get('gmail')?.errors &&
+            signUpForm.get('gmail')?.hasError('email') && signUpForm.get('gmail')?.touched" >
               Email Address is invalid
-            </mat-hint>
+            </mat-error>
           </mat-form-field>
         </div>
         <div class="inputs">
@@ -50,13 +50,14 @@
               formControlName="password"
               type="password"
             />
-            <mat-hint *ngIf="signUpForm.get('password')?.errors &&
-            signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched" style="color: red;">Password is required</mat-hint>
+            <mat-error *ngIf="signUpForm.get('password')?.errors &&
+            signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">Password is required</mat-error>
           </mat-form-field>
         </div>
-        <div style="text-align: center">
+        <div class="singUpBtn">
           <button
             style="margin: 10px 20px 10px 20px"
+            type="submit"
             mat-raised-button
             color="primary"
             [disabled]="signUpForm.invalid"

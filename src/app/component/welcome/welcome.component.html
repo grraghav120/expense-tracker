@@ -15,16 +15,17 @@
     </h2>
     <div>
       <div>
-        <!-- <button mat-raised-button color="primary">
-          <mat-icon>login</mat-icon>Login
-        </button> -->
-        <div style="margin-top: 20px">
+        <div style="margin-top: 20px" *ngIf="isLogging">
           <button mat-raised-button color="primary" (click)="onSignUp()">
             <mat-icon>perm_identity</mat-icon>Sign Up
           </button>
         </div>
+        <div style="margin-top: 20px" *ngIf="!isLogging">
+          <button mat-raised-button color="primary" (click)="onLogin()">
+            <mat-icon>login</mat-icon>Login
+          </button>
+        </div>
       </div>
-      <!-- </div> -->
     </div>
   </mat-drawer>
   <div>
@@ -45,12 +46,28 @@
         aria-label="Example icon-button with heart icon"
         matTooltip="Sign Up"
         (click)="onSignUp()"
+        *ngIf="isLogging"
       >
         <mat-icon>perm_identity</mat-icon>
       </button>
+      <button
+        mat-raised-button
+        class="example-icon favorite-icon"
+        aria-label="Example icon-button with heart icon"
+        matTooltip="Login"
+        (click)="onLogin()"
+        *ngIf="!isLogging"
+        color="accent"
+      >
+        <mat-icon>login</mat-icon>
+        Login
+      </button>
     </mat-toolbar>
   </div>
-  <div>
+  <div *ngIf="isLogging">
     <app-login></app-login>
+  </div>
+  <div *ngIf="!isLogging">
+    <app-signup></app-signup>
   </div>
 </mat-drawer-container>
