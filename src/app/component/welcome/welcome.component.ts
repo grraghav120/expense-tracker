@@ -8,12 +8,16 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit{
-
+  isLogging:boolean=true;
   constructor(public businesData:BusinessDataService,public route:Router){}
   ngOnInit(): void {
-    
+    this.isLogging=true;
   }
   onSignUp(){
-    this.route.navigate(['signUp']);
+    // this.route.navigate(['signUp']);
+    this.isLogging=false;
+  }
+  onLogin(){
+    this.isLogging=true;
   }
 }

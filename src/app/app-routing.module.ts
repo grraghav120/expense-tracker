@@ -8,7 +8,6 @@ import { AddExpenseComponent } from './component/add-expense/add-expense.compone
 
 const routes: Routes = [
   {path:'home',component:HeaderComponent},
-  {path:'signUp',component:SignupComponent},
   {path:'welcome',component:WelcomeComponent},
   {path:'edit/:id',component:AddExpenseComponent},
   {path:'dashboard',component:HomeComponent},

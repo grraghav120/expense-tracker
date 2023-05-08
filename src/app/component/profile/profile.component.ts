@@ -8,6 +8,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 })
 export class ProfileComponent implements OnInit{
   user_name:any='raghav';
+  name:any='Raghav Garg'
   expenseLogged: string='';
   text1:any='';
   text3:any='';
