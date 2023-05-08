@@ -37,12 +37,14 @@ import { WelcomeComponent } from './component/welcome/welcome.component';
 import { HttpClientModule } from '@angular/common/http';
 import { TableviewComponent } from './component/tableview/tableview.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { Confirm } from './component/view-expenses/view-expenses.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SignupComponent,
     LoginComponent,
+    Confirm,
     AddExpenseComponent,
     DashboardComponent,
     ProfileComponent,

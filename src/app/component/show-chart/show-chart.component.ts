@@ -19,7 +19,7 @@ export class ShowChartComponent implements OnInit {
   }
 
   public pieChartOptions: ChartOptions<'pie'> = {
-    responsive: false,
+    responsive: true,
   };
   public pieChartLabels = ['Download', 'In', 'Mail Sales'];
   public pieChartDatasets = [
@@ -39,6 +39,6 @@ export class ShowChartComponent implements OnInit {
   };
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: false,
+    responsive: true,
   };
 }

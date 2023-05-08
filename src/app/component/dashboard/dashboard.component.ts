@@ -12,17 +12,16 @@ import { ProfileComponent } from '../profile/profile.component';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  // expenseForm!:FormGroup;
   isLogging: boolean = true;
-  keywords = ['Transportation', 'Groceries', 'Entertainment', 'Miscellaneous'];
-  newKeywords = ['Netflix'];
+  keywords:any=[];
+  newKeywords:any= [];
   constructor(
     private businesData: BusinessDataService,
     private route: Router,
     public dialog: MatDialog
   ) {}
   ngOnInit(): void {
-    this.businesData.keywords.push(...this.keywords);
+    this.keywords=this.businesData.keywords;
   }
 
   removeKeyword(keyword: string) {
@@ -40,21 +39,24 @@ export class DashboardComponent implements OnInit {
     event.chipInput!.clear();
   }
 
-  onSave() {
-    // this.keywords.push(...this.newKeywords); //api to save all response
-    // this.businesData.keywords=[];
-    this.businesData.keywords.push(...this.newKeywords);
-    // this.newKeywords=[];
+  onSave() { //api call
+    //logger
+    this.businesData.onCreateCategory(this.newKeywords).subscribe((res)=>{
+      console.log(res);
+      this.newKeywords=[];
+    });
   }
 
   onReset() {
     this.newKeywords = [];
   }
+
   openDialog(): void {
     this.dialog.open(ProfileComponent, {
-      width: '500px',
+      width: '600px',
     });
   }
+
   onView() {
     this.route.navigate(['dashboard']);
   }
