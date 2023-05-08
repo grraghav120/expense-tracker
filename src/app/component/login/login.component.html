@@ -5,7 +5,6 @@
   </div>
   <div class="line"></div>
   <div class="content1">
-    <!-- <div style="margin-right:10px"><button mat-button color="primary">Login</button></div> -->
     <div><button mat-button color="warn" (click)="onSignUp()">Get Started</button></div>
   </div>
   <div class="container">
@@ -18,27 +17,27 @@
         <mat-form-field appearance="outline">
           <mat-label>Enter Registered Email</mat-label>
           <input matInput placeholder="abc@gmail.com" type="email" formControlName="gmail">
-          <mat-hint *ngIf="loginForm.get('gmail')?.errors &&
+          <mat-error *ngIf="loginForm.get('gmail')?.errors &&
             loginForm.get('gmail')?.hasError('required') && loginForm.get('gmail')?.touched" style="color: red;">
               Email Address is required
-            </mat-hint>
-            <mat-hint *ngIf="loginForm.get('gmail')?.errors &&
+            </mat-error>
+            <mat-error *ngIf="loginForm.get('gmail')?.errors &&
             loginForm.get('gmail')?.hasError('email') && loginForm.get('gmail')?.touched" style="color: red;">
               Email Address is invalid
-            </mat-hint>
+            </mat-error>
         </mat-form-field>
       </div>
       <div style="padding-top: 5px;">
         <mat-form-field appearance="outline">
           <mat-label>Enter Password</mat-label>
           <input matInput placeholder="" type="password" formControlName="pass">
-          <mat-hint *ngIf="loginForm.get('pass')?.errors &&
-            loginForm.get('pass')?.hasError('required') && loginForm.get('pass')?.touched" style="color: red;">
+          <mat-error *ngIf="loginForm.get('pass')?.errors &&
+            loginForm.get('pass')?.hasError('required') && loginForm.get('pass')?.touched">
               Password is required
-            </mat-hint>
+            </mat-error>
         </mat-form-field>
       </div>
-      <div style="text-align: center;">
+      <div style="text-align: center;" class="btns">
         <button mat-raised-button type="submit" color="accent" (click)="onLogin()">Login</button>
       </div>
     </form>

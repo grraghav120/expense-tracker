@@ -1,45 +1,25 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ChartOptions } from 'chart.js';
 import { ChartConfiguration } from 'chart.js';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { ExpenseContent } from './show-charts.modal';
+
 import { MatDialog } from '@angular/material/dialog';
 import { AddExpenseComponent } from '../add-expense/add-expense.component';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 @Component({
   selector: 'app-show-chart',
   templateUrl: './show-chart.component.html',
   styleUrls: ['./show-chart.component.scss'],
 })
 export class ShowChartComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = [
-    'name',
-    'amount',
-    'expense_date',
-    'expense_category',
-    'payment',
-    'comments',
-  ];
-
-  ELEMENT_DATA: ExpenseContent[] = [
-    {
-      name: 'raghav',
-      amount: 300,
-      expense_date: '20 Apr 2023',
-      expense_category: 'Groceries',
-      payment: 'card',
-      comments: 'ho gya',
-    },
-  ];
-
-  dataSource = new MatTableDataSource<ExpenseContent>(this.ELEMENT_DATA);
 
   @Input() chartType: any;
-  constructor(public dialog: MatDialog) {}
-  ngOnInit(): void {}
+  constructor(public dialog: MatDialog,public businessData:BusinessDataService) {}
+  ngOnInit(): void {
+    
+  }
+
   public pieChartOptions: ChartOptions<'pie'> = {
-    responsive: false,
+    responsive: true,
   };
   public pieChartLabels = ['Download', 'In', 'Mail Sales'];
   public pieChartDatasets = [
@@ -59,19 +39,6 @@ export class ShowChartComponent implements OnInit {
   };
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: false,
+    responsive: true,
   };
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-  onOpen(element:any){
-    this.openDialog();
-    console.log(element);
-    
-  }
-  openDialog(): void {
-    this.dialog.open(AddExpenseComponent, {
-      width: '600px',
-    })
-  }
 }

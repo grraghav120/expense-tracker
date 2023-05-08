@@ -27,3 +27,7 @@
   width: 100%;
   height: auto;
 }
+.side-nav-btn button:hover{
+  transform: scale(1.1);
+  transition: .5s;
+}

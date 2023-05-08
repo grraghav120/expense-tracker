@@ -1,0 +1,9 @@
+table {
+    width: 100%;
+    overflow: hidden;
+    // overflow-x: auto;
+  }
+.table-container{
+  max-width: 100%;
+  overflow-x: scroll;
+}

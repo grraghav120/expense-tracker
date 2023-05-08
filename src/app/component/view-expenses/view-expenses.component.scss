@@ -33,3 +33,24 @@ mat-card-content{
     transform: scale(1.1);
     transition: .5s;
 }
+.front{
+    // font-size: 18px;
+    font-family: cursive;
+    // font-weight: bold;
+    color: grey;
+}
+.front1{
+    font-size: 24px;
+    font-family: cursive;
+    font-weight: bold;
+    // color: grey;
+}
+table {
+    width: 100%;
+    overflow: hidden;
+    // overflow-x: auto;
+  }
+.table-container{
+  max-width: 100%;
+  overflow-x: scroll;
+}

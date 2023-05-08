@@ -1,9 +1,10 @@
-<div>
+<div [ngClass]="{'main-class' : isEdit}">
   <mat-card class="example-card">
     <mat-card-header>
-      <mat-card-title>Add New Expense</mat-card-title>
+      <mat-card-title *ngIf="!isEdit">Add New Expense</mat-card-title>
+      <mat-card-title *ngIf="isEdit">Edit Expense</mat-card-title>
       <mat-card-subtitle
-        >Enter all the required fields to save new expense</mat-card-subtitle
+        >Enter all the required fields to save expense</mat-card-subtitle
       >
     </mat-card-header>
     <mat-card-content style="margin-top: 10px">
@@ -27,7 +28,7 @@
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" style="width: 100%">
-              <mat-label>Amount</mat-label>
+              <mat-label>Amount(In Rupees)</mat-label>
               <input
                 matInput
                 placeholder=""
@@ -51,12 +52,12 @@
           <div class="col-sm-6">
             <mat-form-field appearance="outline" style="width: 100%">
               <mat-label>Choose a Expense date</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="date" />
+              <input matInput [max]="maxDate"  [matDatepicker]="picker" formControlName="expense_date" (dateChange)="addEvent($event)" />
               <mat-hint
                 *ngIf="
-                  expenseForm.get('date')?.errors &&
-                  expenseForm.get('date')?.hasError('required') &&
-                  expenseForm.get('date')?.touched
+                  expenseForm.get('expense_date')?.errors &&
+                  expenseForm.get('expense_date')?.hasError('required') &&
+                  expenseForm.get('expense_date')?.touched
                 "
                 style="color: red"
               >
@@ -72,16 +73,16 @@
           <div class="col-sm-6">
             <mat-form-field appearance="outline" style="width: 100%">
               <mat-label>Expense Category</mat-label>
-              <mat-select formControlName="category">
-                <mat-option *ngFor="let item of keywords" value="item">{{
+              <mat-select formControlName="expense_category">
+                <mat-option *ngFor="let item of keywords" [value]="item">{{
                   item
                 }}</mat-option>
               </mat-select>
               <mat-hint
                 *ngIf="
-                  expenseForm.get('category')?.errors &&
-                  expenseForm.get('category')?.hasError('required') &&
-                  expenseForm.get('category')?.touched
+                  expenseForm.get('expense_category')?.errors &&
+                  expenseForm.get('expense_category')?.hasError('required') &&
+                  expenseForm.get('expense_category')?.touched
                 "
                 style="color: red"
               >
@@ -95,7 +96,7 @@
             <mat-form-field appearance="outline" style="width: 100%">
               <mat-label>Expense Payment Type</mat-label>
               <mat-select formControlName="payment">
-                <mat-option *ngFor="let item of payments" value="item">{{
+                <mat-option *ngFor="let item of payments" [value]="item">{{
                   item
                 }}</mat-option>
               </mat-select>
@@ -114,17 +115,18 @@
         </div>
         <div class="row">
           <mat-form-field appearance="outline" style="width: 100%">
-            <mat-label>Comments</mat-label>
-            <textarea matInput formControlName="comments"></textarea>
+            <mat-label>Comment</mat-label>
+            <textarea matInput formControlName="comment"></textarea>
           </mat-form-field>
         </div>
       </form>
     </mat-card-content>
-    <mat-card-actions align="end">
+    <mat-card-actions align="end" *ngIf="!isEdit">
       <button mat-raised-button (click)="onReset()">
         <mat-icon>autorenew</mat-icon>Reset
       </button>
       <button
+      type="submit"
         mat-raised-button
         (click)="onSaveExpense()"
         [disabled]="expenseForm.invalid"
@@ -133,13 +135,17 @@
       </button>
     </mat-card-actions>
 
-    <mat-card-actions align="end" *ngIf="actions === 'view'">
-      <button mat-raised-button (click)="onEdit()" color="primary">
-        <mat-icon>edit</mat-icon>Edit
+    <mat-card-actions align="end" *ngIf="isEdit">
+      <button mat-raised-button (click)="onReset()">
+        <mat-icon>autorenew</mat-icon>Reset
       </button>
-      <button mat-raised-button (click)="onDelete()" color="warn">
-        <mat-icon>delete</mat-icon> Delete
+      <button mat-raised-button (click)="onCancel()" >
+        <mat-icon>disabled_by_default</mat-icon> Cancel
       </button>
+      <button type="submit" mat-raised-button (click)="onEdit()" [disabled]="expenseForm.invalid && expenseForm.touched" color="primary">
+        <mat-icon>edit</mat-icon>Update
+      </button>
+
     </mat-card-actions>
   </mat-card>
 </div>
