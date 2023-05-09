@@ -7,6 +7,7 @@ import { AddExpenseComponent } from '../add-expense/add-expense.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-view-expenses',
   templateUrl: './view-expenses.component.html',
@@ -28,7 +29,8 @@ export class ViewExpensesComponent implements OnInit {
   constructor(
     public businessData: BusinessDataService,
     public dialog: MatDialog,
-    public http: HttpClient
+    public http: HttpClient,
+   
   ) {}
   text1: any = 'raghav ';
   text2: any = 'rghav1';
@@ -98,7 +100,8 @@ export class Confirm {
     public dialogRef: MatDialogRef<Confirm>,
     public dialog: MatDialog,
     public businessData: BusinessDataService,
-    public route: Router
+    public route: Router,
+    public _snackBar:MatSnackBar
   ) {}
 
   onOpen() {
@@ -108,7 +111,7 @@ export class Confirm {
     this.businessData
       .onDeleteExpense(this.businessData.data.data._id)
       .subscribe((res: any) => {
-        console.log(res);
+        this._snackBar.open(res.message,'',{duration:2000});
       });
   }
 }
