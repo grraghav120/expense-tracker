@@ -30,9 +30,9 @@
       <div style="padding-top: 5px;">
         <mat-form-field appearance="outline">
           <mat-label>Enter Password</mat-label>
-          <input matInput placeholder="" type="password" formControlName="pass">
-          <mat-error *ngIf="loginForm.get('pass')?.errors &&
-            loginForm.get('pass')?.hasError('required') && loginForm.get('pass')?.touched">
+          <input matInput placeholder="" type="password" formControlName="password">
+          <mat-error *ngIf="loginForm.get('password')?.errors &&
+            loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
               Password is required
             </mat-error>
         </mat-form-field>
