@@ -34,10 +34,11 @@ import { ShowChartComponent } from './component/show-chart/show-chart.component'
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { WelcomeComponent } from './component/welcome/welcome.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TableviewComponent } from './component/tableview/tableview.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { Confirm } from './component/view-expenses/view-expenses.component';
+import { AuthInterceptor } from './auth/auth-interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -82,7 +83,7 @@ import { Confirm } from './component/view-expenses/view-expenses.component';
     MatInputModule,
     MatTableModule
   ],
-  providers: [],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

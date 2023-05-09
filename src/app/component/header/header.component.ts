@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ProfileComponent } from '../profile/profile.component';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +11,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 })
 export class HeaderComponent implements OnInit{
   isLogging:boolean=true;
-  constructor(private route:Router,public dialog: MatDialog,public businessData:BusinessDataService){}
+  constructor(private route:Router,public dialog: MatDialog,public authService:AuthService){}
   ngOnInit(): void {
     
   }
@@ -24,6 +24,6 @@ export class HeaderComponent implements OnInit{
     this.route.navigate(['dashboard']);
   }
   onLogout(){
-    this.businessData.onLogout();
+    this.authService.onLogout();
   }
 }

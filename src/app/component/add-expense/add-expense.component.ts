@@ -98,6 +98,8 @@ export class AddExpenseComponent implements OnInit {
             duration: 2000,
           });
         }
+      },(error)=>{
+        this.onReset();
       });
   }
   onEdit() {

@@ -11,7 +11,7 @@ const expenseRoutes=require('./routes/expense');
 
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb+srv://root:@cluster0.ywmh36y.mongodb.net/expenseTracker')
+mongoose.connect('mongodb+srv://root:54ew3SBbkM963U81@cluster0.ywmh36y.mongodb.net/expenseTracker')
 .then(()=>{
   console.log("Connected to database");
 })
@@ -26,7 +26,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin,X-Requested-With,Content-Type,Accept"
+    "Origin,X-Requested-With,Content-Type,Accept,authentication",
   );
   res.setHeader(
     "Access-Control-Allow-Methods",

@@ -6,31 +6,45 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken"); // To generate Token
 
 router.post("/SIGN_UP", (req, res, next) => {
-//   console.log(req.body);
-  bcrypt.hash(req.body.password, 10).then((hash) => {
-    const User = new UserModel({
-      name: req.body.name,
-      username: req.body.username,
-      gmail: req.body.gmail,
-      password: hash, //the password should be encrypted so that no one can access the user account not even us(Admin)
-      userFirstSignUp: req.body.userFirstSignUp,
-    });
-    User.save().then((result)=>{
-        res.status(200).json({
+  //   console.log(req.body);
+  bcrypt
+    .hash(req.body.password, 10)
+    .then((hash) => {
+      const User = new UserModel({
+        name: req.body.name,
+        username: req.body.username,
+        gmail: req.body.gmail,
+        password: hash, //the password should be encrypted so that no one can access the user account not even us(Admin)
+        userFirstSignUp: req.body.userFirstSignUp,
+      });
+      User.save()
+        .then((result) => {
+          const token = jwt.sign(
+            { gmail: req.gmail },
+            "raghav_garg_first_mean_project_this_can_be_anything",
+            { expiresIn: 3600 } // 1 hour
+          );
+          res.status(200).json({
             message: "Account Created",
             status: true,
-            data:{UserSince:result.userFirstSignUp,username:result.username,name:result.name}
-        });
-    }).catch(err=>{
-        res.status(500).json({
+            data: {
+              UserSince: result.userFirstSignUp,
+              username: result.username,
+              name: result.name,
+              token: token,
+              expiredToken: 3600,
+            },
+          });
+        })
+        .catch((err) => {
+          res.status(500).json({
             message: err,
             status: true,
             // data:result
+          });
         });
     })
-    
-  })
-  .catch((err) => {
+    .catch((err) => {
       res.status(500).json({
         error: err,
       });
@@ -45,7 +59,7 @@ router.post("/LOGIN", (req, res, next) => {
         //app crash now good..
         return res.status(401).json({
           message: "Invalid Email Address",
-          status: true,
+          status: false,
         });
       }
       //   console.log(user);
@@ -55,6 +69,7 @@ router.post("/LOGIN", (req, res, next) => {
           if (!validate) {
             return res.status(401).json({
               message: "Invalid Email Address or Password",
+              status: false,
             });
           }
           //Valid Case generate token
@@ -69,6 +84,7 @@ router.post("/LOGIN", (req, res, next) => {
               token: token,
               latestLoginDate: new Date(),
               userId: user._id,
+              expiredToken:3600,
             },
             status: true,
           });
@@ -76,12 +92,14 @@ router.post("/LOGIN", (req, res, next) => {
         .catch((err) => {
           return res.status(401).json({
             message: "Invalid Email or Password",
+            status: false,
           });
         });
     })
     .catch((err) => {
       return res.status(401).json({
         message: "Invalid Email or Password",
+        status: false,
       });
     });
 });

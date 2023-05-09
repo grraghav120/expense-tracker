@@ -28,9 +28,6 @@ export class BusinessDataService {
   onView() {
     this.route.navigate(['welcome']);
   }
-  onLogout() {
-    this.route.navigate(['welcome']);
-  }
 
   onGetAllExpense() {
     return this.http.get(this.apiUrl + 'GET_ALL_EXPENSE');

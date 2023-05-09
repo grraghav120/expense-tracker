@@ -27,25 +27,6 @@ export class SignupComponent implements OnInit {
     });
   }
   onProceed() {
-    this.authService.onSignUp(this.signUpForm.value).subscribe(
-      (res: any) => {
-        if (res) {
-          this._snackBar.open(
-            'Expense Tracker Account Created SuccessFully',
-            '',
-            { duration: 4000 }
-          );
-          this.businessData.firstLoginDate = res.data.UserSince;
-          this.businessData.username = res.data.username;
-          this.businessData.name = res.data.name;
-          this.route.navigate(['dashboard']);
-        }
-      },
-      (error) => {
-        this._snackBar.open('Email Already Exist ! Login Please', '', {
-          duration: 5000,
-        });
-      }
-    );
+    this.authService.onSignUp(this.signUpForm.value)
   }
 }
