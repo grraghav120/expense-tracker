@@ -20,6 +20,10 @@ export class AuthService {
     public route: Router
   ) {}
 
+  authAfterReferesh(isAuth:boolean,token:any){
+    this.isAuth=isAuth;
+    this.token=token;
+  }
   getToken() {
     return this.token;
   }
@@ -52,11 +56,12 @@ export class AuthService {
             this.onLogout();
           }, res.data.expiredToken * 1000);
           this.isAuth = true;
+          this.saveAuthData(res.data.expiredToken);
           this.route.navigate(['dashboard']);
         }
       },
       (error) => {
-        this._snackBar.open('Email Already Exist ! Login Please', '', {
+        this._snackBar.open('Email Already Exist! Login Please', '', {
           duration: 5000,
         });
         this.isAuth = false;
@@ -74,6 +79,7 @@ export class AuthService {
         this.expireTokenTime = setTimeout(() => {
           this.onLogout();
         }, res.data.expiredToken * 1000);
+        this.saveAuthData(res.data.expiredToken);
         this.route.navigate(['dashboard']);
       },
       (error) => {
@@ -88,5 +94,13 @@ export class AuthService {
     this.isAuth = false;
     this.route.navigate(['welcome']);
     clearTimeout(this.expireTokenTime);
+    localStorage.removeItem('LEAD_ID'); 
+  }
+
+  private saveAuthData(time:any) {
+    localStorage.setItem('LEAD_ID', this.token);
+    setTimeout(() => {
+      localStorage.removeItem('LEAD_ID');
+    }, time*1000);
   }
 }
