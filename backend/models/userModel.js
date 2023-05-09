@@ -7,6 +7,7 @@ const userSchmema = mongoose.Schema({
   username: { type: String, required: true },
   gmail: { type: String, required: true, unique: true }, //not works as a validator so we import mongoose-unique-validator
   password: { type: String, required: true },
+  userFirstSignUp:{type:String,required:true},
 });
 
 userSchmema.plugin(uniqueValidator);

@@ -10,6 +10,10 @@ export class BusinessDataService {
   isLogging: boolean = false;
   // keywords=new Set();
   expensesLogged = '';
+  latestLoginDate:any='';
+  firstLoginDate:any=''
+  username:any='';
+  name:any='';
   keywords:any=['Transportation','Groceries','Entertainment','Miscellaneous']
   data:any;
   apiUrl = 'http://localhost:3000/v1/api/';

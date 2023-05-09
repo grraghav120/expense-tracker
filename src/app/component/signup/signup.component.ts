@@ -15,7 +15,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private _snackBar: MatSnackBar,
-    public route: Router
+    public route: Router,
+    public businessData: BusinessDataService
   ) {}
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
@@ -26,37 +27,25 @@ export class SignupComponent implements OnInit {
     });
   }
   onProceed() {
-    this.authService.onSignUp(this.signUpForm.value).subscribe((res: any) => {   
-      if (res.error.error.length === 0) {
-        this._snackBar.open(
-          'Expense Tracker Account Created SuccessFully',
-          '',
-          { duration: 2000 }
-        );
-        this.route.navigate(['dashboard']);
-      } else {
-        this._snackBar.open('Error Occurred!!', '', {
-          duration: 2000,
-        });
-        // this.onReset();
-      }
-    },(error)=>{
-      // console.log(error.error.error);
-      
-      if (Object.keys(error.error.error).length === 0) {
-        this._snackBar.open(
-          'Expense Tracker Account Created SuccessFully',
-          '',
-          { duration: 2000 }
-        );
-        this.route.navigate(['dashboard']);
-      } else {
+    this.authService.onSignUp(this.signUpForm.value).subscribe(
+      (res: any) => {
+        if (res) {
+          this._snackBar.open(
+            'Expense Tracker Account Created SuccessFully',
+            '',
+            { duration: 4000 }
+          );
+          this.businessData.firstLoginDate = res.data.UserSince;
+          this.businessData.username = res.data.username;
+          this.businessData.name = res.data.name;
+          this.route.navigate(['dashboard']);
+        }
+      },
+      (error) => {
         this._snackBar.open('Email Already Exist ! Login Please', '', {
           duration: 5000,
         });
-        // this.route.navigate(['welcome']);
       }
-    }
-    )
+    );
   }
 }
