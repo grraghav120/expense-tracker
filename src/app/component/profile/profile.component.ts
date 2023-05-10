@@ -14,8 +14,6 @@ export class ProfileComponent implements OnInit{
   constructor(public businessData:BusinessDataService,public authService:AuthService){}
   ngOnInit(): void {
     this.authService.getAllSaveData().subscribe((res:any)=>{
-      console.log(res);
-      
       this.lines=[
         {content:'User Since',text:res.data.firstLoginDate},
         {content:'Expense Logged',text:this.businessData.expensesLogged},

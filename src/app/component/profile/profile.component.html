@@ -14,9 +14,15 @@
           height="60px"
           width="60px"
         />
-        <p>{{name}}</p>
-        <p>{{ user_name }}</p>
-      </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-xs-6 names">
+            <p>Name: {{name}}</p>
+          </div>
+          <div class="col-sm-6 col-xs-6 names">
+            <p>UserName: {{user_name}}</p>
+          </div>
+        </div>
       <div class="row row-col-3 mains">
         <div class="col" *ngFor="let line of lines">
           <p style="text-align: center;font-size: 18px;

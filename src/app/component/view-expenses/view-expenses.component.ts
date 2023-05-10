@@ -64,7 +64,7 @@ export class ViewExpensesComponent implements OnInit {
           title: 'Number of Expenses',
           content: res.data.length,
         },
-        { icon: 'monetization_on', title: 'Total Amount', content: this.text4 },
+        { icon: 'monetization_on', title: 'Total Amount', content: '₹'+'0' },
       ];
       this.businessData.expensesLogged = res.data.length;
     });
