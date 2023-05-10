@@ -32,3 +32,13 @@
 mat-card-header{
     border-bottom: 2px solid black;
 }
+
+.names{
+    margin: 10px 0px;
+    display: flex;
+    justify-content: center;
+}
+.names p{
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

@@ -22,7 +22,7 @@ router.post("/SIGN_UP", (req, res, next) => {
           const token = jwt.sign(
             { gmail: req.gmail },
             "raghav_garg_first_mean_project_this_can_be_anything",
-            { expiresIn: 3600 } // 1 hour
+            { expiresIn: "1h" } // 1 hour
           );
           res.status(200).json({
             message: "Account Created",
@@ -33,26 +33,26 @@ router.post("/SIGN_UP", (req, res, next) => {
               name: result.name,
               token: token,
               expiredToken: 3600,
+              userId:result._id,
             },
           });
         })
         .catch((err) => {
+          console.error(err);
           res.status(500).json({
-            message: err,
-            status: true,
-            // data:result
+            message: 'Failed to create user',
+            error: err.message,
           });
         });
     })
     .catch((err) => {
       res.status(500).json({
-        error: err,
+        error: err.message,
       });
     });
 });
 
 router.post("/LOGIN", (req, res, next) => {
-  // console.log(req.body);
   UserModel.findOne({ gmail: req.body.gmail })
     .then((user) => {
       if (!user) {
@@ -76,7 +76,7 @@ router.post("/LOGIN", (req, res, next) => {
           const token = jwt.sign(
             { gmail: user.gmail, userId: user._id },
             "raghav_garg_first_mean_project_this_can_be_anything",
-            { expiresIn: 3600 } // 1 hour
+            { expiresIn: "1h" } // 1 hour
           );
           res.status(200).json({
             message: "Login Successfully!",
@@ -91,14 +91,14 @@ router.post("/LOGIN", (req, res, next) => {
         })
         .catch((err) => {
           return res.status(401).json({
-            message: "Invalid Email or Password",
+            message: "Something Went Wrong! Please Try Again",
             status: false,
           });
         });
     })
     .catch((err) => {
       return res.status(401).json({
-        message: "Invalid Email or Password",
+        message: "Something Weird! Please Try Again",
         status: false,
       });
     });

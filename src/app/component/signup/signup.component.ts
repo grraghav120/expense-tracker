@@ -27,6 +27,6 @@ export class SignupComponent implements OnInit {
     });
   }
   onProceed() {
-    this.authService.onSignUp(this.signUpForm.value)
+    this.authService.onSignUp(this.signUpForm.value);
   }
 }

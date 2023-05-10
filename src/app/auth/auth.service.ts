@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserData } from '../component/signup/signup.model';
 import { BusinessDataService } from '../services/business-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -13,6 +12,7 @@ export class AuthService {
   private isAuth: boolean = false;
   private token!: any;
   private expireTokenTime: any;
+  private userId: any;
   constructor(
     public http: HttpClient,
     public _snackBar: MatSnackBar,
@@ -31,6 +31,9 @@ export class AuthService {
   getIsAuth() {
     return this.isAuth;
   }
+  getUSerId(){
+    return this.userId;
+  }
 
   onSignUp(values: any) {
     let body = {
@@ -48,15 +51,21 @@ export class AuthService {
             '',
             { duration: 4000 }
           );
-          this.businessData.firstLoginDate = res.data.UserSince;
-          this.businessData.username = res.data.username;
-          this.businessData.name = res.data.name;
           this.token = res.data.token;
+          this.userId=res.data.userId;
+          let body={
+            firstLoginDate:res.data.UserSince,
+            username:res.data.username,
+            name:res.data.name,
+            lastLoginDate:res.data.UserSince,
+            userId:res.data.userId,
+          };
+          this.saveAllData(body);
           this.expireTokenTime = setTimeout(() => {
             this.onLogout();
           }, res.data.expiredToken * 1000);
           this.isAuth = true;
-          this.saveAuthData(res.data.expiredToken);
+          this.saveAuthData(res.data.expiredToken,res.data.userId);
           this.route.navigate(['dashboard']);
         }
       },
@@ -79,7 +88,7 @@ export class AuthService {
         this.expireTokenTime = setTimeout(() => {
           this.onLogout();
         }, res.data.expiredToken * 1000);
-        this.saveAuthData(res.data.expiredToken);
+        this.saveAuthData(res.data.expiredToken,res.data.userId);
         this.route.navigate(['dashboard']);
       },
       (error) => {
@@ -94,13 +103,27 @@ export class AuthService {
     this.isAuth = false;
     this.route.navigate(['welcome']);
     clearTimeout(this.expireTokenTime);
-    localStorage.removeItem('LEAD_ID'); 
+    localStorage.removeItem('LEAD_ID');
+    localStorage.removeItem('Id');
   }
 
-  private saveAuthData(time:any) {
+  private saveAuthData(time:any,userId:any) {
+    userId="954854384ubbbfhf9489r34r34fnnn "+userId+" id";
     localStorage.setItem('LEAD_ID', this.token);
+    localStorage.setItem('Id',userId);
     setTimeout(() => {
-      localStorage.removeItem('LEAD_ID');
+      this.onLogout();
     }, time*1000);
   }
+
+  saveAllData(body:any){
+    this.http.post(this.apiUrl+'SAVE_DATA',body).subscribe((res:any)=>{
+      
+    })
+  }
+
+  getAllSaveData(){
+    return this.http.get(this.apiUrl+'GET_SAVE_DATA/'+localStorage.getItem('Id')?.split(' ')[1]);
+  }
+
 }

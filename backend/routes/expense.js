@@ -1,5 +1,6 @@
 const express = require("express");
 const CreateExpense = require("../models/createExpense"); //import the Schema of Create Expense\
+const SaveData=require('../models/saveData');
 const router = express.Router();
 
 const authMiddleware=require('../middleware/expenseMiddleWare');
@@ -73,6 +74,44 @@ router.post("/CREATE_EXPENSE", authMiddleware, (req, res, next) => {
       status: true,
     });
   }); //database command to insert the data see manogoDB
+});
+
+router.post('/SAVE_DATA',(req,res,next)=>{
+  const allData=new SaveData({
+    username:req.body.username,
+    name:req.body.name,
+    firstLoginDate:req.body.firstLoginDate,
+    lastLoginDate:req.body.lastLoginDate,
+    userId:req.body.userId,
+  });
+  allData.save().then((results)=>{
+    res.status(200).json({
+      message:'Successfully Save',
+      data:results,
+      status:true,
+    });
+  }).catch(error=>{
+    res.status(500).json({
+      message:'Error While Saving Content',
+      status:false,
+    })
+  })
+});
+
+router.get('/GET_SAVE_DATA/:id',(req,res,next)=>{
+  SaveData.findOne({userId:req.params.id}).then((result)=>{
+    res.status(200).json({
+      message:'Data Fetched',
+      data:result,
+      status:true,
+    });
+  })
+  .catch(err=>{
+    res.status(500).json({
+      message:err.message,
+      status:false,
+    });
+  });
 });
 
 module.exports = router;
