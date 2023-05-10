@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserData } from '../component/signup/signup.model';
 import { BusinessDataService } from '../services/business-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -13,6 +12,8 @@ export class AuthService {
   private isAuth: boolean = false;
   private token!: any;
   private expireTokenTime: any;
+  private userId: any;
+  // private saveBody:any={};
   constructor(
     public http: HttpClient,
     public _snackBar: MatSnackBar,
@@ -31,6 +32,9 @@ export class AuthService {
   getIsAuth() {
     return this.isAuth;
   }
+  getUSerId(){
+    return this.userId;
+  }
 
   onSignUp(values: any) {
     let body = {
@@ -48,10 +52,16 @@ export class AuthService {
             '',
             { duration: 4000 }
           );
-          this.businessData.firstLoginDate = res.data.UserSince;
-          this.businessData.username = res.data.username;
-          this.businessData.name = res.data.name;
           this.token = res.data.token;
+          this.userId=res.data.userId;
+          let body={
+            firstLoginDate:res.data.UserSince,
+            username:res.data.username,
+            name:res.data.name,
+            lastLoginDate:res.data.UserSince,
+            userId:res.data.userId,
+          };
+          this.saveAllData(body);
           this.expireTokenTime = setTimeout(() => {
             this.onLogout();
           }, res.data.expiredToken * 1000);
@@ -103,4 +113,15 @@ export class AuthService {
       localStorage.removeItem('LEAD_ID');
     }, time*1000);
   }
+
+  saveAllData(body:any){
+    this.http.post(this.apiUrl+'SAVE_DATA',body).subscribe((res:any)=>{
+      console.log(res);
+    })
+  }
+
+  getAllSaveData(){
+    return this.http.get(this.apiUrl+'GET_SAVE_DATA/'+this.userId);
+  }
+
 }

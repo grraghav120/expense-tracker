@@ -33,20 +33,21 @@ router.post("/SIGN_UP", (req, res, next) => {
               name: result.name,
               token: token,
               expiredToken: 3600,
+              userId:result._id,
             },
           });
         })
         .catch((err) => {
+          console.error(err);
           res.status(500).json({
-            message: err,
-            status: true,
-            // data:result
+            message: 'Failed to create user',
+            error: err.message,
           });
         });
     })
     .catch((err) => {
       res.status(500).json({
-        error: err,
+        error: err.message,
       });
     });
 });
@@ -91,14 +92,14 @@ router.post("/LOGIN", (req, res, next) => {
         })
         .catch((err) => {
           return res.status(401).json({
-            message: "Invalid Email or Password",
+            message: "Something Went Wrong! Please Try Again",
             status: false,
           });
         });
     })
     .catch((err) => {
       return res.status(401).json({
-        message: "Invalid Email or Password",
+        message: "Something Weird! Please Try Again",
         status: false,
       });
     });
