@@ -5,6 +5,7 @@
     </div>
     <div class="col-sm-6 col-xs-12 col-md-6" style="padding: 20px">
       <p class="paragraph">Create an Expense Tracker Account</p>
+      <div class="line"></div>
       <form [formGroup]="signUpForm">
         <div class="inputs">
           <mat-form-field appearance="outline">
@@ -62,7 +63,7 @@
             color="primary"
             [disabled]="signUpForm.invalid"
             (click)="onProceed()"
-          >
+          ><mat-icon>done</mat-icon>
             Proceed
           </button>
         </div>

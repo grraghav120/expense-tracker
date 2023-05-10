@@ -53,7 +53,6 @@ router.post("/SIGN_UP", (req, res, next) => {
 });
 
 router.post("/LOGIN", (req, res, next) => {
-  // console.log(req.body);
   UserModel.findOne({ gmail: req.body.gmail })
     .then((user) => {
       if (!user) {
