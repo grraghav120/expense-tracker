@@ -39,6 +39,8 @@ import { TableviewComponent } from './component/tableview/tableview.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { Confirm } from './component/view-expenses/view-expenses.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import {MatStepperModule} from '@angular/material/stepper';
+import { ImportComponent } from './component/import/import.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +58,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     ShowChartComponent,
     WelcomeComponent,
     TableviewComponent,
+    ImportComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,7 +84,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatTableModule
+    MatTableModule,
+    MatStepperModule
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
