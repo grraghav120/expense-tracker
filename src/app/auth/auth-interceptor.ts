@@ -6,11 +6,8 @@ import { AuthService } from './auth.service';
 export class AuthInterceptor implements HttpInterceptor {
     constructor(private authService:AuthService){}
     intercept(req: HttpRequest<any>, next: HttpHandler){
-        let token:any;
-        // if(this.authService.getToken()){
-        //     token=this.authService.getToken();
-        // }
-        token=localStorage.getItem('LEAD_ID');
+        let token=localStorage.getItem('LEAD_ID');
+        let id=localStorage.getItem('Id');
         const authToken=token;
         const authReq=req.clone({
             headers:req.headers.set('authentication',"BreakerHeaders "+ authToken),

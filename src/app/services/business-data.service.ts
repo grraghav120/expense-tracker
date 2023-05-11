@@ -25,13 +25,15 @@ export class BusinessDataService {
   }
 
   onCreateExpense(values: any,date:any) {
+    let id=localStorage.getItem('Id')?.split(' ')[1];
     let body={
       name: values.name,
       amount: values.amount,
       expense_date: (date[0]+' '+date[1]+' '+date[2]+' '+date[3]),
       expense_category: values.expense_category,
       payment: values.payment,
-      comment: values.comment
+      comment: values.comment,
+      creater:id,
     }
     return this.http.post(this.apiUrl + 'CREATE_EXPENSE', body);
   }

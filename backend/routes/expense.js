@@ -67,6 +67,7 @@ router.post("/CREATE_EXPENSE", authMiddleware, (req, res, next) => {
     expense_category: req.body.expense_category,
     payment: req.body.payment,
     comment: req.body.comment,
+    creater: req.body.creater,
   });
   newExpense.save().then((result) => {
     res.status(201).json({

@@ -91,6 +91,7 @@ export class AddExpenseComponent implements OnInit {
       .onCreateExpense(this.expenseForm.value, this.date)
       .subscribe((res: any) => {
         if (res.status === true) {
+          // console.log(res);
           this._snackBar.open('Expense Added', '', { duration: 2000 });
           this.onReset();
         } else {
