@@ -17,7 +17,8 @@ export class HomeComponent implements OnInit {
     public authService:AuthService
   ) {}
   ngOnInit(): void {
-    // this.isLogging = this.businessData.isLogging;
+    const token=localStorage.getItem('LEAD_ID');
+    this.authService.authAfterReferesh(true,token);
   }
   onAdd() {
     this.route.navigate(['home']);

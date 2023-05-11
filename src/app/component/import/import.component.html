@@ -1,1 +1,25 @@
-<p>import works!</p>
+  <mat-stepper linear #stepper>
+    <mat-step editable="true">
+        <ng-template matStepLabel>Import File</ng-template>
+        <div>
+          <!-- Here functionality start -->
+        </div>
+        <div>
+          <button mat-raised-button color="accent" matStepperNext>Import File</button>
+        </div>
+    </mat-step>
+    <mat-step editable="true">
+        <ng-template matStepLabel>Review</ng-template>
+        <div>
+          <button mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button matStepperNext (click)="onSaveImport()" color="primary" >Save</button>
+        </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <div class="view">
+        <button mat-raised-button color="primary" (click)="onView()">View Expenses</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+  

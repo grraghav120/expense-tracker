@@ -118,7 +118,7 @@ export class AuthService {
 
   saveAllData(body:any){
     this.http.post(this.apiUrl+'SAVE_DATA',body).subscribe((res:any)=>{
-      
+      this._snackBar.open('Saving Data....','',{duration:2000});
     })
   }
 

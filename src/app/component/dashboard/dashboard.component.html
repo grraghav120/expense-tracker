@@ -1,14 +1,16 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12 col-md-6 offset-md-3 myCard">
-      <mat-card  class="example-card">
+      <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title
             >User Information <mat-icon>verified_user</mat-icon></mat-card-title
           >
         </mat-card-header>
         <mat-card-actions align="end">
-          <button mat-button (click)="openDialog()"><mat-icon>launch</mat-icon></button>
+          <button mat-button (click)="openDialog()">
+            <mat-icon>launch</mat-icon>
+          </button>
         </mat-card-actions>
       </mat-card>
     </div>
@@ -63,15 +65,28 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12 col-md-6 offset-md-3 myCard" style="margin-bottom: 30px;">
+    <div class="col-12 col-md-6 offset-md-3 myCard">
       <app-add-expense></app-add-expense>
     </div>
-    <div>
-      <!-- import functionality -->
+    <div class="col-12 col-md-6 offset-md-3 myCard" style="margin-bottom: 30px">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <div>
+              <p>Import CSV Expenses <mat-icon>downloading</mat-icon></p>
+            </div>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <app-import></app-import>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
   <div>
-    <button (click)="onView()" class="btns" mat-mini-fab color="accent"><mat-icon>equalizer</mat-icon></button>
+    <button (click)="onView()" class="btns" mat-mini-fab color="accent">
+      <mat-icon>equalizer</mat-icon>
+    </button>
   </div>
 </div>
 <div class="footers">
