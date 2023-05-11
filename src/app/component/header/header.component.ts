@@ -13,7 +13,8 @@ export class HeaderComponent implements OnInit{
   isLogging:boolean=true;
   constructor(private route:Router,public dialog: MatDialog,public authService:AuthService){}
   ngOnInit(): void {
-    
+    const token=localStorage.getItem('LEAD_ID');
+    this.authService.authAfterReferesh(true,token);
   }
   openDialog(): void {
     this.dialog.open(ProfileComponent, {

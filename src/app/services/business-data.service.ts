@@ -20,15 +20,6 @@ export class BusinessDataService {
   constructor(private route: Router, public http: HttpClient) {
   }
 
-  onSignUp(values: any) {
-    console.log(values);
-    let content = JSON.stringify(values);
-    localStorage.setItem('user', content);
-  }
-  onView() {
-    this.route.navigate(['welcome']);
-  }
-
   onGetAllExpense() {
     return this.http.get(this.apiUrl + 'GET_ALL_EXPENSE');
   }
