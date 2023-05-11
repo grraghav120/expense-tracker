@@ -3,6 +3,8 @@ const CreateExpense = require("../models/createExpense"); //import the Schema of
 const SaveData=require('../models/saveData');
 const router = express.Router();
 
+const UserModel=require('../models/userModel');
+
 const authMiddleware=require('../middleware/expenseMiddleWare');
 
 router.delete("/DELETE_EXPENSE/:id", authMiddleware, (req, res, next) => {
@@ -69,12 +71,20 @@ router.post("/CREATE_EXPENSE", authMiddleware, (req, res, next) => {
     comment: req.body.comment,
     creater: req.body.creater,
   });
-  newExpense.save().then((result) => {
-    res.status(201).json({
-      message: "Successfully Created",
-      status: true,
+
+  UserModel.updateOne({_id:req.body.creater},{
+    $push: { expenses: newExpense }
+  }).then((result)=>{
+    res.status(200).json({
+      message:'Expense Added',
+      status:true,
+    })
+  }).catch((err)=>{
+    res.status(501).json({
+      message:err,
+      status:false,
     });
-  }); //database command to insert the data see manogoDB
+  });
 });
 
 router.post('/SAVE_DATA',(req,res,next)=>{
