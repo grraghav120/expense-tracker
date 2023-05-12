@@ -65,7 +65,7 @@ export class AuthService {
             this.onLogout();
           }, res.data.expiredToken * 1000);
           this.isAuth = true;
-          this.saveAuthData(res.data.expiredToken,res.data.userId);
+          this.saveAuthDataonLocalStorage(res.data.expiredToken,res.data.userId);
           this.route.navigate(['dashboard']);
         }
       },
@@ -82,13 +82,16 @@ export class AuthService {
     this.http.post(this.apiUrl + 'USER/LOGIN', body).subscribe(
       (res: any) => {
         this._snackBar.open(res.message, '', { duration: 3000 });
-        this.businessData.latestLoginDate = res.data.latestLoginDate;
         this.token = res.data.token;
         this.isAuth = true;
         this.expireTokenTime = setTimeout(() => {
           this.onLogout();
         }, res.data.expiredToken * 1000);
-        this.saveAuthData(res.data.expiredToken,res.data.userId);
+        this.saveAuthDataonLocalStorage(res.data.expiredToken,res.data.userId);
+        let updateData={
+          lastLoginDate:res.data.latestLoginDate,
+        }
+        this.updateUserData(res.data.userId,updateData);
         this.route.navigate(['dashboard']);
       },
       (error) => {
@@ -107,7 +110,7 @@ export class AuthService {
     localStorage.removeItem('Id');
   }
 
-  private saveAuthData(time:any,userId:any) {
+  private saveAuthDataonLocalStorage(time:any,userId:any) {
     userId="954854384ubbbfhf9489r34r34fnnn "+userId+" id";
     localStorage.setItem('LEAD_ID', this.token);
     localStorage.setItem('Id',userId);
@@ -124,6 +127,12 @@ export class AuthService {
 
   getAllSaveData(){
     return this.http.get(this.apiUrl+'GET_SAVE_DATA/'+localStorage.getItem('Id')?.split(' ')[1]);
+  }
+
+  private updateUserData(id:string,body:any){
+    this.http.post(this.apiUrl+'UPDATE_SAVE_DATA/'+id,body).subscribe((result)=>{
+      console.log(result);
+    })
   }
 
 }
