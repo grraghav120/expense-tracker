@@ -169,4 +169,21 @@ router.post('/SAVE_CATEGORY/:id',(req,res,next)=>{
   });
 })
 
+router.post('/UPDATE_SAVE_DATA/:id',(req,res,next)=>{
+  UserModel.findOneAndUpdate({ _id: req.params.id,'userData.userId': req.params.id },
+   {$set:{
+    'userData.$.lastLoginDate':req.body.lastLoginDate,
+  }},
+   {new:true}
+   ).then(
+    (result) => {
+      console.log(result);
+      res.status(200).json({
+        message: "SuccessFully Updated UserData",
+        status: true,
+      });
+    }
+  );
+})
+
 module.exports = router;
