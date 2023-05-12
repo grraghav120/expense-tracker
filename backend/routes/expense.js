@@ -3,11 +3,16 @@ const CreateExpense = require("../models/createExpense"); //import the Schema of
 const SaveData=require('../models/saveData');
 const router = express.Router();
 
+const UserModel=require('../models/userModel');
+
 const authMiddleware=require('../middleware/expenseMiddleWare');
 
-router.delete("/DELETE_EXPENSE/:id", authMiddleware, (req, res, next) => {
-  // console.log(req.params.id);
-  CreateExpense.deleteOne({ _id: req.params.id }).then((result) => {
+router.delete("/DELETE_EXPENSE/:userId/:id", authMiddleware, (req, res, next) => {
+  UserModel.findOneAndUpdate(
+    { _id: req.params.userId },
+    { $pull: { expenses: { _id: req.params.id } } },
+    { new: true }
+    ).then((result) => {
     res.status(200).json({
       message: "Deleted Successfully",
       status: true,
@@ -15,26 +20,29 @@ router.delete("/DELETE_EXPENSE/:id", authMiddleware, (req, res, next) => {
   });
 });
 
-router.get("/GET_SINGLE_EXPENSE/:id",authMiddleware, (req, res, next) => {
-  // console.log(req.params.id);
-  CreateExpense.findById(req.params.id)
-    .then((result) => {
-      res.status(200).json({
-        message: "SuccessFully Fetched",
-        data: result,
-        status: true,
-      });
-      //   next();
+router.get("/GET_SINGLE_EXPENSE/:userId/:id",authMiddleware, (req, res, next) => {
+  UserModel.findOne({ _id: req.params.userId, 'expenses._id': req.params.id }, { 'expenses.$': 1 }).then((user)=>{
+    res.status(200).json({
+      message:'Fetch one',
+      data:user.expenses[0],
+      status:true,
     })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error retrieving category");
-    });
+  })
+  .catch((err)=>{
+    res.status(501).json({
+      message:err,
+      status:false,
+    })
+  })
 });
 
-router.patch("/UPDATE_EXPENSE/:id",authMiddleware, (req, res, next) => {
-  // console.log(req.body);
-  CreateExpense.findByIdAndUpdate({ _id: req.params.id }, req.body).then(
+router.patch("/UPDATE_EXPENSE/:userId/:id",authMiddleware, (req, res, next) => {
+  UserModel.findOneAndUpdate({ _id: req.params.userId, 'expenses._id': req.params.id },
+   {$set:{
+    'expenses.$':req.body
+  }},
+   {new:true}
+   ).then(
     (result) => {
       // console.log(result);
       res.status(200).json({
@@ -45,16 +53,20 @@ router.patch("/UPDATE_EXPENSE/:id",authMiddleware, (req, res, next) => {
   );
 });
 
-router.get("/GET_ALL_EXPENSE", authMiddleware,(req, res, next) => {
-  CreateExpense.find().then((documents) => {
+router.get("/GET_ALL_EXPENSE/:id", authMiddleware,(req, res, next) => {
+  UserModel.findOne({_id:req.params.id}).then((documents) => {
     // console.log(documents);
     res.status(200).json({
       message: "SuccessFully Fetched",
-      data: documents,
+      data: documents.expenses,
       status: true,
     });
-    next();
-  });
+  }).catch((err)=>{
+    res.status(401).json({
+      message: err,
+      status: false,
+    });
+  })
   // next();
 }); // take a func next is important function as this tell the code to execute next block also not end here
 
@@ -69,12 +81,20 @@ router.post("/CREATE_EXPENSE", authMiddleware, (req, res, next) => {
     comment: req.body.comment,
     creater: req.body.creater,
   });
-  newExpense.save().then((result) => {
-    res.status(201).json({
-      message: "Successfully Created",
-      status: true,
+
+  UserModel.updateOne({_id:req.body.creater},{
+    $push: { expenses: newExpense }
+  }).then((result)=>{
+    res.status(200).json({
+      message:'Expense Added',
+      status:true,
+    })
+  }).catch((err)=>{
+    res.status(501).json({
+      message:err,
+      status:false,
     });
-  }); //database command to insert the data see manogoDB
+  });
 });
 
 router.post('/SAVE_DATA',(req,res,next)=>{
@@ -85,34 +105,35 @@ router.post('/SAVE_DATA',(req,res,next)=>{
     lastLoginDate:req.body.lastLoginDate,
     userId:req.body.userId,
   });
-  allData.save().then((results)=>{
+  UserModel.updateOne({_id:req.body.userId},{
+    $push: { userData: allData }
+  }).then((result)=>{
     res.status(200).json({
-      message:'Successfully Save',
-      data:results,
+      message:'Expense Added',
       status:true,
-    });
-  }).catch(error=>{
-    res.status(500).json({
-      message:'Error While Saving Content',
-      status:false,
     })
-  })
-});
-
-router.get('/GET_SAVE_DATA/:id',(req,res,next)=>{
-  SaveData.findOne({userId:req.params.id}).then((result)=>{
-    res.status(200).json({
-      message:'Data Fetched',
-      data:result,
-      status:true,
-    });
-  })
-  .catch(err=>{
-    res.status(500).json({
-      message:err.message,
+  }).catch((err)=>{
+    res.status(501).json({
+      message:err,
       status:false,
     });
   });
+});
+
+router.get('/GET_SAVE_DATA/:id',(req,res,next)=>{
+  UserModel.findOne({ _id: req.params.id },).then((user)=>{
+    res.status(200).json({
+      message:'Fetch one',
+      data:user.userData[0],
+      status:true,
+    })
+  })
+  .catch((err)=>{
+    res.status(501).json({
+      message:err,
+      status:false,
+    })
+  })
 });
 
 module.exports = router;

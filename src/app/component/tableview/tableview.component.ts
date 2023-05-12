@@ -34,7 +34,7 @@ export class TableviewComponent implements OnInit {
     this.getAllExpense();
   }
   public getAllExpense(){
-    this.businessData.onGetAllExpense().subscribe((res: any) => {
+    this.businessData.onGetAllExpense('ii').subscribe((res: any) => {
       this.ELEMENT_DATA = res.data;
       this.dataSource = new MatTableDataSource<ExpenseContent>(
         this.ELEMENT_DATA

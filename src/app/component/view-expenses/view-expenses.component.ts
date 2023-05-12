@@ -38,11 +38,13 @@ export class ViewExpensesComponent implements OnInit {
   text4: any = 'raghav3';
   startDate = new Date();
   cards: any = [];
+  userId:any;
   ngOnInit(): void {
-    this.getAllExpense();
+    this.userId=localStorage.getItem('Id')?.split(' ')[1];
+    this.getAllExpense(this.userId);
   }
-  public getAllExpense() {
-    this.businessData.onGetAllExpense().subscribe((res: any) => {
+  public getAllExpense(id:any) {
+    this.businessData.onGetAllExpense(id).subscribe((res: any) => {
       this.ELEMENT_DATA = res.data;
       this.dataSource = new MatTableDataSource<ExpenseContent>(
         this.ELEMENT_DATA
@@ -87,7 +89,7 @@ export class ViewExpensesComponent implements OnInit {
       height: '190px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.getAllExpense();
+      this.getAllExpense(this.userId);
     });
   }
 }

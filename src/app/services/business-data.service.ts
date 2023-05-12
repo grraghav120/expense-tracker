@@ -12,16 +12,18 @@ export class BusinessDataService {
   expensesLogged = '';
   latestLoginDate:any='';
   firstLoginDate:any=''
-  username:any='';
-  name:any='';
+  // username:any='';
+  // name:any='';
   keywords:any=['Transportation','Groceries','Entertainment','Miscellaneous']
   data:any;
   apiUrl = 'http://localhost:3000/v1/api/';
+  userId:any;
   constructor(private route: Router, public http: HttpClient) {
   }
 
-  onGetAllExpense() {
-    return this.http.get(this.apiUrl + 'GET_ALL_EXPENSE');
+  onGetAllExpense(id:any) {
+    this.userId=id;
+    return this.http.get(this.apiUrl + 'GET_ALL_EXPENSE/'+id);
   }
 
   onCreateExpense(values: any,date:any) {
@@ -45,11 +47,12 @@ export class BusinessDataService {
   }
   
   onDeleteExpense(id:string){
-    return this.http.delete(this.apiUrl+'DELETE_EXPENSE/'+id);
+    return this.http.delete(this.apiUrl+'DELETE_EXPENSE/'+this.userId+'/'+id);
   }
 
   onGetSingleExpense(id:string){
-    return this.http.get(this.apiUrl+'GET_SINGLE_EXPENSE/'+id);
+    // console.log(this.userId);
+    return this.http.get(this.apiUrl+'GET_SINGLE_EXPENSE/'+this.userId+'/'+id);
   }
 
   onUpdateExpense(id:string,values:any){
@@ -61,8 +64,9 @@ export class BusinessDataService {
       expense_date: (date[0]+' '+date[1]+' '+date[2]+' '+date[3]),
       expense_category: values.expense_category,
       payment: values.payment,
-      comment: values.comment
+      comment: values.comment,
+      creater:this.userId,
     }
-    return this.http.patch(this.apiUrl+'UPDATE_EXPENSE/'+id,body);
+    return this.http.patch(this.apiUrl+'UPDATE_EXPENSE/'+this.userId+'/'+id,body);
   }
 }
