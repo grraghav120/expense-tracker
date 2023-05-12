@@ -1,7 +1,10 @@
 .main{
     padding: 30px 25px;
-    // background-image: url(../../../assets/image/ruppe2.png);
-    // image-resolution: 200;
+    background-image: url(../../../assets/image/saving.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
 }
 mat-card{
     margin: 0px 25px;
@@ -53,4 +56,15 @@ table {
 .table-container{
   max-width: 100%;
   overflow-x: scroll;
+}
+.noelement{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+.noelement p{
+    font-size: 25px;
+    font-weight: 240;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

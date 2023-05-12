@@ -14,7 +14,7 @@ export class BusinessDataService {
   firstLoginDate:any=''
   // username:any='';
   // name:any='';
-  keywords:any=['Transportation','Groceries','Entertainment','Miscellaneous']
+  keywords:any;
   data:any;
   apiUrl = 'http://localhost:3000/v1/api/';
   userId:any;
@@ -41,9 +41,7 @@ export class BusinessDataService {
   }
 
   onCreateCategory(body:any){
-    this.keywords.push(...body);
-    let data={categories:this.keywords};
-    return this.http.post(this.apiUrl+'CREATE_CATEGORY',data);
+    return this.http.post(this.apiUrl+'SAVE_CATEGORY/'+this.userId,body);
   }
   
   onDeleteExpense(id:string){
@@ -69,4 +67,10 @@ export class BusinessDataService {
     }
     return this.http.patch(this.apiUrl+'UPDATE_EXPENSE/'+this.userId+'/'+id,body);
   }
+
+  onGetAllCategory(){
+    this.userId=localStorage.getItem('Id')?.split(' ')[1];
+    return this.http.get(this.apiUrl+'GET_CATEGORY/'+this.userId);
+  }
+
 }

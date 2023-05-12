@@ -73,7 +73,12 @@
           <div class="col-sm-6">
             <mat-form-field appearance="outline" style="width: 100%">
               <mat-label>Expense Category</mat-label>
-              <mat-select formControlName="expense_category">
+              <mat-select formControlName="expense_category" *ngIf="tags">
+                <mat-option *ngFor="let item of tags" [value]="item">{{
+                  item
+                }}</mat-option>
+              </mat-select>
+              <mat-select formControlName="expense_category" *ngIf="!tags">
                 <mat-option *ngFor="let item of keywords" [value]="item">{{
                   item
                 }}</mat-option>

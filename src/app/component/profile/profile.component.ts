@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit{
     this.authService.getAllSaveData().subscribe((res:any)=>{
       this.lines=[
         {content:'User Since',text:res.data.firstLoginDate},
-        {content:'Expense Logged',text:this.businessData.expensesLogged},
+        {content:'Expense Logged',text:(this.businessData.expensesLogged)?this.businessData.expensesLogged:0},
         {content:'Last Login',text:res.data.lastLoginDate}
       ];
       this.name=res.data.name;

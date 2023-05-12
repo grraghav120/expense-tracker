@@ -30,7 +30,7 @@ export class ViewExpensesComponent implements OnInit {
     public businessData: BusinessDataService,
     public dialog: MatDialog,
     public http: HttpClient,
-   
+    public route:Router,
   ) {}
   text1: any = 'raghav ';
   text2: any = 'rghav1';
@@ -42,6 +42,9 @@ export class ViewExpensesComponent implements OnInit {
   ngOnInit(): void {
     this.userId=localStorage.getItem('Id')?.split(' ')[1];
     this.getAllExpense(this.userId);
+  }
+  onHome(){
+    this.route.navigate(['home']);
   }
   public getAllExpense(id:any) {
     this.businessData.onGetAllExpense(id).subscribe((res: any) => {

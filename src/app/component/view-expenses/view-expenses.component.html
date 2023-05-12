@@ -1,4 +1,10 @@
-<div class="main">
+<div *ngIf="ELEMENT_DATA.length===0">
+  <div class="noelement"> 
+    <p><s>No Expense Added Yet!</s></p>
+    <button (click)="onHome()" mat-raised-button color="primary">Add New Expense</button>
+  </div>
+</div>
+<div class="main" *ngIf="ELEMENT_DATA.length>0">
   <div class="row row-col-4">
     <div
       class="col-lg-3 col-xs-3 col-md-12 col-sm-6"
