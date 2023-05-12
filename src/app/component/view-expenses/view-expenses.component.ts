@@ -3,11 +3,11 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ExpenseContent } from './view-expense.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { AddExpenseComponent } from '../add-expense/add-expense.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from 'src/app/auth/auth.service';
 @Component({
   selector: 'app-view-expenses',
   templateUrl: './view-expenses.component.html',
@@ -30,7 +30,8 @@ export class ViewExpensesComponent implements OnInit {
     public businessData: BusinessDataService,
     public dialog: MatDialog,
     public http: HttpClient,
-   
+    public authServ:AuthService,
+    public _snackBar:MatSnackBar,
   ) {}
   text1: any = 'raghav ';
   text2: any = 'rghav1';
@@ -69,6 +70,9 @@ export class ViewExpensesComponent implements OnInit {
         { icon: 'monetization_on', title: 'Total Amount', content: '₹'+'0' },
       ];
       this.businessData.expensesLogged = res.data.length;
+    },(error)=>{
+      this._snackBar.open('Session Expired!!','',{duration:2000});
+      this.authServ.onLogout();
     });
   }
   ngAfterViewInit() {
