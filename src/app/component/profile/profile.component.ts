@@ -14,10 +14,12 @@ export class ProfileComponent implements OnInit{
   constructor(public businessData:BusinessDataService,public authService:AuthService){}
   ngOnInit(): void {
     this.authService.getAllSaveData().subscribe((res:any)=>{
+      let firstDate=(res.data.firstLoginDate).toString().split('T')[0];
+      let lastLogin=(res.data.lastLoginDate).toString().split('T')[0];
       this.lines=[
-        {content:'User Since',text:res.data.firstLoginDate},
+        {content:'User Since',text:firstDate},
         {content:'Expense Logged',text:(this.businessData.expensesLogged)?this.businessData.expensesLogged:0},
-        {content:'Last Login',text:res.data.lastLoginDate}
+        {content:'Last Login',text:lastLogin},
       ];
       this.name=res.data.name;
       this.user_name=res.data.username;
