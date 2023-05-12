@@ -4,6 +4,7 @@ module.exports = (req, res, next) => {
     try{
         const token = req.headers.authentication.split(" ")[1];
         jwt.verify(token,'raghav_garg_first_mean_project_this_can_be_anything');
+        // req.userData={id:localStorage.getItem('Id').split(' ')[1]};
         next();
     }catch(error){
         res.status(401).json({
