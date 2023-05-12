@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 
 const uniqueValidator = require("mongoose-unique-validator");
 
-const createCategory= mongoose.Schema({
-  categories:{type:Array},
-});
-
 const SaveData=mongoose.Schema({
   username:({type:String}),
   name:({type:String}),
@@ -35,7 +31,7 @@ const userSchmema = mongoose.Schema({
   userFirstSignUp:{type:String,required:true},
   userData:[SaveData],
   expenses:[createExpense],
-  category:[createCategory],
+  category:[],
 });
 
 userSchmema.plugin(uniqueValidator);

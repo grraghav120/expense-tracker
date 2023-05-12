@@ -1,9 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
+import { ThemeService } from 'ng2-charts';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 @Component({
   selector: 'app-add-expense',
@@ -11,7 +10,6 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
   styleUrls: ['./add-expense.component.scss'],
 })
 export class AddExpenseComponent implements OnInit {
-  appearance: MatFormFieldAppearance = 'legacy' as MatFormFieldAppearance;
   expenseForm!: FormGroup;
   isEdit: boolean = false;
   date: any;
@@ -19,6 +17,7 @@ export class AddExpenseComponent implements OnInit {
   maxDate :any=new Date();
   keywords: any = [];
   payments: any = ['Card', 'Cash', 'UPI', 'Net Banking', 'Paypal'];
+  @Input() tags:any=[];
   months: any = [
     'Jan',
     'Feb',
@@ -40,7 +39,9 @@ export class AddExpenseComponent implements OnInit {
     public route: Router
   ) {}
   ngOnInit(): void {
-    this.keywords = this.businessData.keywords;
+    this.businessData.onGetAllCategory().subscribe((res:any)=>{
+      this.keywords=res.data;
+    })
     this.expenseForm = new FormGroup({
       name: new FormControl('', Validators.required),
       amount: new FormControl('', Validators.required),

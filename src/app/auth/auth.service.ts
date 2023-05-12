@@ -42,6 +42,7 @@ export class AuthService {
       gmail: values.gmail,
       password: values.password,
       userFirstSignUp: new Date(),
+      category:['Transportation','Groceries','Entertainment','Miscellaneous'],
     };
     this.http.post(this.apiUrl + 'USER/SIGN_UP', body).subscribe(
       (res: any) => {

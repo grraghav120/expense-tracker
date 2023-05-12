@@ -30,6 +30,7 @@ export class ViewExpensesComponent implements OnInit {
     public businessData: BusinessDataService,
     public dialog: MatDialog,
     public http: HttpClient,
+    public route:Router,
     public authServ:AuthService,
     public _snackBar:MatSnackBar,
   ) {}
@@ -43,6 +44,9 @@ export class ViewExpensesComponent implements OnInit {
   ngOnInit(): void {
     this.userId=localStorage.getItem('Id')?.split(' ')[1];
     this.getAllExpense(this.userId);
+  }
+  onHome(){
+    this.route.navigate(['home']);
   }
   public getAllExpense(id:any) {
     this.businessData.onGetAllExpense(id).subscribe((res: any) => {

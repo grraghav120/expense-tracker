@@ -16,6 +16,7 @@ router.post("/SIGN_UP", (req, res, next) => {
         gmail: req.body.gmail,
         password: hash, //the password should be encrypted so that no one can access the user account not even us(Admin)
         userFirstSignUp: req.body.userFirstSignUp,
+        category:[...req.body.category],
       });
       User.save()
         .then((result) => {

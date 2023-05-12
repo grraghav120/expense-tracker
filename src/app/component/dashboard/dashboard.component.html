@@ -15,58 +15,12 @@
       </mat-card>
     </div>
     <div class="col-12 col-md-6 offset-md-3 myCard">
-      <mat-card class="example-card">
-        <mat-card-header>
-          <mat-card-title>
-            <div>
-              <p>Add Expense Category <mat-icon>note_add</mat-icon></p>
-            </div>
-          </mat-card-title>
-          <mat-card-subtitle>Add/Remove Expense Categories</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content style="padding-top: 15px">
-          <mat-form-field appearance="outline" class="example-form-field">
-            <mat-label>Avaiable Expense Categories</mat-label>
-            <mat-chip-grid #chipGrid aria-label="Enter New Category">
-              <mat-chip-row *ngFor="let keyword of keywords">
-                {{ keyword }}
-              </mat-chip-row>
-              <mat-chip-row
-                *ngFor="let keyword of newKeywords"
-                (removed)="removeKeyword(keyword)"
-              >
-                {{ keyword }}
-                <button matChipRemove aria-label="'remove ' + keyword">
-                  <mat-icon>cancel</mat-icon>
-                </button>
-              </mat-chip-row>
-            </mat-chip-grid>
-            <input
-              placeholder="New Categories..."
-              [matChipInputFor]="chipGrid"
-              (matChipInputTokenEnd)="add($event)"
-              style="border: 2px solid black"
-            />
-          </mat-form-field>
-        </mat-card-content>
-        <mat-card-actions align="end">
-          <button mat-raised-button (click)="onReset()">
-            <mat-icon>autorenew</mat-icon>Reset
-          </button>
-          <button
-            mat-raised-button
-            (click)="onSave()"
-            [disabled]="newKeywords.length === 0"
-          >
-            <mat-icon>save</mat-icon> Save
-          </button>
-        </mat-card-actions>
-      </mat-card>
+      <app-add-category  (categoryAdded)="handleCategory($event)" ></app-add-category>
     </div>
   </div>
   <div class="row">
     <div class="col-12 col-md-6 offset-md-3 myCard">
-      <app-add-expense></app-add-expense>
+      <app-add-expense [tags]="keywords"></app-add-expense>
     </div>
     <div class="col-12 col-md-6 offset-md-3 myCard" style="margin-bottom: 30px">
       <mat-card>
