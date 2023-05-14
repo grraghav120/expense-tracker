@@ -4,7 +4,7 @@
     <button (click)="onHome()" mat-raised-button color="primary">Add New Expense</button>
   </div>
 </div>
-<div class="main" *ngIf="ELEMENT_DATA.length>0">
+<div class="main">
   <div class="row row-col-4">
     <div
       class="col-lg-3 col-xs-3 col-md-12 col-sm-6"
@@ -28,8 +28,8 @@
   <div class="row row-col-2">
     <div class="col-sm-6 col-xs-12">
       <mat-card>
+        <mat-card-title style="padding:10px 20px;" >Category Summary</mat-card-title>
         <mat-card-content>
-          <mat-card-title>Category Summary</mat-card-title>
           <app-show-chart [chartType]="'pie'"></app-show-chart>
         </mat-card-content>
       </mat-card>

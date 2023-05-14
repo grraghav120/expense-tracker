@@ -9,16 +9,21 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 })
 export class ProfileComponent implements OnInit{
   user_name:any='';
+  isProcess:boolean=true;
   name:any='';
   lines:any=[];
   constructor(public businessData:BusinessDataService,public authService:AuthService){}
   ngOnInit(): void {
+    this.isProcess=true;
     this.authService.getAllSaveData().subscribe((res:any)=>{
+      setTimeout(() => {
+        this.isProcess=false;
+      }, 2000);
       let firstDate=(res.data.firstLoginDate).toString().split('T')[0];
       let lastLogin=(res.data.lastLoginDate).toString().split('T')[0];
       this.lines=[
         {content:'User Since',text:firstDate},
-        {content:'Expense Logged',text:(this.businessData.expensesLogged)?this.businessData.expensesLogged:0},
+        {content:'Expense Logged',text:res.data.expenseLogged},
         {content:'Last Login',text:lastLogin},
       ];
       this.name=res.data.name;

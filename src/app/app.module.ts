@@ -41,6 +41,7 @@ import { Confirm } from './component/view-expenses/view-expenses.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import {MatStepperModule} from '@angular/material/stepper';
 import { ImportComponent } from './component/import/import.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   declarations: [
     AppComponent,
@@ -73,6 +74,7 @@ import { ImportComponent } from './component/import/import.component';
     NgChartsModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatProgressBarModule,
     MatDatepickerModule,
     MatCardModule,
     MatTabsModule,
