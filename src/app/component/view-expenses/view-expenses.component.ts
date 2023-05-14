@@ -34,19 +34,22 @@ export class ViewExpensesComponent implements OnInit {
     public authServ:AuthService,
     public _snackBar:MatSnackBar,
   ) {}
-  text1: any = 'raghav ';
-  text2: any = 'rghav1';
-  text3: any = 'raghav2';
-  text4: any = 'raghav3';
   startDate = new Date();
   cards: any = [];
   userId:any;
+  allexpense='';
   ngOnInit(): void {
     this.userId=localStorage.getItem('Id')?.split(' ')[1];
     this.getAllExpense(this.userId);
   }
   onHome(){
     this.route.navigate(['home']);
+  }
+  public updateExpene(){
+    let body={
+      expenseLogged:this.businessData.expensesLogged,
+    }
+    this.authServ.updateUserData(this.userId,body);
   }
   public getAllExpense(id:any) {
     this.businessData.onGetAllExpense(id).subscribe((res: any) => {
@@ -73,7 +76,9 @@ export class ViewExpensesComponent implements OnInit {
         },
         { icon: 'monetization_on', title: 'Total Amount', content: '₹'+'0' },
       ];
-      this.businessData.expensesLogged = res.data.length;
+      this.allexpense=res.data.length;
+      this.businessData.expensesLogged=this.allexpense;
+      this.updateExpene();
     },(error)=>{
       this._snackBar.open('Session Expired!!','',{duration:2000});
       this.authServ.onLogout();
@@ -98,6 +103,7 @@ export class ViewExpensesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((result) => {
       this.getAllExpense(this.userId);
+      this.updateExpene();
     });
   }
 }

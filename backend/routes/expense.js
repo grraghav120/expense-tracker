@@ -104,12 +104,13 @@ router.post('/SAVE_DATA',(req,res,next)=>{
     firstLoginDate:req.body.firstLoginDate,
     lastLoginDate:req.body.lastLoginDate,
     userId:req.body.userId,
+    expenseLogged:req.body.expenseLogged,
   });
   UserModel.updateOne({_id:req.body.userId},{
     $push: { userData: allData }
   }).then((result)=>{
     res.status(200).json({
-      message:'Expense Added',
+      message:'Save',
       status:true,
     })
   }).catch((err)=>{
@@ -173,13 +174,14 @@ router.post('/UPDATE_SAVE_DATA/:id',(req,res,next)=>{
   UserModel.findOneAndUpdate({ _id: req.params.id,'userData.userId': req.params.id },
    {$set:{
     'userData.$.lastLoginDate':req.body.lastLoginDate,
+    'userData.$.expenseLogged':req.body.expenseLogged,
   }},
    {new:true}
    ).then(
     (result) => {
-      console.log(result);
+      // console.log(result);
       res.status(200).json({
-        message: "SuccessFully Updated UserData",
+        message: "SuccessFully Updated LoginDate",
         status: true,
       });
     }

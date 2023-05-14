@@ -60,6 +60,7 @@ export class AuthService {
             name:res.data.name,
             lastLoginDate:res.data.UserSince,
             userId:res.data.userId,
+            expenseLogged:0,
           };
           this.saveAllData(body);
           this.expireTokenTime = setTimeout(() => {
@@ -130,7 +131,8 @@ export class AuthService {
     return this.http.get(this.apiUrl+'GET_SAVE_DATA/'+localStorage.getItem('Id')?.split(' ')[1]);
   }
 
-  private updateUserData(id:string,body:any){
+  updateUserData(id:string,body:any){
+    // let userid=localStorage.getItem('Id')?.split(' ')[1];
     this.http.post(this.apiUrl+'UPDATE_SAVE_DATA/'+id,body).subscribe((result)=>{
       console.log(result);
     })

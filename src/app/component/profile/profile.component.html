@@ -6,7 +6,8 @@
       >
       <button mat-raised-button color="primary" disabled><mat-icon>edit</mat-icon>Edit</button>
     </mat-card-header>
-    <mat-card-content>
+    <mat-progress-bar *ngIf="isProcess" mode="indeterminate"></mat-progress-bar>
+    <mat-card-content *ngIf="!isProcess">
       <div class="liner"><p></p></div>
       <div class="main">
         <img
