@@ -1,9 +1,9 @@
-<div *ngIf="ELEMENT_DATA.length===0">
+<!-- <div *ngIf="ELEMENT_DATA.length===0">
   <div class="noelement"> 
     <p><s>No Expense Added Yet!</s></p>
     <button (click)="onHome()" mat-raised-button color="primary">Add New Expense</button>
   </div>
-</div>
+</div> -->
 <div class="main">
   <div class="row row-col-4">
     <div
@@ -29,31 +29,26 @@
     <div class="col-sm-6 col-xs-12">
       <mat-card>
         <mat-card-title style="padding:10px 20px;" >Category Summary</mat-card-title>
+        <mat-card-subtitle style="padding: 5px 20px;">Click to View</mat-card-subtitle>
         <mat-card-content>
-          <app-show-chart [chartType]="'pie'"></app-show-chart>
+          <div style="padding-bottom: 20px;"><button class="btn-pie" (click)="openPieChart()"><img src="../../../assets/image/pie23.gif" width="250px" ></button>
+            </div>
+          
         </mat-card-content>
       </mat-card>
     </div>
     <div class="col-sm-6 col-xs-12">
       <mat-card>
-        <mat-card-title class="content">
+        <mat-card-title style="padding: 10px 20px;">
           <p>Expense Monthly Summary</p>
-          <mat-form-field appearance="outline">
-            <mat-label>Choose a date</mat-label>
-            <input matInput [matDatepicker]="picker" />
-            <mat-datepicker-toggle
-              matIconSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
-            <mat-datepicker
-              #picker
-              startView="year"
-              [startAt]="startDate"
-            ></mat-datepicker>
-          </mat-form-field>
         </mat-card-title>
-        <mat-card-content style="height: 270px">
-          <app-show-chart [chartType]="'bar'"></app-show-chart>
+        <mat-card-subtitle style="padding-left: 20px;padding-bottom: 10px;">Click to View</mat-card-subtitle>
+        <mat-card-content>
+          <div style="padding-bottom: 5px;">
+          <button class="btn-pie" (click)="openBarChart()">
+            <img src="../../../assets/image/bar11.gif" width="175px">
+          </button>
+          </div>
         </mat-card-content>
       </mat-card>
     </div>

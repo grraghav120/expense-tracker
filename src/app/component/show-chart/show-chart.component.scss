@@ -1,0 +1,24 @@
+.pieChart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    margin-top: 30px;
+}
+.barChart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    margin-top: 10px;
+}
+#myCanvas {
+    width: 300px !important;
+    height: 300px !important; 
+}
+.categorypara{
+    font-size: 15px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 10px;
+    padding-left: 10px;
+}

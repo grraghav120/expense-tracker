@@ -9,6 +9,10 @@ export class BusinessDataService {
   
   isLogging: boolean = false;
   // keywords=new Set();
+  // newHashMap:any={};
+  pieLabels:any=[];
+  piedata:any=[];
+  chartType:any;
   expensesLogged = '';
   latestLoginDate:any='';
   firstLoginDate:any=''

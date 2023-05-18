@@ -1,23 +1,39 @@
-<div *ngIf="chartType==='pie'">
-  <canvas
-    baseChart
-    [type]="'pie'"
-    [datasets]="pieChartDatasets"
-    [labels]="pieChartLabels"
-    [options]="pieChartOptions"
-    [plugins]="pieChartPlugins"
-    [legend]="pieChartLegend"
-  >
-  </canvas>
+<div *ngIf="chartType === 'pie'">
+  <div><p class="categorypara">Click on Category for more details</p></div>
+  <div class="pieChart">
+    <canvas
+      baseChart
+      id="myCanvas"
+      [type]="'pie'"
+      [datasets]="pieChartDatasets"
+      [labels]="pieChartLabels"
+      [options]="pieChartOptions"
+      [plugins]="pieChartPlugins"
+      [legend]="pieChartLegend"
+    >
+    </canvas>
+  </div>
 </div>
-<div *ngIf="chartType==='bar'">
-  <canvas
-    baseChart
-    [data]="barChartData"
-    [options]="barChartOptions"
-    [plugins]="barChartPlugins"
-    [legend]="barChartLegend"
-    [type]="'bar'"
-  >
-  </canvas>
+
+<div *ngIf="chartType === 'bar'">
+  <div style="display: flex; justify-content: center; padding: 5px;">
+    <mat-form-field>
+      <mat-label>Select Year</mat-label>
+      <mat-select [(value)]="selectedYear">
+        <mat-option [value]="year" *ngFor="let year of years">{{year}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="barChart">
+    <canvas
+      id="myBarCanvas"
+      baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [plugins]="barChartPlugins"
+      [legend]="barChartLegend"
+      [type]="'bar'"
+    >
+    </canvas>
+  </div>
 </div>

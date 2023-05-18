@@ -9,6 +9,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 })
 export class ProfileComponent implements OnInit{
   user_name:any='';
+  editable:boolean=false;
   isProcess:boolean=true;
   name:any='';
   lines:any=[];
@@ -18,6 +19,7 @@ export class ProfileComponent implements OnInit{
     this.authService.getAllSaveData().subscribe((res:any)=>{
       setTimeout(() => {
         this.isProcess=false;
+        this.editable=true;
       }, 2000);
       let firstDate=(res.data.firstLoginDate).toString().split('T')[0];
       let lastLogin=(res.data.lastLoginDate).toString().split('T')[0];
