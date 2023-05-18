@@ -28,6 +28,7 @@ export class ViewExpensesComponent implements OnInit {
   ];
 
   ELEMENT_DATA: ExpenseContent[] = [];
+  userId:any;
   dataSource = new MatTableDataSource<ExpenseContent>();
   constructor(
     public businessData: BusinessDataService,
@@ -36,11 +37,11 @@ export class ViewExpensesComponent implements OnInit {
     public route:Router,
     public authServ:AuthService,
     public _snackBar:MatSnackBar,
-  ) {}
+  ) {this.userId=localStorage.getItem('Id')?.split(' ')[1];}
   
   cards: any = [];
-  userId:any;
-  allexpense='';
+ 
+  allexpense:any=0;
   count:any=0;
   ngOnInit(): void {
     this.userId=localStorage.getItem('Id')?.split(' ')[1];
@@ -51,7 +52,7 @@ export class ViewExpensesComponent implements OnInit {
   }
   public updateExpene(){
     let body={
-      expenseLogged:this.businessData.expensesLogged,
+      expenseLogged:(this.businessData.expensesLogged)?this.businessData.expensesLogged:0,
     }
     this.authServ.updateUserData(this.userId,body);
   }
@@ -62,25 +63,26 @@ export class ViewExpensesComponent implements OnInit {
         this.ELEMENT_DATA
       );
       this.dataSource.paginator = this.paginator;
+      let len=res.data.length;
       this.cards = [
         {
           icon: 'today',
           title: 'First Expense Date',
-          content: res.data[0].expense_date,
+          content: (len>0)?(res.data[0].expense_date):'-',
         },
         {
           icon: 'today',
           title: 'Latest Expense Date',
-          content: res.data[res.data.length - 1].expense_date,
+          content: (len>0)?(res.data[res.data.length - 1].expense_date):'-',
         },
         {
           icon: 'numbers',
           title: 'Number of Expenses',
-          content: res.data.length,
+          content: len,
         },
         { icon: 'monetization_on', title: 'Total Amount', content: '₹'+this.count },
       ];
-      this.allexpense=res.data.length;
+      this.allexpense=len;
       this.businessData.expensesLogged=this.allexpense;
       this.updateExpene();
       this.pieChartData(res.data);
@@ -98,6 +100,11 @@ export class ViewExpensesComponent implements OnInit {
   cate:any;
   hashMap:any={};
   public pieChartData(data:any){
+    this.businessData.pieLabels=[];
+    this.businessData.piedata=[];
+    this.hashMap={};
+    this.count=0;
+    if(data){
     this.businessData.onGetAllCategory().subscribe((res:any)=>{
       this.cate=res.data;
       
@@ -108,9 +115,7 @@ export class ViewExpensesComponent implements OnInit {
         this.hashMap[data[i].expense_category]+=data[i].amount;
       }
       // console.log(this.hashMap);
-      this.businessData.pieLabels=[];
-      this.businessData.piedata=[];
-      this.count=0;
+
       for(let key in this.hashMap){
         if(this.hashMap[key]!=0){
           this.businessData.pieLabels.push(key);
@@ -121,6 +126,7 @@ export class ViewExpensesComponent implements OnInit {
       this.cards[3].content='₹'+this.count;
       
     })
+  }
   }
 
   openBarChart(){
@@ -157,8 +163,10 @@ export class ViewExpensesComponent implements OnInit {
       height: '190px',
     });
     dialogRef.afterClosed().subscribe((result) => {
+      // this.businessData.expensesLogged=this.businessData.expensesLogged-1;
+      // this.updateExpene();
       this.getAllExpense(this.userId);
-      this.updateExpene();
+      // this.updateExpene();
     });
   }
 }
