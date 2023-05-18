@@ -71,7 +71,7 @@
             </mat-form-field>
           </div>
           <div class="col-sm-6">
-            <mat-form-field appearance="outline" style="width: 100%">
+            <mat-form-field appearance="outline" style="width: 100%" *ngIf="!isEdit">
               <mat-label>Expense Category</mat-label>
               <mat-select formControlName="expense_category" *ngIf="tags">
                 <mat-option *ngFor="let item of tags" [value]="item">{{
@@ -79,6 +79,24 @@
                 }}</mat-option>
               </mat-select>
               <mat-select formControlName="expense_category" *ngIf="!tags">
+                <mat-option *ngFor="let item of keywords" [value]="item">{{
+                  item
+                }}</mat-option>
+              </mat-select>
+              <mat-hint
+                *ngIf="
+                  expenseForm.get('expense_category')?.errors &&
+                  expenseForm.get('expense_category')?.hasError('required') &&
+                  expenseForm.get('expense_category')?.touched
+                "
+                style="color: red"
+              >
+                Expense Category is required
+              </mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 100%" *ngIf="isEdit">
+              <mat-label>Expense Category</mat-label>
+              <mat-select formControlName="expense_category">
                 <mat-option *ngFor="let item of keywords" [value]="item">{{
                   item
                 }}</mat-option>

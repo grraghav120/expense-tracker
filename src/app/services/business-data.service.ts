@@ -13,7 +13,7 @@ export class BusinessDataService {
   pieLabels:any=[];
   piedata:any=[];
   chartType:any;
-  expensesLogged = '';
+  expensesLogged :any=0;
   latestLoginDate:any='';
   firstLoginDate:any=''
   // username:any='';
