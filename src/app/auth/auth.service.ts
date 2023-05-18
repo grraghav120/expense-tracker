@@ -134,7 +134,7 @@ export class AuthService {
   updateUserData(id:string,body:any){
     // let userid=localStorage.getItem('Id')?.split(' ')[1];
     this.http.post(this.apiUrl+'UPDATE_SAVE_DATA/'+id,body).subscribe((result)=>{
-      console.log(result);
+      // console.log(result);
     })
   }
 

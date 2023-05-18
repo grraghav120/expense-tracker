@@ -179,7 +179,6 @@ router.post('/UPDATE_SAVE_DATA/:id',(req,res,next)=>{
    {new:true}
    ).then(
     (result) => {
-      // console.log(result);
       res.status(200).json({
         message: "SuccessFully Updated LoginDate",
         status: true,

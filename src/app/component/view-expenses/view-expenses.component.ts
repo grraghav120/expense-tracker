@@ -8,6 +8,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ChartOptions } from 'chart.js';
+import { ChartConfiguration } from 'chart.js';
+import { ShowChartComponent } from '../show-chart/show-chart.component';
 @Component({
   selector: 'app-view-expenses',
   templateUrl: './view-expenses.component.html',
@@ -34,10 +37,11 @@ export class ViewExpensesComponent implements OnInit {
     public authServ:AuthService,
     public _snackBar:MatSnackBar,
   ) {}
-  startDate = new Date();
+  
   cards: any = [];
   userId:any;
   allexpense='';
+  count:any=0;
   ngOnInit(): void {
     this.userId=localStorage.getItem('Id')?.split(' ')[1];
     this.getAllExpense(this.userId);
@@ -74,11 +78,12 @@ export class ViewExpensesComponent implements OnInit {
           title: 'Number of Expenses',
           content: res.data.length,
         },
-        { icon: 'monetization_on', title: 'Total Amount', content: '₹'+'0' },
+        { icon: 'monetization_on', title: 'Total Amount', content: '₹'+this.count },
       ];
       this.allexpense=res.data.length;
       this.businessData.expensesLogged=this.allexpense;
       this.updateExpene();
+      this.pieChartData(res.data);
     },(error)=>{
       this._snackBar.open('Session Expired!!','',{duration:2000});
       this.authServ.onLogout();
@@ -87,6 +92,56 @@ export class ViewExpensesComponent implements OnInit {
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
+
+  //logic of pie chart
+  
+  cate:any;
+  hashMap:any={};
+  public pieChartData(data:any){
+    this.businessData.onGetAllCategory().subscribe((res:any)=>{
+      this.cate=res.data;
+      
+      for(let i=0;i<this.cate.length;i++){
+        this.hashMap[this.cate[i]]=0;
+      }
+      for(let i =0;i<data.length;i++){
+        this.hashMap[data[i].expense_category]+=data[i].amount;
+      }
+      // console.log(this.hashMap);
+      this.businessData.pieLabels=[];
+      this.businessData.piedata=[];
+      this.count=0;
+      for(let key in this.hashMap){
+        if(this.hashMap[key]!=0){
+          this.businessData.pieLabels.push(key);
+          this.businessData.piedata.push(this.hashMap[key]);
+          this.count+=this.hashMap[key];
+        }
+      }
+      this.cards[3].content='₹'+this.count;
+      
+    })
+  }
+
+  openBarChart(){
+    this.businessData.chartType='bar';
+    let dialogRef = this.dialog.open(ShowChartComponent, {
+      width: '700px',
+      height: '400px',
+    });
+  }
+
+  openPieChart()
+  {
+    this.businessData.chartType='pie';
+    let dialogRef = this.dialog.open(ShowChartComponent, {
+      width: '500px',
+      height: '400px',
+    });
+  }
+
+  // pie chart logic ends
+
   onOpen(element: any) {
     this.openDialog();
     // console.log(element);

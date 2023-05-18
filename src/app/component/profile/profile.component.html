@@ -4,7 +4,7 @@
       <mat-card-title
         >User Information <mat-icon>verified_user</mat-icon></mat-card-title
       >
-      <button mat-raised-button color="primary" disabled><mat-icon>edit</mat-icon>Edit</button>
+      <button mat-raised-button color="primary" [disabled]="!editable"><mat-icon>edit</mat-icon>Edit</button>
     </mat-card-header>
     <mat-progress-bar *ngIf="isProcess" mode="indeterminate"></mat-progress-bar>
     <mat-card-content *ngIf="!isProcess">
