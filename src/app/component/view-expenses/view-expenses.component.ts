@@ -8,8 +8,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/auth.service';
-import { ChartOptions } from 'chart.js';
-import { ChartConfiguration } from 'chart.js';
 import { ShowChartComponent } from '../show-chart/show-chart.component';
 @Component({
   selector: 'app-view-expenses',
@@ -40,7 +38,6 @@ export class ViewExpensesComponent implements OnInit {
   ) {this.userId=localStorage.getItem('Id')?.split(' ')[1];}
   
   cards: any = [];
- 
   allexpense:any=0;
   count:any=0;
   ngOnInit(): void {
@@ -86,6 +83,7 @@ export class ViewExpensesComponent implements OnInit {
       this.businessData.expensesLogged=this.allexpense;
       this.updateExpene();
       this.pieChartData(res.data);
+      this.onBarChartEdit(res.data);
     },(error)=>{
       this._snackBar.open('Session Expired!!','',{duration:2000});
       this.authServ.onLogout();
@@ -114,7 +112,6 @@ export class ViewExpensesComponent implements OnInit {
       for(let i =0;i<data.length;i++){
         this.hashMap[data[i].expense_category]+=data[i].amount;
       }
-      // console.log(this.hashMap);
 
       for(let key in this.hashMap){
         if(this.hashMap[key]!=0){
@@ -129,28 +126,46 @@ export class ViewExpensesComponent implements OnInit {
   }
   }
 
-  openBarChart(){
-    this.businessData.chartType='bar';
-    let dialogRef = this.dialog.open(ShowChartComponent, {
-      width: '700px',
-      height: '400px',
-    });
-  }
-
   openPieChart()
   {
     this.businessData.chartType='pie';
-    let dialogRef = this.dialog.open(ShowChartComponent, {
+    let pieDialogRef = this.dialog.open(ShowChartComponent, {
       width: '500px',
       height: '400px',
     });
+    this.businessData.pieDialogRef=pieDialogRef;
   }
 
   // pie chart logic ends
 
+  //bar charts logic
+
+  onBarChartEdit(data:any){
+    let hashmap:any={};
+    for(let i=0;i<data.length;i++){
+      let date=data[i].expense_date.toString().split(' ');
+      hashmap[date[3]]=[];
+    }
+    for(let i=0;i<data.length;i++){
+      let date=data[i].expense_date.toString().split(' ');
+      hashmap[date[3]].push([date[1],data[i].amount]);
+    }
+    this.businessData.hashmap=hashmap;
+    // console.log(hashmap);
+  }
+
+  openBarChart(){
+    this.businessData.chartType='bar';
+    let dialogRef = this.dialog.open(ShowChartComponent, {
+      width: '700px',
+      height: '450px',
+    });
+  }
+
+  //logic ends
+
   onOpen(element: any) {
     this.openDialog();
-    // console.log(element);
     let body = {
       action: 'edit',
       data: element,
@@ -163,10 +178,7 @@ export class ViewExpensesComponent implements OnInit {
       height: '190px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      // this.businessData.expensesLogged=this.businessData.expensesLogged-1;
-      // this.updateExpene();
       this.getAllExpense(this.userId);
-      // this.updateExpene();
     });
   }
 }

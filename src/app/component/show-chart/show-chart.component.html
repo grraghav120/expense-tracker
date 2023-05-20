@@ -1,6 +1,13 @@
 <div *ngIf="chartType === 'pie'">
   <div><p class="categorypara">Click on Category for more details</p></div>
-  <div class="pieChart">
+  <div *ngIf="pieChartLabels.length===0 && chartType==='pie'">
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+      <p>Nothing to Show </p>
+      <button mat-raised-button (click)="onHome()" style="margin-bottom:10px">Add Expense</button>
+      <img src="../../../assets/image/pie22.gif" height="200px" width="200px">
+    </div>
+  </div>
+  <div class="pieChart" *ngIf="pieChartLabels.length>0">
     <canvas
       baseChart
       id="myCanvas"
@@ -16,15 +23,22 @@
 </div>
 
 <div *ngIf="chartType === 'bar'">
-  <div style="display: flex; justify-content: center; padding: 5px;">
-    <mat-form-field>
+  <div><p class="categorypara">Click on <b>Bars</b> for more details</p></div>
+  <div style="display: flex; justify-content: center;">
+    <mat-form-field appearance="outline">
       <mat-label>Select Year</mat-label>
-      <mat-select [(value)]="selectedYear">
+      <mat-select [(value)]="selectedYear" (selectionChange)="onSelectionChange($event)">
         <mat-option [value]="year" *ngFor="let year of years">{{year}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="barChart">
+  <div *ngIf="selectedYear==='' && chartType==='bar'">
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+      <p>Select Year for <b>Monthly</b> details. </p>
+      <img src="../../../assets/image/nobar.gif" height="220px" width="300px">
+    </div>
+  </div>
+  <div class="barChart" *ngIf="selectedYear!==''">
     <canvas
       id="myBarCanvas"
       baseChart
