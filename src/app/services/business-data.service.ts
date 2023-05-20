@@ -8,21 +8,23 @@ import { Router } from '@angular/router';
 export class BusinessDataService {
   
   isLogging: boolean = false;
-  // keywords=new Set();
-  // newHashMap:any={};
+  hashmap:any={};
+  public pieDialogRef:any;
   pieLabels:any=[];
   piedata:any=[];
   chartType:any;
   expensesLogged :any=0;
   latestLoginDate:any='';
   firstLoginDate:any=''
-  // username:any='';
-  // name:any='';
   keywords:any;
   data:any;
   apiUrl = 'http://localhost:3000/v1/api/';
   userId:any;
   constructor(private route: Router, public http: HttpClient) {
+  }
+
+  onHome(){
+    this.route.navigate(['home']);
   }
 
   onGetAllExpense(id:any) {
@@ -53,7 +55,6 @@ export class BusinessDataService {
   }
 
   onGetSingleExpense(id:string){
-    // console.log(this.userId);
     return this.http.get(this.apiUrl+'GET_SINGLE_EXPENSE/'+this.userId+'/'+id);
   }
 
