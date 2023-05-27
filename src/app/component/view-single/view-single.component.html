@@ -1,0 +1,32 @@
+<div style="margin-top: 30px;">
+    <div class="viewExpense"><p>Expense Details</p></div>
+    <table align="center">
+        <tr>
+            <td><b>Name : </b></td>
+            <td>{{tableData.name}}</td>
+        </tr>
+        <tr>
+            <td><b>Amount : </b></td>
+            <td>{{tableData.amount}}</td>
+        </tr>
+        <tr>
+            <td><b>Expense Date :</b> </td>
+            <td>{{tableData.expense_date}}</td>
+        </tr>
+        <tr>
+            <td><b>Expense Category : </b></td>
+            <td>{{tableData.expense_category}}</td>
+        </tr>
+        <tr>
+            <td><b>Payment Type : </b></td>
+            <td>{{tableData.payment}}</td>
+        </tr>
+        <tr *ngIf="tableData.comment!=null">
+            <td><b>Comment :</b> </td>
+            <td>{{tableData.comment}}</td>
+        </tr>
+    </table>
+</div>
+<div mat-dialog-actions align="end">
+    <button mat-flat-button  mat-dialog-close color="primary">Ok</button>
+</div>

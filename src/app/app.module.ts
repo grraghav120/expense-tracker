@@ -42,6 +42,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import {MatStepperModule} from '@angular/material/stepper';
 import { ImportComponent } from './component/import/import.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { ViewSingleComponent } from './component/view-single/view-single.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,6 +61,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     WelcomeComponent,
     TableviewComponent,
     ImportComponent,
+    ViewSingleComponent,
   ],
   imports: [
     BrowserModule,

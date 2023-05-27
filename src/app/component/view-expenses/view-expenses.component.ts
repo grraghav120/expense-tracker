@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ShowChartComponent } from '../show-chart/show-chart.component';
+import { ViewSingleComponent } from '../view-single/view-single.component';
 @Component({
   selector: 'app-view-expenses',
   templateUrl: './view-expenses.component.html',
@@ -182,6 +183,7 @@ export class ViewExpensesComponent implements OnInit {
     });
   }
 }
+
 @Component({
   selector: 'confirm',
   templateUrl: 'confirm.html',
@@ -198,11 +200,30 @@ export class Confirm {
   onOpen() {
     this.route.navigate(['edit', this.businessData.data.data._id]);
   }
+
   onDelete() {
     this.businessData
       .onDeleteExpense(this.businessData.data.data._id)
       .subscribe((res: any) => {
         this._snackBar.open(res.message,'',{duration:2000});
       });
+  }
+
+  openDialog(): void {
+    
+  }
+
+  onView(){
+    let tableData;
+    this.businessData.onGetSingleExpense(this.businessData.data.data._id).subscribe((res: any) => {
+      tableData=res.data;
+      let dialogRef = this.dialog.open(ViewSingleComponent, {
+        width: '300px',
+        height: '250px',
+        data:{
+          data:tableData,
+        }
+      });
+    });
   }
 }
