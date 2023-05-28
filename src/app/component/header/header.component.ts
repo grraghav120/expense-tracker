@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ProfileComponent } from '../profile/profile.component';
 import { AuthService } from 'src/app/auth/auth.service';
+import { AlertBoxComponent } from '../alert-box/alert-box.component';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +26,10 @@ export class HeaderComponent implements OnInit{
     this.route.navigate(['dashboard']);
   }
   onLogout(){
-    this.authService.onLogout();
+    // this.authService.onLogout();
+    this.dialog.open(AlertBoxComponent, {
+      // width: '600px',
+      // height: '500px',
+    });
   }
 }

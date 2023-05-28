@@ -43,6 +43,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { ImportComponent } from './component/import/import.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { ViewSingleComponent } from './component/view-single/view-single.component';
+import { AlertBoxComponent } from './component/alert-box/alert-box.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +63,7 @@ import { ViewSingleComponent } from './component/view-single/view-single.compone
     TableviewComponent,
     ImportComponent,
     ViewSingleComponent,
+    AlertBoxComponent,
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProfileComponent } from '../profile/profile.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+import { AlertBoxComponent } from '../alert-box/alert-box.component';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +35,11 @@ export class HomeComponent implements OnInit {
     });
   }
   onLogout() {
-    this.authService.onLogout();
+    this.dialog.open(AlertBoxComponent, {
+      // width: '600px',
+      // height: '500px',
+    });
+    // this.authService.onLogout();
   }
   onGithub(){
     this.businessData.onGithub();
