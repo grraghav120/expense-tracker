@@ -24,6 +24,26 @@
               >
                 Expense Name is required
               </mat-hint>
+              <mat-hint
+                *ngIf="
+                  expenseForm.get('name')?.errors &&
+                  expenseForm.get('name')?.hasError('pattern') &&
+                  expenseForm.get('name')?.touched
+                "
+                style="color: red"
+              >
+                Expense Name is invalid
+              </mat-hint>
+              <mat-hint
+                *ngIf="
+                  expenseForm.get('name')?.errors &&
+                  expenseForm.get('name')?.hasError('maxlength') &&
+                  expenseForm.get('name')?.touched
+                "
+                style="color: red"
+              >
+                Expense Name should be max 50 length
+              </mat-hint>
             </mat-form-field>
           </div>
           <div class="col-sm-6">

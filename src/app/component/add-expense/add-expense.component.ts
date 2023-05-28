@@ -43,7 +43,7 @@ export class AddExpenseComponent implements OnInit {
       this.keywords=res.data;
     })
     this.expenseForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+      name: new FormControl('', [Validators.required,Validators.maxLength(50),Validators.pattern('^[a-zA-Z ]*$')]),
       amount: new FormControl('', Validators.required),
       expense_category: new FormControl('', Validators.required),
       payment: new FormControl('', Validators.required),

@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,14 +14,13 @@ export class SignupComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private _snackBar: MatSnackBar,
-    public route: Router,
-    public businessData: BusinessDataService
+    public route: Router
   ) {}
   ngOnInit(): void {
     this.signUpForm = new FormGroup({
-      name: new FormControl('', Validators.required),
+      name: new FormControl('', [Validators.required,Validators.maxLength(50),Validators.pattern('^[a-zA-Z ]*$')]),
       username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required,Validators.minLength(8)]),
       gmail: new FormControl('', [Validators.email, Validators.required]),
     });
   }
