@@ -1,8 +1,11 @@
-.mains{
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    // margin-top: 28px;
+.mains {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  // margin-top: 28px;
 }
 .example-spacer {
-    flex: 1 1 auto;
-  }
+  flex: 1 1 auto;
+}
+.mains img {
+  border-radius: 10px;
+}
