@@ -44,6 +44,8 @@ import { ImportComponent } from './component/import/import.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { ViewSingleComponent } from './component/view-single/view-single.component';
 import { AlertBoxComponent } from './component/alert-box/alert-box.component';
+import { LoaderComponent } from './component/loader/loader.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,6 +66,7 @@ import { AlertBoxComponent } from './component/alert-box/alert-box.component';
     ImportComponent,
     ViewSingleComponent,
     AlertBoxComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +79,7 @@ import { AlertBoxComponent } from './component/alert-box/alert-box.component';
     FormsModule,
     MatSnackBarModule,
     NgChartsModule,
+    MatProgressSpinnerModule,
     MatNativeDateModule,
     MatSelectModule,
     MatProgressBarModule,

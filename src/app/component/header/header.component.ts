@@ -11,9 +11,14 @@ import { AlertBoxComponent } from '../alert-box/alert-box.component';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit{
-  isLogging:boolean=true;
+  // isLogging:boolean=true;
+  isLoading: boolean=true;
   constructor(private route:Router,public dialog: MatDialog,public authService:AuthService){}
   ngOnInit(): void {
+    this.isLoading=true;
+    setTimeout(() => {
+      this.isLoading=false;
+    }, 4000);
     const token=localStorage.getItem('LEAD_ID');
     this.authService.authAfterReferesh(true,token);
   }
@@ -28,8 +33,6 @@ export class HeaderComponent implements OnInit{
   onLogout(){
     // this.authService.onLogout();
     this.dialog.open(AlertBoxComponent, {
-      // width: '600px',
-      // height: '500px',
     });
   }
 }
