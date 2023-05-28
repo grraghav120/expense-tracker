@@ -28,6 +28,7 @@ export class ViewExpensesComponent implements OnInit {
 
   ELEMENT_DATA: ExpenseContent[] = [];
   userId:any;
+  isLoading:boolean=true;
   dataSource = new MatTableDataSource<ExpenseContent>();
   constructor(
     public businessData: BusinessDataService,
@@ -42,6 +43,7 @@ export class ViewExpensesComponent implements OnInit {
   allexpense:any=0;
   count:any=0;
   ngOnInit(): void {
+    this.isLoading=true;
     this.userId=localStorage.getItem('Id')?.split(' ')[1];
     this.getAllExpense(this.userId);
   }
@@ -85,6 +87,9 @@ export class ViewExpensesComponent implements OnInit {
       this.updateExpene();
       this.pieChartData(res.data);
       this.onBarChartEdit(res.data);
+      setTimeout(() => {
+        this.isLoading=false;
+      }, 4000);
     },(error)=>{
       this._snackBar.open('Session Expired!!','',{duration:2000});
       this.authServ.onLogout();

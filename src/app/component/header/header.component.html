@@ -52,7 +52,10 @@
       </button>
     </mat-toolbar>
   </div>
-  <div>
+  <div *ngIf="isLoading">
+    <app-loader></app-loader>
+  </div>
+  <div *ngIf="!isLoading">
     <app-dashboard></app-dashboard>
   </div>
 </mat-drawer-container>
