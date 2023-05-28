@@ -13,6 +13,8 @@
             <input matInput placeholder="Full Name" formControlName="name" />
             <mat-error *ngIf="signUpForm.get('name')?.errors &&
             signUpForm.get('name')?.hasError('required') && signUpForm.get('name')?.touched"  >Name is required</mat-error>
+            <mat-error *ngIf="signUpForm.get('name')?.errors &&
+            signUpForm.get('name')?.hasError('pattern') && signUpForm.get('name')?.touched"  >Please Enter a Valid Name</mat-error>
           </mat-form-field>
         </div>
         <div class="inputs">
@@ -53,6 +55,8 @@
             />
             <mat-error *ngIf="signUpForm.get('password')?.errors &&
             signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">Password is required</mat-error>
+            <mat-error *ngIf="signUpForm.get('password')?.errors &&
+            signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched">Password should be at least 8 characters</mat-error>
           </mat-form-field>
         </div>
         <div class="singUpBtn">
