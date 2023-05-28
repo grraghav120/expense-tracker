@@ -19,14 +19,40 @@
           <mat-icon>perm_identity</mat-icon>Profile
         </button>
         <div style="margin-top: 20px">
-        <button mat-raised-button color="primary" (click)="onAdd()">
-          <mat-icon>add-chart</mat-icon>Add Expenses
-        </button>
+          <button mat-raised-button color="primary" (click)="onAdd()">
+            <mat-icon>add-chart</mat-icon>Add Expenses
+          </button>
         </div>
         <div style="margin-top: 20px">
-        <button mat-raised-button color="primary" (click)="onLogout()">
-          <mat-icon>logout</mat-icon>Logout
-        </button>
+          <button mat-raised-button color="primary" (click)="onLogout()">
+            <mat-icon>logout</mat-icon>Logout
+          </button>
+          <div class="social-btns" style="margin-top: 20px">
+            <button
+              mat-button
+              class="example-icon favorite-icon"
+              aria-label="Example icon-button with heart icon"
+              (click)="onGithub()"
+            >
+              <img
+                src="../../../assets/image/github.png"
+                height="40px"
+                width="40px"
+              />
+            </button>
+            <button
+              mat-button
+              class="example-icon"
+              aria-label="Example icon-button with share icon"
+              (click)="onLinkedin()"
+            >
+              <img
+                src="../../../assets/image/linkedin.png"
+                height="30px"
+                width="30px"
+              />
+            </button>
+          </div>
         </div>
       </div>
     </div>

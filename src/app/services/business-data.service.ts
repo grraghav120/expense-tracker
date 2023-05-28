@@ -77,5 +77,14 @@ export class BusinessDataService {
     this.userId=localStorage.getItem('Id')?.split(' ')[1];
     return this.http.get(this.apiUrl+'GET_CATEGORY/'+this.userId);
   }
-
+  onGithub(){
+    const link=document.createElement('a');
+    link.href="https://github.com/grraghav120/expense-tracker";
+    link.click();
+  }
+  onLinkedin(){
+    const link=document.createElement('a');
+    link.href="https://www.linkedin.com/in/raghavgarg2002/";
+    link.click();
+  }
 }
