@@ -137,5 +137,15 @@ export class AuthService {
       // console.log(result);
     })
   }
+  
+  updateProfile(body:any){
+    let id=localStorage.getItem('Id')?.split(' ')[1];
+    return this.http.post(this.apiUrl+'UPDATE_PROFILE/'+id,body);
+  }
+
+  updateWholeInfo(body:any){
+    let id=localStorage.getItem('Id')?.split(' ')[1];
+    return this.http.post(this.apiUrl+'UPDATE_NAME/'+id,body);
+  }
 
 }
