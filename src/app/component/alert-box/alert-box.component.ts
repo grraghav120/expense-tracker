@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -7,10 +8,10 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./alert-box.component.scss']
 })
 export class AlertBoxComponent implements OnInit{
-
-  constructor(public authService:AuthService){}
+  type:any;
+  constructor(public authService:AuthService,@Inject(MAT_DIALOG_DATA) public data: any){}
   ngOnInit(): void {
-      
+      this.type=this.data.type;
   }
 
   onLogout(){

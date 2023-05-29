@@ -36,10 +36,8 @@ export class HomeComponent implements OnInit {
   }
   onLogout() {
     this.dialog.open(AlertBoxComponent, {
-      // width: '600px',
-      // height: '500px',
+      data:{type:'alert'}
     });
-    // this.authService.onLogout();
   }
   onGithub(){
     this.businessData.onGithub();

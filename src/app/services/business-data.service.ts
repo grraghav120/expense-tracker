@@ -46,6 +46,25 @@ export class BusinessDataService {
     return this.http.post(this.apiUrl + 'CREATE_EXPENSE', body);
   }
 
+
+  onImportExpense(values:any){
+    let id=localStorage.getItem('Id')?.split(' ')[1];
+    let date=values.expense_date.split('/');
+    date=(new Date(date[2],date[1]-1,date[0])).toString();
+    date=date.split(' ');
+    let body={
+      name: values.expense_name,
+      amount: values.amount,
+      expense_date: (date[0]+' '+date[1]+' '+date[2]+' '+date[3]),
+      expense_category: values.expense_category,
+      payment: values.payment_type,
+      comment: values.comment,
+      creater:id,
+    }
+    return this.http.post(this.apiUrl+'CREATE_EXPENSE',body);
+  }
+
+
   onCreateCategory(body:any){
     return this.http.post(this.apiUrl+'SAVE_CATEGORY/'+this.userId,body);
   }

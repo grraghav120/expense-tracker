@@ -1,8 +1,24 @@
-<h1 mat-dialog-title>Confirm Action</h1>
-<div mat-dialog-content>
-    We are Missing You !!!
+<div *ngIf="type==='alert'">
+  <h1 mat-dialog-title>Confirm Action</h1>
+  <div mat-dialog-content>We are Missing You !!!</div>
+  <div mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>Stay</button>
+    <button
+      mat-raised-button
+      color="primary"
+      mat-dialog-close
+      cdkFocusInitial
+      (click)="onLogout()"
+    >
+      Leave
+    </button>
+  </div>
 </div>
-<div mat-dialog-actions align="end">
-  <button mat-raised-button mat-dialog-close>Stay</button>
-  <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial (click)="onLogout()" >Leave</button>
+
+<div *ngIf="type==='error'">
+  <h1 mat-dialog-title>Wrong File Choosen</h1>
+  <div mat-dialog-content>Please Choose only CSV (.csv) Files !!</div>
+  <div mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close>OK</button>
+  </div>
 </div>

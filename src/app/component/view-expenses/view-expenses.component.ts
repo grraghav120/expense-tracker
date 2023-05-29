@@ -56,14 +56,18 @@ export class ViewExpensesComponent implements OnInit {
     }
     this.authServ.updateUserData(this.userId,body);
   }
+
   public getAllExpense(id:any) {
     this.businessData.onGetAllExpense(id).subscribe((res: any) => {
       this.ELEMENT_DATA = res.data;
       this.dataSource = new MatTableDataSource<ExpenseContent>(
         this.ELEMENT_DATA
       );
-      this.dataSource.paginator = this.paginator;
+      this.count=0;
       let len=res.data.length;
+      setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+      },5000);
       this.cards = [
         {
           icon: 'today',
@@ -94,9 +98,6 @@ export class ViewExpensesComponent implements OnInit {
       this._snackBar.open('Session Expired!!','',{duration:2000});
       this.authServ.onLogout();
     });
-  }
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
   }
 
   //logic of pie chart
@@ -212,10 +213,6 @@ export class Confirm {
       .subscribe((res: any) => {
         this._snackBar.open(res.message,'',{duration:2000});
       });
-  }
-
-  openDialog(): void {
-    
   }
 
   onView(){
