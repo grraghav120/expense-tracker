@@ -33,6 +33,7 @@ export class HeaderComponent implements OnInit{
   onLogout(){
     // this.authService.onLogout();
     this.dialog.open(AlertBoxComponent, {
+      data:{type:'alert'}
     });
   }
 }
