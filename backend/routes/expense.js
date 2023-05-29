@@ -187,4 +187,36 @@ router.post('/UPDATE_SAVE_DATA/:id',(req,res,next)=>{
   );
 })
 
+router.post('/UPDATE_PROFILE/:id',(req,res,next)=>{
+  UserModel.findOneAndUpdate({ _id: req.params.id,'userData.userId': req.params.id },
+   {$set:{
+    'userData.$.username':req.body.username,
+    'userData.$.name':req.body.name,
+  }},
+   {new:true}
+   ).then(
+    (result) => {
+      res.status(200).json({
+        message: "SuccessFully Updated Profile Info",
+        status: true,
+      });
+    }
+  );
+})
+
+router.post('/UPDATE_NAME/:id',(req,res,next)=>{
+  UserModel.findOneAndUpdate({_id:req.params.id},
+  { name: req.body.name ,username:req.body.username}
+  ).then(
+    (result) => {
+      res.status(200).json({
+        message: "SuccessFully Updated Info",
+        status: true,
+      });
+    }
+  );
+})
+
+
+
 module.exports = router;

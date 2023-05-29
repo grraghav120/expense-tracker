@@ -4,7 +4,7 @@
       <mat-card-title
         >User Information <mat-icon>verified_user</mat-icon></mat-card-title
       >
-      <button mat-raised-button color="primary" [disabled]="!editable"><mat-icon>edit</mat-icon>Edit</button>
+      <button mat-raised-button color="primary" (click)="editField()" [disabled]="!editable"><mat-icon>edit</mat-icon>Edit</button>
     </mat-card-header>
     <mat-progress-bar *ngIf="isProcess" mode="indeterminate"></mat-progress-bar>
     <mat-card-content *ngIf="!isProcess">
@@ -18,11 +18,19 @@
         />
         </div>
         <div class="row">
-          <div class="col-sm-6 col-xs-6 names">
+          <div class="col-sm-6 col-xs-6 names" *ngIf="!isEdit">
             <p>Name: {{name}}</p>
           </div>
-          <div class="col-sm-6 col-xs-6 names">
+          <div class="col-sm-6 col-xs-6 names" *ngIf="isEdit">
+            <p>Name:</p>
+            <input type="text" [value]="name" [(ngModel)]="newName">
+          </div>
+          <div class="col-sm-6 col-xs-6 names" *ngIf="!isEdit">
             <p>UserName: {{user_name}}</p>
+          </div>
+          <div class="col-sm-6 col-xs-6 names" *ngIf="isEdit">
+            <p>UserName:</p>
+            <input type="text" [value]="name" [(ngModel)]="newUsername" width="50%">
           </div>
         </div>
       <div class="row row-col-3 mains">
@@ -33,8 +41,11 @@
         </div>
       </div>
     </mat-card-content>
-    <mat-card-actions align="end">
+    <mat-card-actions align="end" *ngIf="!isEdit">
       <button mat-raised-button mat-dialog-close cdkFocusInitial color="primary">Ok</button>
+    </mat-card-actions>
+    <mat-card-actions align="end" *ngIf="isEdit">
+      <button mat-raised-button mat-dialog-close cdkFocusInitial color="primary" (click)="saveData()" >Save</button>
     </mat-card-actions>
   </mat-card>
 </div>
