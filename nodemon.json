@@ -1,6 +1,0 @@
-{
-    "env":{
-        "MONGO_ATLAS_PW":"54ew3SBbkM963U81",
-        "JWT_KEY":"raghav_garg_first_mean_project_this_can_be_anything"
-    }
-}
