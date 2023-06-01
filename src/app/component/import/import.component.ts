@@ -40,7 +40,12 @@ export class ImportComponent implements OnInit {
     this.route.navigate(['dashboard']);
   }
 
-  onSaveImport() {
+  onSaveImport(){
+    // console.log("Working on it.. Please Give some time");
+    this.snackBar.open('Working on it.. Please Give some time','X',{duration:2000});
+  }
+
+  onSaveImport1() {
     if(this.dataRows.length!==this.propertyNames.length){
       this.snackBar.open('Bad Format','',{duration:2000});
       return;
@@ -81,7 +86,7 @@ export class ImportComponent implements OnInit {
         comment=true;
       }
     }
-    // console.log(hashamp);
+    console.log(hashamp);
     if(!name || !amount || !expense_date){
       this.snackBar.open('Please Mention required Fields Properly','',{duration:2000});
       return;
@@ -126,20 +131,24 @@ export class ImportComponent implements OnInit {
       this.dialog.open(AlertBoxComponent, {
         data: { type: 'error' },
       });
-    } else {
-      this.isCorrect = true;
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          let fileContents = e.target.result.toString();
-          let data = fileContents.split('\r');
-          this.propertyNames = data[0].split(',');
-          this.dataRows = data[1].split('\n')[1].split(',');
-          // console.log(this.propertyNames,this.dataRows);
-        };
-        reader.readAsText(file);
-      }
+    // } else {
+    //   this.isCorrect = true;
+    //   const file = event.target.files[0];
+    //   if (file) {
+    //     const reader = new FileReader();
+    //     reader.onload = (e: any) => {
+    //       let fileContents = e.target.result.toString();
+    //       let fullContent:any=fileContents.split('\r');
+    //       for(let i=1;i<=fullContent.length-1;i++){
+    //         fullContent[i]=fullContent[i].slice(1,fullContent[i].length);
+    //       }
+    //       console.log(fullContent);
+    //       this.propertyNames = fullContent[0].split(',');
+    //       this.dataRows=fullContent.slice(1,fullContent.length-1);
+    //       console.log(this.propertyNames,this.dataRows);
+    //     };
+    //     reader.readAsText(file);
+    //   }
       
       
     }

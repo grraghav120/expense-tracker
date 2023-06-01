@@ -1,14 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BusinessDataService } from '../services/business-data.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  apiUrl = 'http://localhost:3000/v1/api/';
+  apiUrl = environment.apiUrl;
   private isAuth: boolean = false;
   private token!: any;
   private expireTokenTime: any;
@@ -16,7 +15,6 @@ export class AuthService {
   constructor(
     public http: HttpClient,
     public _snackBar: MatSnackBar,
-    public businessData: BusinessDataService,
     public route: Router
   ) {}
 
@@ -123,7 +121,7 @@ export class AuthService {
 
   saveAllData(body:any){
     this.http.post(this.apiUrl+'SAVE_DATA',body).subscribe((res:any)=>{
-      this._snackBar.open('Saving Data....','',{duration:2000});
+      this._snackBar.open('Expense Tracker Account Created SuccessFully','',{duration:2000});
     })
   }
 

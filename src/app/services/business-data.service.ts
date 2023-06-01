@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class BusinessDataService {
   firstLoginDate:any=''
   keywords:any;
   data:any;
-  apiUrl = 'http://localhost:3000/v1/api/';
+  apiUrl = environment.apiUrl;
   userId:any;
   constructor(private route: Router, public http: HttpClient) {
   }

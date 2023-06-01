@@ -7,7 +7,7 @@ const http = require("http"); // nodejs package . require keyword to import the 
 
 const debug = require("debug")("node-angular");
 
-const app = require("./backend/app"); //import express app
+const app = require("./app"); //import express app
 const normalizePort = (val) => {
   var port = parseInt(val, 10);
 

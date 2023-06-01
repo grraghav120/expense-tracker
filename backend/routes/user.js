@@ -2,8 +2,10 @@ const express = require("express");
 
 const UserModel = require("../models/userModel");
 const router = express.Router();
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken"); // To generate Token
+
+
 
 router.post("/SIGN_UP", (req, res, next) => {
   //   console.log(req.body);
@@ -22,7 +24,7 @@ router.post("/SIGN_UP", (req, res, next) => {
         .then((result) => {
           const token = jwt.sign(
             { gmail: req.gmail },
-            "raghav_garg_first_mean_project_this_can_be_anything",
+            process.env.JWT_KEY,
             { expiresIn: '1h' } // 1 hour
           );
           res.status(200).json({
