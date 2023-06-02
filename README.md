@@ -11,6 +11,8 @@
 - You can See your Profile in Profile Option
 - Also you can Edit your Name/ Username and SAVE it.
 - Logout (Auto Logout in next 1 hour so don't worry 😊 )
+- You can check Expense Summary using BAR chart and PIE charts.
+- You can also Import Expense in CSV files.
 ## Screenshots
 # Dashboard - View Expense
 
