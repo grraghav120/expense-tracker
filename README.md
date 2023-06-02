@@ -1,4 +1,16 @@
 # ExpenseTracker
+- Developed a MEAN (MongoDB, Express, Node and Angular) stack Expense Tracker application with 12+ APIs, including authenticated ones, to efficiently manage daily expenses.
+# How to Use
+- Make an Account (SignUp) for first Time.
+- If Already have an account please Login
+- Dashboard Shows
+- Please Click Add Expense on the Side Nav or on Plus icon to add new expense
+- Here You can Add new Expense by providing details
+- You can add your new Category if you want by ADD CATEGORY just above there and proceed to SAVE button.
+- After getting message save expense now you can check on View Expense / Dashboard.
+- You can See your Profile in Profile Option
+- Also you can Edit your Name/ Username and SAVE it.
+- Logout (Auto Logout in next 1 hour so don't worry 😊 )
 ## Screenshots
 # Dashboard - View Expense
 
