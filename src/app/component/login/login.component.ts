@@ -11,7 +11,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  // isLogging:boolean=false;
+  LoginContinue:boolean=false;
   loginForm!: FormGroup;
   constructor(
     public route: Router,
@@ -19,16 +19,24 @@ export class LoginComponent implements OnInit {
     
   ) {}
   ngOnInit(): void {
+    this.LoginContinue=false;
     this.loginForm = new FormGroup({
       gmail: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
     });
   }
-  res: any;
   onLogin() {
     if (this.loginForm.invalid) {
       return;
     }
-    this.authService.onLogin(this.loginForm.value);
+    this.LoginContinue=true;
+    this.authService.onLogin(this.loginForm.value).then(() => {
+      // Handle successful login
+      this.LoginContinue = false; // Enable the login button after successful login
+    })
+    .catch((error:any) => {
+      // Handle error response here
+      this.LoginContinue = false; // Enable the login button after error
+    });
   }
 }

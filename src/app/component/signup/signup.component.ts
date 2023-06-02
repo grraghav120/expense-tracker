@@ -11,12 +11,14 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class SignupComponent implements OnInit {
   signUpForm!: FormGroup;
+  SignUpContinue:boolean=false;
   constructor(
     private authService: AuthService,
     private _snackBar: MatSnackBar,
     public route: Router
   ) {}
   ngOnInit(): void {
+    this.SignUpContinue=false;
     this.signUpForm = new FormGroup({
       name: new FormControl('', [Validators.required,Validators.maxLength(50),Validators.pattern('^[a-zA-Z ]*$')]),
       username: new FormControl('', Validators.required),
@@ -25,6 +27,12 @@ export class SignupComponent implements OnInit {
     });
   }
   onProceed() {
-    this.authService.onSignUp(this.signUpForm.value);
+    this.SignUpContinue=true;
+    this.authService.onSignUp(this.signUpForm.value).then(()=>{
+      this.SignUpContinue=false;
+    }).catch((error:any) => {
+      // Handle error response here
+      this.SignUpContinue = false; // Enable the login button after error
+    });
   }
 }

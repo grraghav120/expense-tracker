@@ -38,7 +38,11 @@
         </mat-form-field>
       </div>
       <div style="text-align: center;" class="btns">
-        <button mat-raised-button type="submit" color="accent" (click)="onLogin()"><mat-icon>login</mat-icon>Login</button>
+        <button *ngIf="!LoginContinue" mat-raised-button type="submit" color="accent" (click)="onLogin()"><mat-icon>login</mat-icon>Login</button>
+        <button *ngIf="LoginContinue" class="btn btn-success" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          Loading...
+        </button>
       </div>
     </form>
     </div>

@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" hasBackdrop="True" autosize>
+<mat-drawer-container class="example-container" hasBackdrop="True" autosize style="height: 100vh">
   <mat-drawer style="height: 100%" #drawer class="example-sidenav" mode="over">
     <h2
       style="
@@ -10,13 +10,13 @@
     </h2>
     <div>
       <div style="margin-top: 20px">
-        <button mat-raised-button color="primary" (click)="onView()" >
-          <mat-icon>equalizer</mat-icon>View Expenses
+        <button mat-raised-button color="primary" (click)="openDialog()">
+          <mat-icon>perm_identity</mat-icon>Profile
         </button>
       </div>
       <div style="margin-top: 20px">
-        <button mat-raised-button color="primary" (click)="openDialog()">
-          <mat-icon>perm_identity</mat-icon>Profile
+        <button mat-raised-button color="primary" (click)="onView()" >
+          <mat-icon>equalizer</mat-icon>View Expenses
         </button>
       </div>
       <div  style="margin-top: 20px">

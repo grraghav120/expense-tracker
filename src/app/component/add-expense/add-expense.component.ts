@@ -16,6 +16,7 @@ export class AddExpenseComponent implements OnInit {
   id: any;
   maxDate :any=new Date();
   keywords: any = [];
+  isSaving:boolean=false;
   payments: any = ['Card', 'Cash', 'UPI', 'Net Banking', 'Paypal'];
   @Input() tags:any=[];
   months: any = [
@@ -39,6 +40,7 @@ export class AddExpenseComponent implements OnInit {
     public route: Router
   ) {}
   ngOnInit(): void {
+    this.isSaving=false;
     this.businessData.onGetAllCategory().subscribe((res:any)=>{
       this.keywords=res.data;
     })
@@ -88,11 +90,12 @@ export class AddExpenseComponent implements OnInit {
   }
 
   onSaveExpense() {
+    this.isSaving=true;
     this.businessData
       .onCreateExpense(this.expenseForm.value, this.date)
       .subscribe((res: any) => {
+        this.isSaving=false;
         if (res.status === true) {
-          // console.log(res);
           this._snackBar.open('Expense Added', '', { duration: 2000 });
           this.onReset();
         } else {
