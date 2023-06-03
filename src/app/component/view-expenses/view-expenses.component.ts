@@ -29,6 +29,7 @@ export class ViewExpensesComponent implements OnInit {
   ELEMENT_DATA: ExpenseContent[] = [];
   userId:any;
   isLoading:boolean=true;
+  isDelete:boolean=false;
   dataSource = new MatTableDataSource<ExpenseContent>();
   constructor(
     public businessData: BusinessDataService,
@@ -44,6 +45,7 @@ export class ViewExpensesComponent implements OnInit {
   count:any=0;
   ngOnInit(): void {
     this.isLoading=true;
+    this.isDelete=false;
     this.userId=localStorage.getItem('Id')?.split(' ')[1];
     this.getAllExpense(this.userId);
   }
@@ -185,7 +187,10 @@ export class ViewExpensesComponent implements OnInit {
       height: '190px',
     });
     dialogRef.afterClosed().subscribe((result) => {
-      this.getAllExpense(this.userId);
+      if(result==="delete") {
+        // this.isDelete=true;
+        this.getAllExpense(this.userId);
+      }
     });
   }
 }
@@ -194,7 +199,7 @@ export class ViewExpensesComponent implements OnInit {
   selector: 'confirm',
   templateUrl: 'confirm.html',
 })
-export class Confirm {
+export class Confirm{
   constructor(
     public dialogRef: MatDialogRef<Confirm>,
     public dialog: MatDialog,
