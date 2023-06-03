@@ -10,10 +10,15 @@ export class AddCategoryComponent implements OnInit{
   @Output() categoryAdded = new EventEmitter<string>();
   keywords:any=[];
   newKeywords:any= [];
+  CategoryLoad:boolean=true;
+  isSaving:boolean=false;
   constructor(public businesData:BusinessDataService){}
   ngOnInit(): void {
+    this.CategoryLoad=true;
+    this.isSaving=false;
     this.businesData.onGetAllCategory().subscribe((res:any)=>{
       if(res){
+        this.CategoryLoad=false;
         this.keywords=res.data;
       }
     });
@@ -35,11 +40,13 @@ export class AddCategoryComponent implements OnInit{
   }
 
   onSave() { //api call
+    this.isSaving=true;
     this.categoryAdded.emit(this.keywords);
     this.businesData.onCreateCategory(this.newKeywords).subscribe((res)=>{
       if(res){
         this.keywords.push(...this.newKeywords);
         this.newKeywords=[];
+        this.isSaving=false;
       }
     });
   }

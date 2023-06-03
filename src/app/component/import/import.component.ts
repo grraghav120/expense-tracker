@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AlertBoxComponent } from '../alert-box/alert-box.component';
-import { HashLocationStrategy } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
 
 @Component({
   selector: 'app-import',
@@ -33,25 +33,20 @@ export class ImportComponent implements OnInit {
   ];
   propertyNames: string[] = [];
   dataRows: string[] = [];
-  constructor(public route: Router, public dialog: MatDialog,public snackBar:MatSnackBar,public businessData:BusinessDataService) {}
+  csvRecords: any;
+  header: boolean = false;
+  constructor(private ngxCsvParser: NgxCsvParser,public route: Router, public dialog: MatDialog,public snackBar:MatSnackBar,public businessData:BusinessDataService) {}
   ngOnInit(): void {}
 
   onView() {
     this.route.navigate(['dashboard']);
   }
 
-  onSaveImport(){
-    // console.log("Working on it.. Please Give some time");
-    this.snackBar.open('Working on it.. Please Give some time','X',{duration:2000});
-  }
-
-  onSaveImport1() {
-    if(this.dataRows.length!==this.propertyNames.length){
-      this.snackBar.open('Bad Format','',{duration:2000});
-      return;
-    }
+  onSaveImport() {
+    this.propertyNames=this.csvRecords[0];
+    console.log(this.csvRecords);
+    
     let hashamp:any={};
-
     let name:boolean=false;
     let amount:boolean=false;
     let expense_date:boolean=false;
@@ -59,59 +54,79 @@ export class ImportComponent implements OnInit {
     let payment_type:boolean=false;
     let comment :boolean=false;
 
-    for(let i=0;i<this.propertyNames.length;i++){
-      this.propertyNames[i].toLowerCase();
-      if(this.propertyNames[i]==='name' || this.propertyNames[i]==='expense_name' || this.propertyNames[i]==='expense name'){
-        hashamp['expense_name']=this.dataRows[i];
-        name=true;
+    for(let j=1;j<this.csvRecords.length;j++)
+    {
+      hashamp={};
+      name=false;
+      amount=false;
+      expense_category=false;
+      expense_date=false;
+      payment_type=false;
+      comment=false;
+      for(let i=0;i<this.propertyNames.length;i++)
+      {
+        this.propertyNames[i].toLowerCase();
+        if(this.propertyNames[i]==='name' || this.propertyNames[i]==='expense_name' || this.propertyNames[i]==='expense name'){
+          if(this.csvRecords[j][i] &&(this.csvRecords[j][i]!='' || this.csvRecords[j][i]!=' ')){
+          hashamp['expense_name']=this.csvRecords[j][i];
+          name=true;
+          }
+        }
+        else if(this.propertyNames[i]==='amount' || this.propertyNames[i]==='amounts'){
+          if(this.csvRecords[j][i] &&(this.csvRecords[j][i]!='' || this.csvRecords[j][i]!=' ')){
+            hashamp['amount']=parseInt(this.csvRecords[j][i]);
+            amount=true;
+          }
+        }
+        else if(this.propertyNames[i]==='expense date' || this.propertyNames[i]==='date' || this.propertyNames[i]==='expense_date'){
+          if(this.csvRecords[j][i] &&(this.csvRecords[j][i]!='' || this.csvRecords[j][i]!=' ')){
+          hashamp['expense_date']=this.csvRecords[j][i];
+          expense_date=true;
+          }
+        }
+        else if(this.propertyNames[i]==='payment' || this.propertyNames[i]==='payment_type' || this.propertyNames[i]==='payment type'){
+          if(this.csvRecords[j][i] &&(this.csvRecords[j][i]!='' || this.csvRecords[j][i]!=' ')){
+          hashamp['payment_type']=this.csvRecords[j][i];
+          payment_type=true;
+          }
+        }
+        else if(this.propertyNames[i]==='expense_category' || this.propertyNames[i]==='expense category' || this.propertyNames[i]==='category'){
+          if(this.csvRecords[j][i] &&(this.csvRecords[j][i]!='' || this.csvRecords[j][i]!=' ')){
+          hashamp['expense_category']=this.csvRecords[j][i];
+          expense_category=true;
+          }
+        }
+        else if(this.propertyNames[i]==='comments' || this.propertyNames[i]==='comment'){
+          if(this.csvRecords[j][i] &&(this.csvRecords[j][i]!='' || this.csvRecords[j][i]!=' ')){
+          hashamp['comment']=this.csvRecords[j][i];
+          comment=true;
+          }
+        }
       }
-      else if(this.propertyNames[i]==='amount' || this.propertyNames[i]==='amounts'){
-        hashamp['amount']=parseInt(this.dataRows[i]);
-        amount=true;
-      }
-      else if(this.propertyNames[i]==='expense date' || this.propertyNames[i]==='date' || this.propertyNames[i]==='expense_date'){
-        hashamp['expense_date']=this.dataRows[i];
-        expense_date=true;
-      }
-      else if(this.propertyNames[i]==='payment' || this.propertyNames[i]==='payment_type' || this.propertyNames[i]==='payment type'){
-        hashamp['payment_type']=this.dataRows[i];
-        payment_type=true;
-      }
-      else if(this.propertyNames[i]==='expense_category' || this.propertyNames[i]==='expense category' || this.propertyNames[i]==='category'){
-        hashamp['expense_category']=this.dataRows[i];
-        expense_category=true;
-      }
-      else if(this.propertyNames[i]==='comments' || this.propertyNames[i]==='comment'){
-        hashamp['comment']=this.dataRows[i];
-        comment=true;
-      }
+        if(!name || !amount || !expense_date){
+          this.snackBar.open('Please Mention required Fields Properly','',{duration:2000});
+          return;
+        }
+        if(hashamp['expense_date'].split('/')[2].length!=4){
+          this.snackBar.open('Date Format DD/MM/YYYY','',{duration:2000});
+          return;
+        }
+        if(parseInt(hashamp['expense_date'].split('/')[1])>12){
+          this.snackBar.open('Date Format DD/MM/YYYY','',{duration:2000});
+          return;
+        }
+        if(!expense_category){
+          hashamp['expense_category']='Unassigned';
+        }
+        if(!payment_type){
+          hashamp['payment_type']='Card';
+        }
+        if(!comment){
+          hashamp['comment']='Unassigned Expense';
+        }
+        this.onSaveExpense(hashamp);
+      // }
     }
-    console.log(hashamp);
-    if(!name || !amount || !expense_date){
-      this.snackBar.open('Please Mention required Fields Properly','',{duration:2000});
-      return;
-    }
-    if(hashamp['expense_date'].split('/')[2].length!=4){
-      this.snackBar.open('Date Format DD/MM/YYYY','',{duration:2000});
-      return;
-    }
-    if(parseInt(hashamp['expense_date'].split('/')[1])>12){
-      this.snackBar.open('Date Format DD/MM/YYYY','',{duration:2000});
-      return;
-    }
-    if(!expense_category){
-      hashamp['expense_category']='Unassigned';
-    }
-    if(!payment_type){
-      hashamp['payment_type']='Card';
-    }
-    if(!comment){
-      hashamp['comment']='Unassigned';
-    }
-    
-    //apii cal;
-
-    this.onSaveExpense(hashamp);
   }
 
   onSaveExpense(body:any) {
@@ -119,7 +134,7 @@ export class ImportComponent implements OnInit {
       .onImportExpense(body)
       .subscribe((res: any) => {
         if (res.status === true) {
-          this.snackBar.open('Expense Added',' ',{duration:2000});
+          console.log("Added");
         }
       },error=>{
         this.snackBar.open(error.message,' ',{duration:2000});
@@ -131,26 +146,19 @@ export class ImportComponent implements OnInit {
       this.dialog.open(AlertBoxComponent, {
         data: { type: 'error' },
       });
-    // } else {
-    //   this.isCorrect = true;
-    //   const file = event.target.files[0];
-    //   if (file) {
-    //     const reader = new FileReader();
-    //     reader.onload = (e: any) => {
-    //       let fileContents = e.target.result.toString();
-    //       let fullContent:any=fileContents.split('\r');
-    //       for(let i=1;i<=fullContent.length-1;i++){
-    //         fullContent[i]=fullContent[i].slice(1,fullContent[i].length);
-    //       }
-    //       console.log(fullContent);
-    //       this.propertyNames = fullContent[0].split(',');
-    //       this.dataRows=fullContent.slice(1,fullContent.length-1);
-    //       console.log(this.propertyNames,this.dataRows);
-    //     };
-    //     reader.readAsText(file);
-    //   }
-      
-      
+      return;
     }
+    const files = event.srcElement.files;
+    this.header = (this.header as unknown as string) === 'true' || this.header === true;
+
+    this.ngxCsvParser.parse(files[0], { header: this.header, delimiter: ',', encoding: 'utf8' })
+      .pipe().subscribe({
+        next: (result): void => {
+          this.csvRecords = result;
+        },
+        error: (error: NgxCSVParserError): void => {
+          console.log('Error', error);
+        }
+      });
   }
 }

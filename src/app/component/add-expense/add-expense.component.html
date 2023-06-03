@@ -169,12 +169,17 @@
         <mat-icon>autorenew</mat-icon>Reset
       </button>
       <button
-      type="submit"
+        type="submit"
+        *ngIf="!isSaving"
         mat-raised-button
         (click)="onSaveExpense()"
         [disabled]="expenseForm.invalid"
       >
         <mat-icon>save</mat-icon> Save
+      </button>
+      <button *ngIf="isSaving" class="btn btn-success" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Saving...
       </button>
     </mat-card-actions>
 

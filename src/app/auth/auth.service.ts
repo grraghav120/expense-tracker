@@ -33,7 +33,8 @@ export class AuthService {
     return this.userId;
   }
 
-  onSignUp(values: any) {
+  onSignUp(values: any):Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
     let body = {
       name: values.name,
       username: values.username,
@@ -67,6 +68,7 @@ export class AuthService {
           this.isAuth = true;
           this.saveAuthDataonLocalStorage(res.data.expiredToken,res.data.userId);
           this.route.navigate(['dashboard']);
+          resolve(true);
         }
       },
       (error) => {
@@ -74,11 +76,14 @@ export class AuthService {
           duration: 5000,
         });
         this.isAuth = false;
+        reject(error);
       }
     );
+    });
   }
 
-  onLogin(body: any) {
+  onLogin(body: any): Promise<boolean>  {
+    return new Promise<boolean>((resolve, reject) => {
     this.http.post(this.apiUrl + 'USER/LOGIN', body).subscribe(
       (res: any) => {
         this._snackBar.open(res.message, '', { duration: 3000 });
@@ -93,12 +98,14 @@ export class AuthService {
         }
         this.updateUserData(res.data.userId,updateData);
         this.route.navigate(['dashboard']);
+        resolve(true);
       },
       (error) => {
         this._snackBar.open(error.error.message, '', { duration: 3000 });
         this.isAuth = false;
-      }
-    );
+        reject(error);
+      });
+    });
   }
 
   onLogout() {

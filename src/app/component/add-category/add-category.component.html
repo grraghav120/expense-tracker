@@ -7,7 +7,18 @@
       </mat-card-title>
       <mat-card-subtitle>Add/Remove Expense Categories</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content style="padding-top: 15px">
+    <mat-card-content *ngIf="CategoryLoad" style="padding-top: 15px;display: flex; justify-content: center;align-items: center;">
+      <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-danger" role="status" style="margin: 0px 5px;">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="spinner-grow text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </mat-card-content>
+    <mat-card-content style="padding-top: 15px" *ngIf="!CategoryLoad">
       <mat-form-field appearance="outline" class="example-form-field">
         <mat-label>Avaiable Expense Categories</mat-label>
         <mat-chip-grid #chipGrid aria-label="Enter New Category">
@@ -37,11 +48,16 @@
         <mat-icon>autorenew</mat-icon>Reset
       </button>
       <button
+        *ngIf="!isSaving"
         mat-raised-button
         (click)="onSave()"
         [disabled]="newKeywords.length === 0"
       >
         <mat-icon>save</mat-icon> Save
+      </button>
+      <button *ngIf="isSaving" class="btn btn-success" type="button" disabled>
+        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+        Saving...
       </button>
     </mat-card-actions>
   </mat-card>

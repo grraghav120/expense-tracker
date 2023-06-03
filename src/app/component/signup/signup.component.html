@@ -63,12 +63,17 @@
           <button
             style="margin: 10px 20px 10px 20px"
             type="submit"
+            *ngIf="!SignUpContinue"
             mat-raised-button
             color="primary"
             [disabled]="signUpForm.invalid"
             (click)="onProceed()"
           ><mat-icon>done</mat-icon>
             Proceed
+          </button>
+          <button *ngIf="SignUpContinue" class="btn btn-success" type="button" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Creating...
           </button>
         </div>
       </form>
