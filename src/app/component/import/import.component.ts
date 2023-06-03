@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AlertBoxComponent } from '../alert-box/alert-box.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BusinessDataService } from 'src/app/services/business-data.service';
-import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
 
 @Component({
   selector: 'app-import',
@@ -35,7 +34,7 @@ export class ImportComponent implements OnInit {
   dataRows: string[] = [];
   csvRecords: any;
   header: boolean = false;
-  constructor(private ngxCsvParser: NgxCsvParser,public route: Router, public dialog: MatDialog,public snackBar:MatSnackBar,public businessData:BusinessDataService) {}
+  constructor(public route: Router, public dialog: MatDialog,public snackBar:MatSnackBar,public businessData:BusinessDataService) {}
   ngOnInit(): void {}
 
   onView() {
@@ -54,7 +53,7 @@ export class ImportComponent implements OnInit {
     let payment_type:boolean=false;
     let comment :boolean=false;
 
-    for(let j=1;j<this.csvRecords.length;j++)
+    for(let j=1;j<this.csvRecords.length-1;j++)
     {
       hashamp={};
       name=false;
@@ -148,17 +147,34 @@ export class ImportComponent implements OnInit {
       });
       return;
     }
-    const files = event.srcElement.files;
-    this.header = (this.header as unknown as string) === 'true' || this.header === true;
-
-    this.ngxCsvParser.parse(files[0], { header: this.header, delimiter: ',', encoding: 'utf8' })
-      .pipe().subscribe({
-        next: (result): void => {
-          this.csvRecords = result;
-        },
-        error: (error: NgxCSVParserError): void => {
-          console.log('Error', error);
+    let files = event.target.files; // FileList object
+    let file = files[0];
+    var reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = (event:any)=>{
+        let csv = event.target.result; // Content of CSV file
+        csv=csv.toString();
+        let allTextLines = csv.split(/\r\n|\n/);
+        let headers = allTextLines[0].split(',');
+        for(let i=0;i<allTextLines.length-1;i++){
+          allTextLines[i]=allTextLines[i].split(',')
         }
-      });
+        this.csvRecords=allTextLines;
+        // console.log(allTextLines,headers);
+      }
+
+    // this.ngxCsvParser.parse(files[0], { header: this.header, delimiter: ',', encoding: 'utf8' })
+    //   .pipe().subscribe({
+    //     next: (result): void => {
+    //       this.csvRecords = result;
+    //       console.log(this.csvRecords);
+          
+    //     },
+    //     error: (error: NgxCSVParserError): void => {
+    //       console.log('Error', error);
+    //     }
+    //   });
   }
+
+
 }

@@ -45,7 +45,6 @@ import { ViewSingleComponent } from './component/view-single/view-single.compone
 import { AlertBoxComponent } from './component/alert-box/alert-box.component';
 import { LoaderComponent } from './component/loader/loader.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { NgxCsvParserModule } from 'ngx-csv-parser';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +76,6 @@ import { NgxCsvParserModule } from 'ngx-csv-parser';
     MatPaginatorModule,
     FormsModule,
     MatSnackBarModule,
-    NgxCsvParserModule,
     NgChartsModule,
     MatProgressSpinnerModule,
     MatNativeDateModule,
