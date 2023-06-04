@@ -5,11 +5,11 @@
 
 # Quick Acces 😏
 
-- Email - abc@gmail.com
-- password - 12345678 (Got it)😁
+- Email 📧 - abc@gmail.com
+- password 🔑 - 12345678 (Got it)😁
 
 
-# How to Use
+# How to Use 👥
 - Make an Account (SignUp) for first Time.
 - If Already have an account please Login
 - Dashboard Shows
@@ -21,7 +21,7 @@
 - Also you can Edit your Name/ Username and SAVE it.
 - Logout (Auto Logout in next 1 hour so don't worry 😊 )
 - You can check Expense Summary using BAR chart and PIE charts.
-- You can also Import Expense in CSV files.
+- You can also Import Expense in CSV files.📩
 ## Screenshots
 # Dashboard - View Expense
 
