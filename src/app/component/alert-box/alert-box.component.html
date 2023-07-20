@@ -1,13 +1,12 @@
 <div *ngIf="type==='alert'">
-  <h1 mat-dialog-title>Confirm Action</h1>
-  <div mat-dialog-content>We are Missing You !!!</div>
+  <h1 mat-dialog-title>Leaving So Soon???</h1>
+  <div mat-dialog-content>Logged out for now, but the journey continues. See you soon! 👋😄</div>
   <div mat-dialog-actions align="end">
-    <button mat-raised-button mat-dialog-close>Stay</button>
+    <button mat-raised-button mat-dialog-close cdkFocusInitial>Stay</button>
     <button
       mat-raised-button
       color="primary"
       mat-dialog-close
-      cdkFocusInitial
       (click)="onLogout()"
     >
       Leave
