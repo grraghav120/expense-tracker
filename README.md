@@ -1,6 +1,15 @@
 # ExpenseTracker
-- Developed a MEAN (MongoDB, Express, Node and Angular) stack Expense Tracker application with 12+ APIs, including authenticated ones, to efficiently manage daily expenses.
-# How to Use
+- Developed a MEAN (MongoDB, Express, Node and Angular) stack Expense Tracker application along with 12+ APIs, including authenticated ones, to efficiently manage daily expenses.
+- Implemented robust APIs using Express.js and Node.js, enabling smooth data retrieval and manipulation.
+- Ensured secure access to sensitive features by implementing user authentication and authorization mechanisms in this application.
+
+# Quick Acces 😏
+
+- Email 📧 - abc@gmail.com
+- password 🔑 - 12345678 (Got it)😁
+
+
+# How to Use 👥
 - Make an Account (SignUp) for first Time.
 - If Already have an account please Login
 - Dashboard Shows
@@ -12,7 +21,7 @@
 - Also you can Edit your Name/ Username and SAVE it.
 - Logout (Auto Logout in next 1 hour so don't worry 😊 )
 - You can check Expense Summary using BAR chart and PIE charts.
-- You can also Import Expense in CSV files.
+- You can also Import Expense in CSV files.📩
 ## Screenshots
 # Dashboard - View Expense
 
@@ -72,9 +81,12 @@ Update info
 # SignUp
 ![image](https://github.com/grraghav120/expense-tracker/assets/96789493/33d3d042-5283-49c9-8a37-e5ee902d967a)
 
-#Logger
+# Logger
 ![image](https://github.com/grraghav120/expense-tracker/assets/96789493/7e37a242-533a-41fc-b418-430eb77f4746)
 
+# Database
+
+![image](https://github.com/grraghav120/expense-tracker/assets/96789493/b490db8a-d765-4506-af9c-31185646ad2d)
 
 
 
