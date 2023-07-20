@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 export class BusinessDataService {
   
   isLogging: boolean = false;
+  isChecking:boolean=false;
   hashmap:any={};
   public pieDialogRef:any;
   pieLabels:any=[];

@@ -65,7 +65,9 @@
     </mat-toolbar>
   </div>
   <div *ngIf="isLogging">
-    <app-login></app-login>
+    <div>
+      <app-login></app-login>
+    </div>
   </div>
   <div *ngIf="!isLogging">
     <app-signup></app-signup>
