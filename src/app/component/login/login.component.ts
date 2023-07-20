@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(
     public route: Router,
     public authService: AuthService,
-    
+    public busServ:BusinessDataService
   ) {}
   ngOnInit(): void {
     this.LoginContinue=false;
@@ -30,13 +30,16 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.LoginContinue=true;
+    this.busServ.isChecking=true;
     this.authService.onLogin(this.loginForm.value).then(() => {
       // Handle successful login
       this.LoginContinue = false; // Enable the login button after successful login
+      this.busServ.isChecking=false;
     })
     .catch((error:any) => {
-      // Handle error response here
+      // Handle error response 
       this.LoginContinue = false; // Enable the login button after error
+      this.busServ.isChecking=false;
     });
   }
 }
