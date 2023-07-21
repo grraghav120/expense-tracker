@@ -12,6 +12,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 export class AddExpenseComponent implements OnInit {
   expenseForm!: FormGroup;
   isEdit: boolean = false;
+  filled:boolean=true;
   date: any;
   id: any;
   maxDate :any=new Date();
@@ -82,6 +83,9 @@ export class AddExpenseComponent implements OnInit {
 
   onReset() {
     this.expenseForm.reset();
+    this.expenseForm.markAsUntouched();
+    // console.log(this.expenseForm);
+    // this.expenseForm.markAllAsTouched();
   }
 
   addEvent(event: any) {

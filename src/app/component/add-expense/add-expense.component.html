@@ -190,7 +190,7 @@
       <button mat-raised-button (click)="onCancel()" >
         <mat-icon>disabled_by_default</mat-icon> Cancel
       </button>
-      <button type="submit" mat-raised-button (click)="onEdit()" [disabled]="expenseForm.invalid && expenseForm.touched" color="primary">
+      <button type="submit" mat-raised-button (click)="onEdit()" [disabled]="expenseForm.invalid && expenseForm.status==='INVALID'" color="primary">
         <mat-icon>edit</mat-icon>Update
       </button>
 
