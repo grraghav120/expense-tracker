@@ -1,5 +1,4 @@
 # ExpenseTracker
-- Developed a MEAN (MongoDB, Express, Node and Angular) stack Expense Tracker application along with 12+ APIs, including authenticated ones, to efficiently manage daily expenses.
 - Implemented robust APIs using Express.js and Node.js, enabling smooth data retrieval and manipulation.
 - Ensured secure access to sensitive features by implementing user authentication and authorization mechanisms in this application.
 
