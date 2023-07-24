@@ -8,7 +8,7 @@
 - password 🔑 - 12345678 (Got it)😁
 
 
-# How to Use 👥
+# How to Use 👥 (Features of Application)
 - Make an Account (SignUp) for first Time.
 - If Already have an account please Login
 - Dashboard Shows
