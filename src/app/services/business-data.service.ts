@@ -28,6 +28,9 @@ export class BusinessDataService {
   onHome(){
     this.route.navigate(['home']);
   }
+  onNavigate(url:any){
+    this.route.navigate([url]);
+  }
 
   onGetAllExpense(id:any) {
     this.userId=id;
