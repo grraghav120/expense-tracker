@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { ExpenseContent } from './view-expense.model';
@@ -8,8 +8,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/auth.service';
-import { ShowChartComponent } from '../show-chart/show-chart.component';
 import { ViewSingleComponent } from '../view-single/view-single.component';
+import { ShowChartComponent } from '../show-chart/show-chart.component';
 @Component({
   selector: 'app-view-expenses',
   templateUrl: './view-expenses.component.html',

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ProfileComponent } from '../profile/profile.component';
 import { AuthService } from 'src/app/auth/auth.service';
-import { AlertBoxComponent } from '../alert-box/alert-box.component';
+import { AlertBoxComponent } from 'src/app/shared/alert-box/alert-box.component';
+import { ProfileComponent } from 'src/app/shared/profile/profile.component';
 
 @Component({
   selector: 'app-header',

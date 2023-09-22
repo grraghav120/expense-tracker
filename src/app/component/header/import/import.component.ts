@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AlertBoxComponent } from '../alert-box/alert-box.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+import { AlertBoxComponent } from 'src/app/shared/alert-box/alert-box.component';
 
 @Component({
   selector: 'app-import',
