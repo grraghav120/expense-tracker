@@ -1,16 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './component/home/home.component';
-import { HeaderComponent } from './component/header/header.component';
-import { WelcomeComponent } from './component/welcome/welcome.component';
-import { AddExpenseComponent } from './component/add-expense/add-expense.component';
 import { AuthGuard } from './auth/auth.guard';
+import { AddExpenseComponent } from './component/header/add-expense/add-expense.component';
 
 const routes: Routes = [
-  {path:'home',component:HeaderComponent,canActivate:[AuthGuard]},
-  {path:'welcome',component:WelcomeComponent},
-  {path:'edit/:id',component:AddExpenseComponent,canActivate:[AuthGuard]},
-  {path:'dashboard',component:HomeComponent,canActivate:[AuthGuard]},
+  {
+    path:'home',
+    loadChildren:()=>import('./component/header/header.module').then((m)=>m.HeaderModule),
+  },
+
+  {
+    path:'welcome',
+    loadChildren:()=>import('./component/welcome/welcome.module').then((m)=>m.WelcomeModule),
+  },
+
+  {
+    path:'edit/:id',
+    component:AddExpenseComponent,
+    canActivate:[AuthGuard]
+  },
+  
+  {
+    path:'dashboard',
+    loadChildren:()=>import("./component/home/home.module").then((m)=>m.HomeModule),
+  },
+  
   {path:'**', redirectTo:'welcome'},
 ];
 

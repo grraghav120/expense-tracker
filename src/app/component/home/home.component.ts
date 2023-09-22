@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProfileComponent } from '../profile/profile.component';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
-import { AlertBoxComponent } from '../alert-box/alert-box.component';
+import { AlertBoxComponent } from 'src/app/shared/alert-box/alert-box.component';
+import { ProfileComponent } from 'src/app/shared/profile/profile.component';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +13,6 @@ import { AlertBoxComponent } from '../alert-box/alert-box.component';
 export class HomeComponent implements OnInit {
   isLogging: any;
   constructor(
-    private route: Router,
     public dialog: MatDialog,
     public authService:AuthService,
     public businessData:BusinessDataService,
@@ -24,7 +22,7 @@ export class HomeComponent implements OnInit {
     this.authService.authAfterReferesh(true,token);
   }
   onAdd() {
-    this.route.navigate(['home']);
+    this.businessData.onNavigate('home');
   }
   Profile() {
     this.openDialog();

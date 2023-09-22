@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { ProfileComponent } from '../profile/profile.component';
+import { ProfileComponent } from 'src/app/shared/profile/profile.component';
 
 @Component({
   selector: 'app-dashboard',
