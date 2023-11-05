@@ -1,3 +1,6 @@
+<div *ngIf="showLoader" class="loaderRelay">
+  <app-welcome-loader></app-welcome-loader>
+</div>
 <div [ngClass]="{'main-class' : isEdit}">
   <mat-card class="example-card">
     <mat-card-header>

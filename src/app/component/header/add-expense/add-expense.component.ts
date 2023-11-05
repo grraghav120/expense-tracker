@@ -14,6 +14,7 @@ export class AddExpenseComponent implements OnInit {
   isEdit: boolean = false;
   filled:boolean=true;
   date: any;
+  showLoader:boolean=false;
   id: any;
   maxDate :any=new Date();
   keywords: any = [];
@@ -65,6 +66,7 @@ export class AddExpenseComponent implements OnInit {
     });
   }
   prePopulate() {
+    this.showLoader=true;
     this.businessData.onGetSingleExpense(this.id).subscribe((res: any) => {
       let date = res.data.expense_date.toString().split(' ');
       let month = this.months.indexOf(date[1]);
@@ -78,7 +80,11 @@ export class AddExpenseComponent implements OnInit {
         payment: res.data.payment,
         comment: res.data.comment,
       });
-    });
+      this.showLoader=false;
+    },error=>{
+      this.showLoader=false;
+    }
+    );
   }
 
   onReset() {

@@ -16,7 +16,7 @@ export class ViewSingleComponent implements OnInit{
   }
   ngOnInit(): void {
     this.tableData=this.data.data; 
-    console.log(this.tableData);
+    // console.log(this.tableData);
     
   }
 }
