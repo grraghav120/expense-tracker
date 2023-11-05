@@ -21,7 +21,7 @@
             <td><b>Payment Type : </b></td>
             <td>{{tableData.payment}}</td>
         </tr>
-        <tr *ngIf="tableData.comment!=null">
+        <tr *ngIf="tableData.comment!=null && tableData.comment && tableData.comment!=''">
             <td><b>Comment :</b> </td>
             <td>{{tableData.comment}}</td>
         </tr>
