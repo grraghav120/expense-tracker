@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/auth.service';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 
 @Component({
   selector: 'app-welcome',
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class WelcomeComponent implements OnInit{
   isLogging:boolean=true;
-  constructor(public authService:AuthService,public _snackBar : MatSnackBar){}
+  constructor(public authService:AuthService,public _snackBar : MatSnackBar,public businessData:BusinessDataService ){}
   ngOnInit(): void {
     this.isLogging=true;
     const LoggedUser=localStorage.getItem('LEAD_ID');
@@ -25,5 +26,13 @@ export class WelcomeComponent implements OnInit{
   onLogin(){
     this.isLogging=true;
   }
+
+  onGithub(){
+    this.businessData.onGithub();
+  }
+  onLinkedin(){
+    this.businessData.onLinkedin();
+  }
+
 
 }
