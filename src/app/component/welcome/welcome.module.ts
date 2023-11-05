@@ -11,6 +11,7 @@ const routes: Routes = [
   {
     path: '',
     component: WelcomeComponent,
+    title:'Welcome | ExpenseTracker'
   },
 ];
 
