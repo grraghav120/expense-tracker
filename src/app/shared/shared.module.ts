@@ -26,9 +26,10 @@ import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { NgChartsModule } from 'ng2-charts';
+import { WelcomeLoaderComponent } from './welcome-loader/welcome-loader.component';
 
 @NgModule({
-  declarations: [LoaderComponent,FooterComponent,ProfileComponent,AlertBoxComponent],
+  declarations: [LoaderComponent,FooterComponent,ProfileComponent,AlertBoxComponent, WelcomeLoaderComponent],
   imports: [
     CommonModule,
     MatSidenavModule,
@@ -60,6 +61,7 @@ import { NgChartsModule } from 'ng2-charts';
     FooterComponent,
     ProfileComponent,
     AlertBoxComponent,
+    WelcomeLoaderComponent,
     MatSidenavModule,
     MatToolbarModule,
     MatTooltipModule,

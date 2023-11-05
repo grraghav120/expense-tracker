@@ -103,7 +103,7 @@ export class BusinessDataService {
   }
   onGithub(){
     const link=document.createElement('a');
-    link.href="https://github.com/grraghav120/expense-tracker";
+    link.href="https://github.com/grraghav120";
     link.click();
   }
   onLinkedin(){
