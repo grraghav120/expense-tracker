@@ -41,9 +41,16 @@
         </div>
       </div>
     </mat-card-content>
-    <mat-card-actions align="end" *ngIf="!isEdit">
+    <div style="display:flex; flex-direction: row; justify-content: space-between;">
+      <mat-card-actions *ngIf="!isEdit">
+        <button mat-raised-button mat-dialog-close color="primary" (click)="onDeleteAccount()" >Delete Account</button>
+        <!-- <button mat-raised-button mat-dialog-close cdkFocusInitial color="primary">Ok</button> -->
+      </mat-card-actions>
+    <mat-card-actions *ngIf="!isEdit">
+      <!-- <button mat-raised-button mat-dialog-close color="primary">Delete Account</button> -->
       <button mat-raised-button mat-dialog-close cdkFocusInitial color="primary">Ok</button>
     </mat-card-actions>
+    </div>
     <mat-card-actions align="end" *ngIf="isEdit">
       <button mat-raised-button mat-dialog-close cdkFocusInitial color="primary" (click)="saveData()" >Save</button>
     </mat-card-actions>

@@ -21,3 +21,19 @@
     <button mat-raised-button mat-dialog-close>OK</button>
   </div>
 </div>
+
+<div *ngIf="type==='delete'">
+  <h1 mat-dialog-title>Warning!!</h1>
+  <div mat-dialog-content>Are your sure? Remember this action can't be <b>undo</b>.</div>
+  <div mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close cdkFocusInitial>Stay</button>
+    <button
+      mat-raised-button
+      color="primary"
+      mat-dialog-close
+      (click)="onDeleteAccount()"
+    >
+      Delete
+    </button>
+  </div>
+</div>

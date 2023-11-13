@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class AlertBoxComponent implements OnInit{
   type:any;
+  isLoading:boolean=false;
   constructor(public authService:AuthService,@Inject(MAT_DIALOG_DATA) public data: any){}
   ngOnInit(): void {
       this.type=this.data.type;
@@ -18,5 +19,13 @@ export class AlertBoxComponent implements OnInit{
     this.authService.onLogout();
   }
 
+  onDeleteAccount(){
+    this.isLoading=true;
+    this.authService.deleteUserAccount().subscribe((res:any)=>{
+      console.log(res);
+      this.isLoading=false;
+      this.onLogout();
+    });
+  }
 
 }
