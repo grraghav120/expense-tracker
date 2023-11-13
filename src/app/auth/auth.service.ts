@@ -72,6 +72,7 @@ export class AuthService {
         }
       },
       (error) => {
+        // console.log(error);
         this._snackBar.open('Email Already Exist! Login Please', '', {
           duration: 5000,
         });
@@ -151,6 +152,11 @@ export class AuthService {
   updateWholeInfo(body:any){
     let id=localStorage.getItem('Id')?.split(' ')[1];
     return this.http.post(this.apiUrl+'UPDATE_NAME/'+id,body);
+  }
+
+  deleteUserAccount(){
+    let id=localStorage.getItem('Id')?.split(' ')[1];
+    return this.http.delete(this.apiUrl+'USER/DELETE_ACCOUNT/'+id);
   }
 
 }

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+import { AlertBoxComponent } from '../alert-box/alert-box.component';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +19,7 @@ export class ProfileComponent implements OnInit{
   isEdit:boolean=false;
   newName:any;
   newUsername:any;
-  constructor(public businessData:BusinessDataService,public authService:AuthService,public snackBar:MatSnackBar){}
+  constructor(public businessData:BusinessDataService,public authService:AuthService,public snackBar:MatSnackBar,public dialog: MatDialog){}
   ngOnInit(): void {
     this.isProcess=true;
     this.authService.getAllSaveData().subscribe((res:any)=>{
@@ -54,6 +56,13 @@ export class ProfileComponent implements OnInit{
       }
     },error=>{
       this.snackBar.open('Server Error','',{duration:2000});
+    });
+  }
+  onDeleteAccount(){
+    console.log("delete");
+    // this.authService.onLogout();
+    this.dialog.open(AlertBoxComponent, {
+      data:{type:'delete'}
     });
   }
 }

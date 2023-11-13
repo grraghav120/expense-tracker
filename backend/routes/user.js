@@ -5,6 +5,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken"); // To generate Token
 
+const authMiddleware=require('../middleware/expenseMiddleWare');
 
 
 router.post("/SIGN_UP", (req, res, next) => {
@@ -65,7 +66,6 @@ router.post("/LOGIN", (req, res, next) => {
           status: false,
         });
       }
-      //   console.log(user);
       bcrypt
         .compare(req.body.password, user.password)
         .then((validate) => {
@@ -106,5 +106,30 @@ router.post("/LOGIN", (req, res, next) => {
       });
     });
 });
+
+router.delete("/DELETE_ACCOUNT/:id", authMiddleware, (req, res, next) => {
+  UserModel.findOneAndDelete({ _id: req.params.id })
+    .then((result) => {
+      if (!result) {
+        return res.status(404).json({
+          message: "User not found",
+          status: false,
+        });
+      }
+      res.status(200).json({
+        message: "Successfully deleted account",
+        status: true,
+      });
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({
+        message: "Internal Server Error",
+        status: false,
+      });
+    });
+});
+
+
 
 module.exports = router;
