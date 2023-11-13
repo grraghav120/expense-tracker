@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit{
     });
   }
   onDeleteAccount(){
-    console.log("delete");
+    // console.log("delete");
     // this.authService.onLogout();
     this.dialog.open(AlertBoxComponent, {
       data:{type:'delete'}
