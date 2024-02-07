@@ -1,3 +1,7 @@
+<div *ngIf="isLoading">
+    <app-welcome-loader></app-welcome-loader>
+</div>
+<div *ngIf="!isLoading">
 <div style="margin-top: 30px;">
     <div class="viewExpense"><p>Expense Details</p></div>
     <table align="center">
@@ -29,4 +33,5 @@
 </div>
 <div mat-dialog-actions align="end">
     <button mat-flat-button  mat-dialog-close color="primary">Ok</button>
+</div>
 </div>

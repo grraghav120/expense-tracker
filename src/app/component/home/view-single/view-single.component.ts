@@ -10,13 +10,21 @@ import {MatDialog, MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dia
 })
 export class ViewSingleComponent implements OnInit{
   tableData:any=[];
-  constructor(public businessData:BusinessDataService,
-    @Inject(MAT_DIALOG_DATA) public data: any){
+  isLoading:boolean=false;
+  constructor(public businessData:BusinessDataService){
     
   }
   ngOnInit(): void {
-    this.tableData=this.data.data; 
     // console.log(this.tableData);
-    
+    this.onGetSingleExpense();
   }
+  
+  onGetSingleExpense(){
+    this.isLoading=true;
+    this.businessData.onGetSingleExpense(this.businessData.data.data._id).subscribe((res: any) => {
+      this.tableData=res.data;
+      this.isLoading=false;
+    });
+  }
+
 }
