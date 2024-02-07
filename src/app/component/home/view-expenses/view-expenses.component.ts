@@ -221,16 +221,9 @@ export class Confirm{
   }
 
   onView(){
-    let tableData;
-    this.businessData.onGetSingleExpense(this.businessData.data.data._id).subscribe((res: any) => {
-      tableData=res.data;
-      let dialogRef = this.dialog.open(ViewSingleComponent, {
-        width: '300px',
-        height: '250px',
-        data:{
-          data:tableData,
-        }
-      });
+    let dialogRef = this.dialog.open(ViewSingleComponent, {
+      width: '300px',
+      height: '250px',
     });
   }
 }
