@@ -12,6 +12,7 @@ import { ProfileComponent } from 'src/app/shared/profile/profile.component';
 })
 export class HomeComponent implements OnInit {
   isLogging: any;
+  app_version:any;
   constructor(
     public dialog: MatDialog,
     public authService:AuthService,
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     const token=localStorage.getItem('LEAD_ID');
     this.authService.authAfterReferesh(true,token);
+    this.app_version=this.businessData.appVersion;
   }
   onAdd() {
     this.businessData.onNavigate('home');

@@ -22,6 +22,7 @@ export class BusinessDataService {
   data:any;
   apiUrl = environment.apiUrl;
   userId:any;
+  appVersion:any;
   constructor(private route: Router, public http: HttpClient) {
   }
 
@@ -111,4 +112,9 @@ export class BusinessDataService {
     link.href="https://www.linkedin.com/in/raghavgarg2002/";
     link.click();
   }
+
+  onGetAppVersion(){
+    return this.http.get(this.apiUrl+'USER/APP_VERSION/');
+  }
+
 }
