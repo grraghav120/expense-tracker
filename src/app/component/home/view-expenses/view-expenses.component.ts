@@ -193,6 +193,9 @@ export class ViewExpensesComponent implements OnInit {
       }
     });
   }
+  onAdd() {
+    this.businessData.onNavigate('home');
+  }
 }
 
 @Component({

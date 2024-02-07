@@ -10,6 +10,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 })
 export class WelcomeComponent implements OnInit{
   isLogging:boolean=true;
+  appVersion:any;
   constructor(public authService:AuthService,public _snackBar : MatSnackBar,public businessData:BusinessDataService ){}
   ngOnInit(): void {
     this.isLogging=true;
@@ -19,6 +20,11 @@ export class WelcomeComponent implements OnInit{
       this.isLogging=true;
       this._snackBar.open('You have Logout Successfully','',{duration:3000});
     }
+    this.businessData.onGetAppVersion().subscribe((res:any)=>{
+      console.log(res);
+      this.businessData.appVersion=res.version;
+      this.appVersion=res.version;
+    });
   }
   onSignUp(){
     this.isLogging=false;

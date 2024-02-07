@@ -130,6 +130,13 @@ router.delete("/DELETE_ACCOUNT/:id", authMiddleware, (req, res, next) => {
     });
 });
 
+router.get("/APP_VERSION", (req, res, next) => {
+  res.status(200).json({
+    message:'App Version successfully fetched',
+    version:'v1.1.0',
+    status:true,
+  });
+});
 
 
 module.exports = router;
