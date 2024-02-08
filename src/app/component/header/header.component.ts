@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit{
     setTimeout(() => {
       this.isLoading=false;
     }, 4000);
-    const token=localStorage.getItem('LEAD_ID');
+    const token=sessionStorage.getItem('LEAD_ID');
     this.authService.authAfterReferesh(true,token);
   }
   openDialog(): void {

@@ -14,7 +14,7 @@ export class WelcomeComponent implements OnInit{
   constructor(public authService:AuthService,public _snackBar : MatSnackBar,public businessData:BusinessDataService ){}
   ngOnInit(): void {
     this.isLogging=true;
-    const LoggedUser=localStorage.getItem('LEAD_ID');
+    const LoggedUser=sessionStorage.getItem('LEAD_ID');
     if(LoggedUser){
       this.authService.onLogout();
       this.isLogging=true;
@@ -24,6 +24,7 @@ export class WelcomeComponent implements OnInit{
       console.log(res);
       this.businessData.appVersion=res.version;
       this.appVersion=res.version;
+      sessionStorage.setItem('Version',this.appVersion);
     });
   }
   onSignUp(){

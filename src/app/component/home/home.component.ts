@@ -19,9 +19,9 @@ export class HomeComponent implements OnInit {
     public businessData:BusinessDataService,
   ) {}
   ngOnInit(): void {
-    const token=localStorage.getItem('LEAD_ID');
+    const token=sessionStorage.getItem('LEAD_ID');
     this.authService.authAfterReferesh(true,token);
-    this.app_version=this.businessData.appVersion;
+    this.app_version=sessionStorage.getItem('Version');
   }
   onAdd() {
     this.businessData.onNavigate('home');

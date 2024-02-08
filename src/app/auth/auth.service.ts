@@ -114,14 +114,14 @@ export class AuthService {
     this.isAuth = false;
     this.route.navigate(['welcome']);
     clearTimeout(this.expireTokenTime);
-    localStorage.removeItem('LEAD_ID');
-    localStorage.removeItem('Id');
+    sessionStorage.removeItem('LEAD_ID');
+    sessionStorage.removeItem('Id');
   }
 
   private saveAuthDataonLocalStorage(time:any,userId:any) {
     userId="954854384ubbbfhf9489r34r34fnnn "+userId+" id";
-    localStorage.setItem('LEAD_ID', this.token);
-    localStorage.setItem('Id',userId);
+    sessionStorage.setItem('LEAD_ID', this.token);
+    sessionStorage.setItem('Id',userId);
     setTimeout(() => {
       this.onLogout();
     }, time*1000);
@@ -134,7 +134,7 @@ export class AuthService {
   }
 
   getAllSaveData(){
-    return this.http.get(this.apiUrl+'GET_SAVE_DATA/'+localStorage.getItem('Id')?.split(' ')[1]);
+    return this.http.get(this.apiUrl+'GET_SAVE_DATA/'+sessionStorage.getItem('Id')?.split(' ')[1]);
   }
 
   updateUserData(id:string,body:any){
@@ -145,17 +145,17 @@ export class AuthService {
   }
   
   updateProfile(body:any){
-    let id=localStorage.getItem('Id')?.split(' ')[1];
+    let id=sessionStorage.getItem('Id')?.split(' ')[1];
     return this.http.post(this.apiUrl+'UPDATE_PROFILE/'+id,body);
   }
 
   updateWholeInfo(body:any){
-    let id=localStorage.getItem('Id')?.split(' ')[1];
+    let id=sessionStorage.getItem('Id')?.split(' ')[1];
     return this.http.post(this.apiUrl+'UPDATE_NAME/'+id,body);
   }
 
   deleteUserAccount(){
-    let id=localStorage.getItem('Id')?.split(' ')[1];
+    let id=sessionStorage.getItem('Id')?.split(' ')[1];
     return this.http.delete(this.apiUrl+'USER/DELETE_ACCOUNT/'+id);
   }
 

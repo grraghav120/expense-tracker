@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
@@ -12,10 +13,10 @@ export class AlertBoxComponent implements OnInit{
   type:any;
   isLoading:boolean=false;
   userId:any;
-  constructor(public authService:AuthService,@Inject(MAT_DIALOG_DATA) public data: any,public snackBar:MatSnackBar,public dialog: MatDialog){}
+  constructor(public authService:AuthService,@Inject(MAT_DIALOG_DATA) public data: any,public snackBar:MatSnackBar,public dialog: MatDialog,public route:Router){}
   ngOnInit(): void {
       this.type=this.data.type;
-      this.userId=localStorage.getItem('Id')?.split(' ')[1];
+      this.userId=sessionStorage.getItem('Id')?.split(' ')[1];
   }
 
   onLogout(){
@@ -38,6 +39,9 @@ export class AlertBoxComponent implements OnInit{
       this.onLogout();
       this.snackBar.open('Account Deleted Successfully','',{duration:2000});
     });
+  }
+  onNavigateWelcome(){
+    this.route.navigate(['welcome']);
   }
 
 }

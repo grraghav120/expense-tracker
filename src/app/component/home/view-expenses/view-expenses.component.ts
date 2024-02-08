@@ -38,7 +38,7 @@ export class ViewExpensesComponent implements OnInit {
     public route:Router,
     public authServ:AuthService,
     public _snackBar:MatSnackBar,
-  ) {this.userId=localStorage.getItem('Id')?.split(' ')[1];}
+  ) {this.userId=sessionStorage.getItem('Id')?.split(' ')[1];}
   
   cards: any = [];
   allexpense:any=0;
@@ -46,7 +46,7 @@ export class ViewExpensesComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading=true;
     this.isDelete=false;
-    this.userId=localStorage.getItem('Id')?.split(' ')[1];
+    this.userId=sessionStorage.getItem('Id')?.split(' ')[1];
     this.getAllExpense(this.userId);
   }
   onHome(){

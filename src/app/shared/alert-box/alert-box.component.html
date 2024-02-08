@@ -49,6 +49,14 @@
   </div>
 </div>
 
+<div *ngIf="type==='expire'">
+  <h1 mat-dialog-title>Session Expired</h1>
+  <div mat-dialog-content>Your current session expired!! Please login again to continue</div>
+  <div mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close (click)="onNavigateWelcome()">OK</button>
+  </div>
+</div>
+
 <div *ngIf="isLoading" class="loaderRelay">
   <!-- Loader content, you can customize this part as needed -->
   <app-welcome-loader></app-welcome-loader>
