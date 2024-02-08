@@ -7,7 +7,8 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
-  constructor(public businessData:BusinessDataService){}
+  app_version:any;
+  constructor(public businessData:BusinessDataService){this.app_version=sessionStorage.getItem('Version');}
   onGithub(){
     this.businessData.onGithub();
   }

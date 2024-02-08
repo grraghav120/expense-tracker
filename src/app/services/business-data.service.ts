@@ -39,7 +39,7 @@ export class BusinessDataService {
   }
 
   onCreateExpense(values: any,date:any) {
-    let id=localStorage.getItem('Id')?.split(' ')[1];
+    let id=sessionStorage.getItem('Id')?.split(' ')[1];
     let body={
       name: values.name,
       amount: values.amount,
@@ -54,7 +54,7 @@ export class BusinessDataService {
 
 
   onImportExpense(values:any){
-    let id=localStorage.getItem('Id')?.split(' ')[1];
+    let id=sessionStorage.getItem('Id')?.split(' ')[1];
     let date=values.expense_date.split('/');
     date=(new Date(date[2],date[1]-1,date[0])).toString();
     date=date.split(' ');
@@ -99,7 +99,7 @@ export class BusinessDataService {
   }
 
   onGetAllCategory(){
-    this.userId=localStorage.getItem('Id')?.split(' ')[1];
+    this.userId=sessionStorage.getItem('Id')?.split(' ')[1];
     return this.http.get(this.apiUrl+'GET_CATEGORY/'+this.userId);
   }
   onGithub(){
