@@ -116,12 +116,16 @@ export class AuthService {
     clearTimeout(this.expireTokenTime);
     sessionStorage.removeItem('LEAD_ID');
     sessionStorage.removeItem('Id');
+    localStorage.removeItem('LEAD_ID');
+    localStorage.removeItem('Id');
   }
 
   private saveAuthDataonLocalStorage(time:any,userId:any) {
     userId="954854384ubbbfhf9489r34r34fnnn "+userId+" id";
     sessionStorage.setItem('LEAD_ID', this.token);
     sessionStorage.setItem('Id',userId);
+    localStorage.setItem('LEAD_ID', this.token);
+    localStorage.setItem('Id',userId);
     setTimeout(() => {
       this.onLogout();
     }, time*1000);
