@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+import { BusinessDataService } from 'src/app/services/business-data.service';
 import { AlertBoxComponent } from 'src/app/shared/alert-box/alert-box.component';
 import { ProfileComponent } from 'src/app/shared/profile/profile.component';
 
@@ -13,7 +14,15 @@ import { ProfileComponent } from 'src/app/shared/profile/profile.component';
 export class HeaderComponent implements OnInit{
   // isLogging:boolean=true;
   isLoading: boolean=true;
-  constructor(private route:Router,public dialog: MatDialog,public authService:AuthService){}
+  app_version:any;
+  constructor(
+    private route:Router,
+    public dialog: MatDialog,
+    public authService:AuthService,
+    public businessData:BusinessDataService
+  ){
+    this.app_version=sessionStorage.getItem('Version');
+  }
   ngOnInit(): void {
     this.isLoading=true;
     setTimeout(() => {
