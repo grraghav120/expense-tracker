@@ -12,14 +12,20 @@ export class AddCategoryComponent implements OnInit{
   newKeywords:any= [];
   CategoryLoad:boolean=true;
   isSaving:boolean=false;
+  isEdit:boolean=false;
   constructor(public businesData:BusinessDataService){}
   ngOnInit(): void {
+    this.onGetCategory(); 
+  }
+
+  onGetCategory(){
     this.CategoryLoad=true;
     this.isSaving=false;
     this.businesData.onGetAllCategory().subscribe((res:any)=>{
       if(res){
         this.CategoryLoad=false;
         this.keywords=res.data;
+
       }
     });
   }
@@ -29,6 +35,30 @@ export class AddCategoryComponent implements OnInit{
     if (index >= 0) {
       this.newKeywords.splice(index, 1);
     }
+  }
+
+  removeKeywordEdit(keyword: string) {
+    const index = this.keywords.indexOf(keyword);
+    if (index >= 4) {
+      this.keywords.splice(index, 1);
+    }
+  }
+
+  onSaveEditCategories(){
+    //isEdit true
+    //api call to update all categories
+    //also update the emit property
+    // console.log('edit log save btn');
+    this.isSaving=true;
+    this.businesData.onEditCategory(this.keywords).subscribe((res)=>{
+      if(res){
+        this.newKeywords=[];
+        this.isSaving=false;
+        this.isEdit=false;
+        this.categoryAdded.emit(this.keywords);
+        this.onGetCategory();
+      }
+    });
   }
 
   add(event: MatChipInputEvent): void {
@@ -53,6 +83,10 @@ export class AddCategoryComponent implements OnInit{
 
   onReset() {
     this.newKeywords = [];
+  }
+
+  onEditCategories(){
+    this.isEdit=!this.isEdit;
   }
 
 }
