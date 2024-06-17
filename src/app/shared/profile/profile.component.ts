@@ -19,13 +19,18 @@ export class ProfileComponent implements OnInit{
   isEdit:boolean=false;
   newName:any;
   newUsername:any;
+  userId:any;
   constructor(public businessData:BusinessDataService,public authService:AuthService,public snackBar:MatSnackBar,public dialog: MatDialog){}
   ngOnInit(): void {
+    this.userId=sessionStorage.getItem('Id')?.split(' ')[1];
     this.isProcess=true;
     this.authService.getAllSaveData().subscribe((res:any)=>{
       setTimeout(() => {
         this.isProcess=false;
         this.editable=true;
+        if(this.userId==="6558727029c0dacee0900c6a"){
+          this.editable=false;
+        }
       }, 1000);
       let firstDate=(res.data.firstLoginDate).toString().split('T')[0];
       let lastLogin=(res.data.lastLoginDate).toString().split('T')[0];
@@ -38,7 +43,7 @@ export class ProfileComponent implements OnInit{
       this.user_name=res.data.username;
       this.newName=res.data.name;
       this.newUsername=res.data.username;
-    })    
+    });
   }
   editField(){
     this.isEdit=!this.isEdit;

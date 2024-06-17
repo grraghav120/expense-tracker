@@ -153,6 +153,9 @@ router.get('/GET_CATEGORY/:id',(req,res,next)=>{
   })
 });
 
+
+
+
 router.post('/SAVE_CATEGORY/:id',(req,res,next)=>{
   UserModel.updateOne({_id:req.params.id},{
     $push: { category: { $each: req.body } }
@@ -169,6 +172,25 @@ router.post('/SAVE_CATEGORY/:id',(req,res,next)=>{
     });
   });
 })
+
+router.post('/EDIT_CATEGORY/:id',(req,res,next)=>{
+  UserModel.updateOne(
+    { _id: req.params.id },
+    { $set: { category: req.body } }
+  ).then((result) => {
+    // console.log(result);
+    res.status(200).json({
+      message: 'Category Updated',
+      status: true,
+    });
+  }).catch((err) => {
+    res.status(501).json({
+      message: err,
+      status: false,
+    });
+  });  
+});
+
 
 router.post('/UPDATE_SAVE_DATA/:id',(req,res,next)=>{
   UserModel.findOneAndUpdate({ _id: req.params.id,'userData.userId': req.params.id },

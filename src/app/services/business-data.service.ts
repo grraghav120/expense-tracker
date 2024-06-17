@@ -74,6 +74,10 @@ export class BusinessDataService {
   onCreateCategory(body:any){
     return this.http.post(this.apiUrl+'SAVE_CATEGORY/'+this.userId,body);
   }
+
+  onEditCategory(body:any){
+    return this.http.post(this.apiUrl+'EDIT_CATEGORY/'+this.userId,body);
+  }
   
   onDeleteExpense(id:string){
     return this.http.delete(this.apiUrl+'DELETE_EXPENSE/'+this.userId+'/'+id);
