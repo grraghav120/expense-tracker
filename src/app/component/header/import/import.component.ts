@@ -43,7 +43,7 @@ export class ImportComponent implements OnInit {
 
   onSaveImport() {
     this.propertyNames=this.csvRecords[0];
-    console.log(this.csvRecords);
+    // console.log(this.csvRecords);
     
     let hashamp:any={};
     let name:boolean=false;

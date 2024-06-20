@@ -22,7 +22,7 @@ export class WelcomeComponent implements OnInit{
     }
     if(!sessionStorage.getItem('Version')){
       this.businessData.onGetAppVersion().subscribe((res:any)=>{
-        console.log(res);
+        // console.log(res);
         this.businessData.appVersion=res.version;
         this.appVersion=res.version;
         sessionStorage.setItem('Version',this.appVersion);
