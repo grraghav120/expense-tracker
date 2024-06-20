@@ -34,7 +34,7 @@ export class AlertBoxComponent implements OnInit{
       return;
     }
     this.authService.deleteUserAccount().subscribe((res:any)=>{
-      console.log(res);
+      // console.log(res);
       this.isLoading=false;
       this.onLogout();
       this.snackBar.open('Account Deleted Successfully','',{duration:2000});

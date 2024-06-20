@@ -55,7 +55,8 @@ export class ProfileComponent implements OnInit{
     }
     this.authService.updateProfile(body).subscribe((res:any)=>{
       if(res){
-        this.authService.updateWholeInfo(body).subscribe((result)=>{console.log(result);
+        this.authService.updateWholeInfo(body).subscribe((result)=>{
+          // console.log(result);
         });
         this.snackBar.open('Profile Updated','',{duration:2000});
       }

@@ -88,6 +88,8 @@ export class ViewExpensesComponent implements OnInit {
         },
         { icon: 'monetization_on', title: 'Total Amount', content: '₹'+this.count },
       ];
+      // console.log(this.cards,this.count,res.data);
+      
       this.allexpense=len;
       this.businessData.expensesLogged=this.allexpense;
       this.updateExpene();
@@ -112,12 +114,16 @@ export class ViewExpensesComponent implements OnInit {
     this.hashMap={};
     this.count=0;
     if(data){
-    this.businessData.onGetAllCategory().subscribe((res:any)=>{
-      this.cate=res.data;
-      
-      for(let i=0;i<this.cate.length;i++){
-        this.hashMap[this.cate[i]]=0;
+    // this.businessData.onGetAllCategory().subscribe((res:any)=>{
+    //   this.cate=res.data;
+      for(let i=0;i<data.length;i++){
+        this.hashMap[data[i].expense_category]=0;
       }
+      // for(let i=0;i<this.cate.length;i++){
+      //   this.hashMap[this.cate[i]]=0;
+      // }
+      // console.log(this.hashMap);
+      
       for(let i =0;i<data.length;i++){
         this.hashMap[data[i].expense_category]+=data[i].amount;
       }
@@ -131,7 +137,7 @@ export class ViewExpensesComponent implements OnInit {
       }
       this.cards[3].content='₹'+this.count;
       
-    })
+    // })
   }
   }
 

@@ -12,6 +12,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 export class AddExpenseComponent implements OnInit {
   expenseForm!: FormGroup;
   isEdit: boolean = false;
+  isCategoryNotFound:boolean=false;
   filled:boolean=true;
   date: any;
   showLoader:boolean=false;
@@ -72,15 +73,22 @@ export class AddExpenseComponent implements OnInit {
       let month = this.months.indexOf(date[1]);
       let day = parseInt(date[2]);
       let year = parseInt(date[3]);
-      this.expenseForm.setValue({
-        name: res.data.name,
-        amount: res.data.amount,
-        expense_date: new Date(year, month, day),
-        expense_category: res.data.expense_category,
-        payment: res.data.payment,
-        comment: res.data.comment,
+      this.businessData.onGetAllCategory().subscribe((response:any)=>{
+        let cate=response.data;
+        let index=response.data.indexOf(res.data.expense_category);
+        if(index==-1){
+          this.isCategoryNotFound=true;
+        }
+        this.expenseForm.setValue({
+          name: res.data.name,
+          amount: res.data.amount,
+          expense_date: new Date(year, month, day),
+          expense_category: (this.isCategoryNotFound)?'Unassigned':res.data.expense_category,
+          payment: res.data.payment,
+          comment: res.data.comment,
+        });
+        this.showLoader=false;
       });
-      this.showLoader=false;
     },error=>{
       this.showLoader=false;
     }
