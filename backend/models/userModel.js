@@ -2,25 +2,7 @@ const mongoose = require("mongoose");
 
 const uniqueValidator = require("mongoose-unique-validator");
 
-const SaveData=mongoose.Schema({
-  username:({type:String}),
-  name:({type:String}),
-  firstLoginDate:({type:String}),
-  lastLoginDate:({type:String}),
-  expenseLogged:({type:String}),
-  userId:({type:String}),
-});
-
-
-const createExpense = mongoose.Schema({
-  name: { type: String, required: true },
-  amount: { type: Number, required: true },
-  expense_date: { type: String, required: true },
-  expense_category: { type: String, required: true },
-  payment: { type: String, required: true },
-  comment: { type: String, required: false },
-  creater:{type:mongoose.Schema.Types.ObjectId,ref:"UserSchema",required:true},
-});
+// Removed saveData and createExpense schema as they are already created in different files
 
 
 const userSchmema = mongoose.Schema({
