@@ -12,6 +12,7 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 })
 export class LoginComponent implements OnInit {
   LoginContinue:boolean=false;
+  public hidePassword:boolean=true;
   loginForm!: FormGroup;
   constructor(
     public route: Router,
@@ -41,5 +42,9 @@ export class LoginComponent implements OnInit {
       this.LoginContinue = false; // Enable the login button after error
       this.busServ.isChecking=false;
     });
+  }
+  togglePassword()
+  {
+    this.hidePassword=!this.hidePassword;
   }
 }
