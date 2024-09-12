@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-welcome-loader',
@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./welcome-loader.component.scss']
 })
 export class WelcomeLoaderComponent {
-
+  @Input() msg :any;
+  ngOnInit(){
+    console.log(this.msg);
+    
+  }
 }

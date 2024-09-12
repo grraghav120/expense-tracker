@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   queryPass:any;
   queryEmail:any;
+  msg:string="Please Wait.. Login Admin Account";
   constructor(
     public route: Router,
     public authService: AuthService,
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   ) {
     this.activateroute.queryParams.subscribe((p)=>{
       if((p['email']!=undefined || p['email']!=null) && (p['pass']!=undefined || p['pass']!=null)){
-        console.log(p['email'],p['pass']);
+        // console.log(p['email'],p['pass']);
         this.queryEmail=p['email'];
         this.queryPass=p['pass'];
       }
