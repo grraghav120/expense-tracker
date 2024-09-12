@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 
@@ -11,7 +12,15 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 export class WelcomeComponent implements OnInit{
   isLogging:boolean=true;
   appVersion:any='';
-  constructor(public authService:AuthService,public _snackBar : MatSnackBar,public businessData:BusinessDataService ){}
+  constructor(
+    public authService:AuthService,
+    public _snackBar : MatSnackBar,
+    public businessData:BusinessDataService,
+    public activateroute:ActivatedRoute
+   )
+  {
+    
+  }
   ngOnInit(): void {
     this.isLogging=true;
     const LoggedUser=sessionStorage.getItem('LEAD_ID');
