@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   queryPass:any;
   queryEmail:any;
-  msg:string="Please Wait.. Login Admin Account";
+  msg:any=null;
   constructor(
     public route: Router,
     public authService: AuthService,
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
       password: new FormControl('', Validators.required),
     });
     if(this.queryEmail!=undefined && this.queryPass!=undefined){
+      if(this.queryEmail=='abc@gmail.com') this.msg="Please Wait.. Login Admin Account";
       this.onLogin('autoLogin');
     }
   }
