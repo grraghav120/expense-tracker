@@ -1,0 +1,46 @@
+.circle-radio {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #6c757d;
+    background-color: #f8f9fa;
+  }
+  
+  .circle-radio:hover {
+    background-color: #e2e6ea;
+    border-color: #adb5bd;
+  }
+  
+  .circle-radio.active {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+  }
+  
+  .container {
+    max-width: 600px;
+  }
+  
+  .mt-4 {
+    margin-top: 1.5rem;
+  }
+  
+  .mt-5 {
+    margin-top: 3rem;
+  }
+  
+  .gap-2 {
+    gap: 0.5rem;
+  }
+  
+.skip-btn{
+    background-color: white;
+    border: none;
+}

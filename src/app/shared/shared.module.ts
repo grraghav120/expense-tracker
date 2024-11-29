@@ -27,9 +27,11 @@ import { ProfileComponent } from './profile/profile.component';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { NgChartsModule } from 'ng2-charts';
 import { WelcomeLoaderComponent } from './welcome-loader/welcome-loader.component';
+import { RatingComponent } from './rating/rating.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
-  declarations: [LoaderComponent,FooterComponent,ProfileComponent,AlertBoxComponent, WelcomeLoaderComponent],
+  declarations: [LoaderComponent,FooterComponent,ProfileComponent,AlertBoxComponent, WelcomeLoaderComponent, RatingComponent],
   imports: [
     CommonModule,
     MatSidenavModule,
@@ -55,6 +57,7 @@ import { WelcomeLoaderComponent } from './welcome-loader/welcome-loader.componen
     ReactiveFormsModule,
     MatProgressBarModule,
     NgChartsModule,
+    MatRadioModule
   ],
   exports: [
     LoaderComponent,
@@ -62,6 +65,7 @@ import { WelcomeLoaderComponent } from './welcome-loader/welcome-loader.componen
     ProfileComponent,
     AlertBoxComponent,
     WelcomeLoaderComponent,
+    RatingComponent,
     MatSidenavModule,
     MatToolbarModule,
     MatTooltipModule,
@@ -83,6 +87,7 @@ import { WelcomeLoaderComponent } from './welcome-loader/welcome-loader.componen
     MatProgressBarModule,
     MatProgressSpinnerModule,
     NgChartsModule,
+    MatRadioModule
   ],
 })
 export class SharedModule {}

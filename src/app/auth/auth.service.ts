@@ -12,6 +12,7 @@ export class AuthService {
   private token!: any;
   private expireTokenTime: any;
   private userId: any;
+  private emailAddress:any;
   constructor(
     public http: HttpClient,
     public _snackBar: MatSnackBar,
@@ -31,6 +32,15 @@ export class AuthService {
   }
   getUSerId(){
     return this.userId;
+  }
+  
+  getEmail(){
+    return this.emailAddress;
+  }
+
+  private setEmail(email:any){
+    localStorage.setItem('user_email',email);
+    this.emailAddress=email;
   }
 
   onSignUp(values: any):Promise<boolean> {
@@ -53,6 +63,7 @@ export class AuthService {
           );
           this.token = res.data.token;
           this.userId=res.data.userId;
+          this.setEmail(values.gmail);
           let body={
             firstLoginDate:res.data.UserSince,
             username:res.data.username,
@@ -90,6 +101,7 @@ export class AuthService {
         this._snackBar.open(res.message, '', { duration: 3000 });
         this.token = res.data.token;
         this.isAuth = true;
+        this.setEmail(res.data.email);
         this.expireTokenTime = setTimeout(() => {
           this.onLogout();
         }, res.data.expiredToken * 1000);
