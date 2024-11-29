@@ -1,0 +1,67 @@
+<div class="container text-center">
+  <mat-card class="mb-2">
+    <mat-card-content>
+      <p style="text-align: start">
+        How likely are you to recommend our service to a friend or colleague?
+      </p>
+      <div class="d-flex justify-content-center flex-wrap gap-2 mt-4">
+        <div
+          *ngFor="let option of ratingOptions"
+          class="circle-radio"
+          [class.active]="rating === option"
+          (click)="selectRating(option)"
+        >
+          {{ option }}
+        </div>
+      </div>
+      <div class="d-flex justify-content-between mt-3">
+        <span>1 - Extremely Unlikely</span>
+        <span>10 - Extremely Likely</span>
+      </div>
+      <hr />
+      <div class="mt-3">
+        <p style="text-align: start">
+          Reason to Delete the <b>Expense Tracker Account</b>
+        </p>
+        <div>
+          <select
+            [(ngModel)]="reason"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option value="0" selected>Select Reason</option>
+            <option value="1">
+              The app/website is not user-friendly or easy to use.
+            </option>
+            <option value="2">
+              I’m concerned about how my data is stored or used.
+            </option>
+            <option value="3">I don’t use the Expense Tracker anymore.</option>
+            <option value="4">
+              I found another service that better suits my needs.
+            </option>
+            <option value="5">
+              I’m experiencing too many bugs or technical problems.
+            </option>
+            <option value="6">
+              I want to delete my account for personal reasons.
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-3">
+        <button
+          type="button"
+          [disabled]="rating == null || reason == 0"
+          (click)="onSkipFeedback('noSkip')"
+          class="btn btn-success"
+        >
+          Proceed
+        </button>
+      </div>
+      <div class="mt-1">
+        <button class="skip-btn" (click)="onSkipFeedback('skip')">Skip?</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

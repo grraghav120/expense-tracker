@@ -108,17 +108,27 @@ export class BusinessDataService {
   }
   onGithub(){
     const link=document.createElement('a');
+    link.target="_blank";
     link.href="https://github.com/grraghav120";
     link.click();
   }
   onLinkedin(){
     const link=document.createElement('a');
+    link.target="_blank";
     link.href="https://www.linkedin.com/in/raghavgarg2002/";
     link.click();
   }
 
   onGetAppVersion(){
     return this.http.get(this.apiUrl+'USER/APP_VERSION/');
+  }
+
+  onProvideFeedback(body:any){
+    return this.http.post(this.apiUrl+'USER/USER_FEEDBACK/',body)
+  }
+
+  onConfirmAccess(body:any){
+    return this.http.post(this.apiUrl+'USER/CONFIRM_ACCESS/',body);
   }
 
 }
