@@ -23,18 +23,61 @@
 </div>
 
 <div *ngIf="type==='delete'">
-  <h1 mat-dialog-title>Warning!!</h1>
-  <div mat-dialog-content>Are your sure? Remember this action can't be <b>undo</b>.</div>
-  <div mat-dialog-actions align="end">
-    <button mat-raised-button mat-dialog-close cdkFocusInitial>Stay</button>
-    <button
-      mat-raised-button
-      color="primary"
-      mat-dialog-close
-      (click)="onDeleteAccount()"
-    >
-      Delete
-    </button>
+  <div *ngIf="!isReadyToDeleteAccount && !isProvideFeedback">
+    <h1 mat-dialog-title>Warning!!</h1>
+    <div mat-dialog-content>Are your sure? Remember this action can't be <b>undo</b>.</div>
+    <div mat-dialog-actions align="end">
+      <button mat-raised-button mat-dialog-close cdkFocusInitial>Stay</button>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onDeleteAccount()"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+  <div *ngIf="isReadyToDeleteAccount && !isProvideFeedback">
+    <div>
+      <div mat-dialog-content>
+        <div class="confirm-access">
+          <div><p class="confirm">Confirm Access</p></div>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <mat-card >
+            <mat-card-content class="signed-address">
+              <img class="signed-image" src="../../../assets/image/man.png" width="30" height="30">
+              <p>
+              Signed in as <strong>{{userEmailAddress}}</strong>
+              </p>
+            </mat-card-content>
+          </mat-card>          
+        </div>
+        <div style="margin-bottom: 10px;">
+          <mat-card>
+            <mat-card-content>
+              <div>
+                <p>Password</p>
+              </div>
+              <div>
+                <mat-form-field  appearance="outline" style="width: 100%" class="example-full-width">
+                  <input matInput type="password" [(ngModel)]="passwordOfUser" name="passwordField"/>
+                </mat-form-field>
+              </div>
+              <div>
+                <button type="button" class="w-100 btn btn-success" [disabled]="passwordOfUser==null" (click)="onConfirmPassword()" mat-dialog-close>Confirm</button>
+              </div>
+            </mat-card-content>
+          </mat-card>          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="isProvideFeedback && !isReadyToDeleteAccount">
+    <div class="confirm-access" style="margin-top: 10px;">
+      <div><p class="confirm">Rate your experience</p></div>
+    </div>
+    <app-rating (skipFeedback)="handleSkip($event)"></app-rating>
   </div>
 </div>
 
