@@ -16,7 +16,7 @@ export class AlertBoxComponent implements OnInit{
   isLoading:boolean=false;
   userId:any;
   isReadyToDeleteAccount=false;
-  userEmailAddress='';
+  userEmailAddress='grraghav120@gmail.com';
   passwordOfUser:any=null;
   isProvideFeedback:boolean=false;
   constructor(
