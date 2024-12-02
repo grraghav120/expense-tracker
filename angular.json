@@ -15,7 +15,7 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@ngx-env/builder:browser",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/expense-tracker",
             "index": "src/index.html",
@@ -32,7 +32,7 @@
                 "glob": "_redirects",
                 "input": "src",
                 "output": "/"
-              }
+              } 
             ],
             "styles": [
               "@angular/material/prebuilt-themes/indigo-pink.css",
@@ -61,7 +61,7 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ]
+              ]              
             },
             "development": {
               "buildOptimizer": false,
@@ -81,7 +81,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@ngx-env/builder:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
               "browserTarget": "expense-tracker:build:production"
@@ -93,7 +93,7 @@
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@ngx-env/builder:extract-i18n",
+          "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
             "browserTarget": "expense-tracker:build"
           }
