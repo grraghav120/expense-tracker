@@ -23,7 +23,16 @@ export class BusinessDataService {
   apiUrl = environment.apiUrl;
   userId:any;
   appVersion:any;
+  private comingSrc:any;
   constructor(private route: Router, public http: HttpClient) {
+  }
+
+  setComingSrc(val:any){
+    this.comingSrc=val;
+  }
+
+  getComingSrc(){
+    return this.comingSrc;
   }
 
   onHome(){
@@ -129,6 +138,10 @@ export class BusinessDataService {
 
   onConfirmAccess(body:any){
     return this.http.post(this.apiUrl+'USER/CONFIRM_ACCESS/',body);
+  }
+
+  onCollectSource(body:any){
+    return this.http.post(this.apiUrl+'USER/USER_SOURCE/',body);
   }
 
 }

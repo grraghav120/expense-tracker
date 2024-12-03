@@ -31,7 +31,6 @@ export class RatingComponent {
         createdAt:new Date(),
       };
       //post feedback to DB
-      console.log(body);
       this.businessService.onProvideFeedback(body).subscribe((res:any)=>{
         if(res.status){
           console.log(res);

@@ -16,7 +16,7 @@ export class AlertBoxComponent implements OnInit{
   isLoading:boolean=false;
   userId:any;
   isReadyToDeleteAccount=false;
-  userEmailAddress='grraghav120@gmail.com';
+  userEmailAddress='';
   passwordOfUser:any=null;
   isProvideFeedback:boolean=false;
   constructor(
@@ -39,7 +39,6 @@ export class AlertBoxComponent implements OnInit{
   }
 
   onDeleteAccount(){
-    console.log(environment.adminId);
     if (this.userId === environment.adminId) {
       this.dialog.open(AlertBoxComponent, {
         data:{type:'admin'}
@@ -60,7 +59,6 @@ export class AlertBoxComponent implements OnInit{
       gmail: this.userEmailAddress,
       password:this.passwordOfUser,
     }
-    console.log(body);
     this.businessService.onConfirmAccess(body).subscribe((res:any)=>{
       this.isLoading=false;
       this.onConfirmPasswordAndDeleteAccount();

@@ -28,6 +28,9 @@ export class LoginComponent implements OnInit {
         this.queryEmail=p['email'];
         this.queryPass=p['pass'];
       }
+      if(p['src']!=undefined || [p['src']!=null]){
+        this.busServ.setComingSrc(p['src']);
+      }
     })
   }
   ngOnInit(): void {

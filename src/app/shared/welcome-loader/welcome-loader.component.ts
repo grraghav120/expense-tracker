@@ -8,7 +8,5 @@ import { Component, Input } from '@angular/core';
 export class WelcomeLoaderComponent {
   @Input() msg :any;
   ngOnInit(){
-    console.log(this.msg);
-    
   }
 }

@@ -65,7 +65,7 @@
                 </mat-form-field>
               </div>
               <div>
-                <button type="button" class="w-100 btn btn-success" [disabled]="passwordOfUser==null" (click)="onConfirmPassword()" mat-dialog-close>Confirm</button>
+                <button type="button" class="w-100 btn btn-success" [disabled]="passwordOfUser==null || passwordOfUser=='' " (click)="onConfirmPassword()" mat-dialog-close>Confirm</button>
               </div>
             </mat-card-content>
           </mat-card>          
