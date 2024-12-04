@@ -22,6 +22,9 @@
         <mat-form-field appearance="outline">
           <mat-label>Enter Registered Email</mat-label>
           <input matInput placeholder="abc@gmail.com" type="email" formControlName="gmail">
+          <button matSuffix mat-icon-button aria-label="Clear" (click)="loginForm.get('gmail')?.setValue('')">
+            <mat-icon>close</mat-icon>
+          </button>
           <mat-error *ngIf="loginForm.get('gmail')?.errors &&
             loginForm.get('gmail')?.hasError('required') && loginForm.get('gmail')?.touched" style="color: red;">
               Email Address is required
@@ -35,7 +38,10 @@
       <div style="padding-top: 5px;">
         <mat-form-field appearance="outline">
           <mat-label>Enter Password</mat-label>
-          <input matInput placeholder="" type="password" formControlName="password">
+          <input matInput placeholder="" [type]="hidePassword ? 'password' : 'text'" formControlName="password">
+          <button matSuffix mat-icon-button aria-label="toggle-password" (click)="togglePassword()">
+            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
           <mat-error *ngIf="loginForm.get('password')?.errors &&
             loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched">
               Password is required
