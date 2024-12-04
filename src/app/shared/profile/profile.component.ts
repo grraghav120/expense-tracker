@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthService } from 'src/app/auth/auth.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
 import { AlertBoxComponent } from '../alert-box/alert-box.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -20,15 +20,20 @@ export class ProfileComponent implements OnInit{
   newName:any;
   newUsername:any;
   userId:any;
-  constructor(public businessData:BusinessDataService,public authService:AuthService,public snackBar:MatSnackBar,public dialog: MatDialog){}
+  constructor(
+    public businessData:BusinessDataService,
+    public snackBar:MatSnackBar,
+    public dialog: MatDialog
+  ){}
+
   ngOnInit(): void {
     this.userId=sessionStorage.getItem('Id')?.split(' ')[1];
     this.isProcess=true;
-    this.authService.getAllSaveData().subscribe((res:any)=>{
+    this.businessData.getAllSaveData().subscribe((res:any)=>{
       setTimeout(() => {
         this.isProcess=false;
         this.editable=true;
-        if(this.userId==="6558727029c0dacee0900c6a"){
+        if(this.userId===environment.adminId){
           this.editable=false;
         }
       }, 1000);
@@ -53,9 +58,9 @@ export class ProfileComponent implements OnInit{
       username:this.newUsername,
       name:this.newName,
     }
-    this.authService.updateProfile(body).subscribe((res:any)=>{
+    this.businessData.updateProfile(body).subscribe((res:any)=>{
       if(res){
-        this.authService.updateWholeInfo(body).subscribe((result)=>{
+        this.businessData.updateWholeInfo(body).subscribe((result)=>{
           // console.log(result);
         });
         this.snackBar.open('Profile Updated','',{duration:2000});
@@ -66,7 +71,6 @@ export class ProfileComponent implements OnInit{
   }
   onDeleteAccount(){
     // console.log("delete");
-    // this.authService.onLogout();
     this.dialog.open(AlertBoxComponent, {
       data:{type:'delete'}
     });

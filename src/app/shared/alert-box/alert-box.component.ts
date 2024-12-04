@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { BusinessDataService } from 'src/app/services/business-data.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -24,8 +23,7 @@ export class AlertBoxComponent implements OnInit{
     @Inject(MAT_DIALOG_DATA) public data: any,
     public snackBar:MatSnackBar,
     public dialog: MatDialog,
-    public route:Router,
-    public businessService:BusinessDataService
+    public route:Router
   ){}
   
   ngOnInit(): void {
@@ -59,7 +57,7 @@ export class AlertBoxComponent implements OnInit{
       gmail: this.userEmailAddress,
       password:this.passwordOfUser,
     }
-    this.businessService.onConfirmAccess(body).subscribe((res:any)=>{
+    this.authService.onConfirmAccess(body).subscribe((res:any)=>{
       this.isLoading=false;
       this.onConfirmPasswordAndDeleteAccount();
     },error=>{

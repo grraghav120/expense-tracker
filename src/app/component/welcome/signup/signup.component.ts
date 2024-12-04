@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
@@ -15,7 +14,6 @@ export class SignupComponent implements OnInit {
   SignUpContinue:boolean=false;
   constructor(
     private authService: AuthService,
-    private _snackBar: MatSnackBar,
     public route: Router,
     private busServ: BusinessDataService
   ) {}
@@ -32,24 +30,10 @@ export class SignupComponent implements OnInit {
     this.SignUpContinue=true;
     this.authService.onSignUp(this.signUpForm.value).then(()=>{
       this.SignUpContinue=false;
-      this.saveSource();
+      this.authService.saveSource(this.signUpForm.value.gmail,'signup',this.busServ.getComingSrc());
     }).catch((error:any) => {
-      // Handle error response here
-      this.SignUpContinue = false; // Enable the login button after error
+      this.SignUpContinue = false;
+      console.error(error);
     });
   }
-
-  saveSource(){
-    let body={
-      email:this.signUpForm.value.gmail,
-      source:this.busServ.getComingSrc(),
-      createdAt:new Date(),
-    };
-    this.busServ.onCollectSource(body).subscribe((res:any)=>{
-      console.log(res.message);
-    }),(error:any)=>{
-      console.error(error);
-    };
-  }
-
 }

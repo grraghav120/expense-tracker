@@ -19,7 +19,11 @@ export class WelcomeComponent implements OnInit{
     public activateroute:ActivatedRoute
    )
   {
-    
+    this.activateroute.queryParams.subscribe((p)=>{
+      if(p['src']!=undefined && [p['src']!=null]){
+        this.businessData.setComingSrc(p['src']);
+      }
+    });
   }
   ngOnInit(): void {
     this.isLogging=true;
@@ -30,8 +34,7 @@ export class WelcomeComponent implements OnInit{
       this._snackBar.open('You have Logout Successfully','',{duration:3000});
     }
     if(!sessionStorage.getItem('Version')){
-      this.businessData.onGetAppVersion().subscribe((res:any)=>{
-        // console.log(res);
+      this.authService.onGetAppVersion().subscribe((res:any)=>{
         this.businessData.appVersion=res.version;
         this.appVersion=res.version;
         sessionStorage.setItem('Version',this.appVersion);

@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl;
   private isAuth: boolean = false;
   private token!: any;
   private expireTokenTime: any;
@@ -38,7 +38,7 @@ export class AuthService {
     return this.emailAddress;
   }
 
-  private setEmail(email:any){
+  setEmail(email:any){
     localStorage.setItem('user_email',email);
     this.emailAddress=email;
   }
@@ -143,36 +143,49 @@ export class AuthService {
     }, time*1000);
   }
 
-  saveAllData(body:any){
-    this.http.post(this.apiUrl+'SAVE_DATA',body).subscribe((res:any)=>{
-      this._snackBar.open('Expense Tracker Account Created SuccessFully','',{duration:2000});
-    })
-  }
-
-  getAllSaveData(){
-    return this.http.get(this.apiUrl+'GET_SAVE_DATA/'+sessionStorage.getItem('Id')?.split(' ')[1]);
-  }
-
   updateUserData(id:string,body:any){
-    // let userid=localStorage.getItem('Id')?.split(' ')[1];
     this.http.post(this.apiUrl+'UPDATE_SAVE_DATA/'+id,body).subscribe((result)=>{
-      // console.log(result);
     })
   }
-  
-  updateProfile(body:any){
-    let id=sessionStorage.getItem('Id')?.split(' ')[1];
-    return this.http.post(this.apiUrl+'UPDATE_PROFILE/'+id,body);
-  }
 
-  updateWholeInfo(body:any){
-    let id=sessionStorage.getItem('Id')?.split(' ')[1];
-    return this.http.post(this.apiUrl+'UPDATE_NAME/'+id,body);
+  saveAllData(body:any){
+    this.http.post(this.apiUrl+'USER/SAVE_DATA',body).subscribe((res:any)=>{
+    })
   }
 
   deleteUserAccount(){
     let id=sessionStorage.getItem('Id')?.split(' ')[1];
     return this.http.delete(this.apiUrl+'USER/DELETE_ACCOUNT/'+id);
+  }
+
+  onGetAppVersion(){
+    return this.http.get(this.apiUrl+'USER/APP_VERSION/');
+  }
+  
+  private onCollectSource(body:any){
+    return this.http.post(this.apiUrl+'USER/USER_SOURCE/',body);
+  }
+
+  saveSource(email:string,action:string,source:string){
+    let body={
+      email:email,
+      source:source,
+      action:action,
+      createdAt:new Date(),
+    };
+    this.onCollectSource(body).subscribe((res:any)=>{
+      console.log(res.message);
+    }),(error:any)=>{
+      console.error(error);
+    };
+  }
+
+  onProvideFeedback(body:any){
+    return this.http.post(this.apiUrl+'USER/USER_FEEDBACK/',body)
+  }
+
+  onConfirmAccess(body:any){
+    return this.http.post(this.apiUrl+'USER/CONFIRM_ACCESS/',body);
   }
 
 }

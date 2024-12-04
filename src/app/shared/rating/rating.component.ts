@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BusinessDataService } from 'src/app/services/business-data.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-rating',
@@ -14,7 +14,7 @@ export class RatingComponent {
   reason: number | null = 0;
 
   constructor(
-    public businessService:BusinessDataService,
+    public authServ:AuthService,
     public snackBar:MatSnackBar
   )
   {}
@@ -31,7 +31,7 @@ export class RatingComponent {
         createdAt:new Date(),
       };
       //post feedback to DB
-      this.businessService.onProvideFeedback(body).subscribe((res:any)=>{
+      this.authServ.onProvideFeedback(body).subscribe((res:any)=>{
         if(res.status){
           console.log(res);
         }else{
