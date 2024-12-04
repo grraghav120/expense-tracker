@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   queryPass:any;
   queryEmail:any;
   msg:any=null;
+
   constructor(
     public route: Router,
     public authService: AuthService,
@@ -24,12 +25,12 @@ export class LoginComponent implements OnInit {
   ) {
     this.activateroute.queryParams.subscribe((p)=>{
       if((p['email']!=undefined || p['email']!=null) && (p['pass']!=undefined || p['pass']!=null)){
-        // console.log(p['email'],p['pass']);
         this.queryEmail=p['email'];
         this.queryPass=p['pass'];
       }
     })
   }
+
   ngOnInit(): void {
     this.LoginContinue=false;
     this.loginForm = new FormGroup({
@@ -41,6 +42,7 @@ export class LoginComponent implements OnInit {
       this.onLogin('autoLogin');
     }
   }
+
   onLogin(wayToLogin:string) {
     if (wayToLogin==='default' && this.loginForm.invalid) {
       return;
@@ -50,6 +52,7 @@ export class LoginComponent implements OnInit {
     }
     this.LoginLogic(this.loginForm.value);
   }
+
   LoginLogic(body:any){
     this.LoginContinue=true;
     this.busServ.isChecking=true;
@@ -57,6 +60,7 @@ export class LoginComponent implements OnInit {
       // Handle successful login
       this.LoginContinue = false; // Enable the login button after successful login
       this.busServ.isChecking=false;
+      this.authService.saveSource(this.loginForm.value.gmail,'login',this.busServ.getComingSrc());
     })
     .catch((error:any) => {
       // Handle error response 
@@ -64,4 +68,5 @@ export class LoginComponent implements OnInit {
       this.busServ.isChecking=false;
     });
   }
+
 }

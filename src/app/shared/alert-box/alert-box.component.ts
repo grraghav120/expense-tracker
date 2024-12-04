@@ -3,7 +3,6 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
-import { BusinessDataService } from 'src/app/services/business-data.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,7 +15,7 @@ export class AlertBoxComponent implements OnInit{
   isLoading:boolean=false;
   userId:any;
   isReadyToDeleteAccount=false;
-  userEmailAddress='grraghav120@gmail.com';
+  userEmailAddress='';
   passwordOfUser:any=null;
   isProvideFeedback:boolean=false;
   constructor(
@@ -24,8 +23,7 @@ export class AlertBoxComponent implements OnInit{
     @Inject(MAT_DIALOG_DATA) public data: any,
     public snackBar:MatSnackBar,
     public dialog: MatDialog,
-    public route:Router,
-    public businessService:BusinessDataService
+    public route:Router
   ){}
   
   ngOnInit(): void {
@@ -39,7 +37,6 @@ export class AlertBoxComponent implements OnInit{
   }
 
   onDeleteAccount(){
-    console.log(environment.adminId);
     if (this.userId === environment.adminId) {
       this.dialog.open(AlertBoxComponent, {
         data:{type:'admin'}
@@ -60,8 +57,7 @@ export class AlertBoxComponent implements OnInit{
       gmail: this.userEmailAddress,
       password:this.passwordOfUser,
     }
-    console.log(body);
-    this.businessService.onConfirmAccess(body).subscribe((res:any)=>{
+    this.authService.onConfirmAccess(body).subscribe((res:any)=>{
       this.isLoading=false;
       this.onConfirmPasswordAndDeleteAccount();
     },error=>{

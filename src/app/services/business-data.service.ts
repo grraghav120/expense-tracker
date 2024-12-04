@@ -23,7 +23,20 @@ export class BusinessDataService {
   apiUrl = environment.apiUrl;
   userId:any;
   appVersion:any;
+  private comingSrc:any='Direct';
   constructor(private route: Router, public http: HttpClient) {
+  }
+
+  setComingSrc(val:any){
+    this.comingSrc=val;
+  }
+
+  getComingSrc(){
+    return this.comingSrc;
+  }
+
+  getUserIdFromSS(){
+    return sessionStorage.getItem('Id')?.split(' ')[1];
   }
 
   onHome(){
@@ -54,7 +67,7 @@ export class BusinessDataService {
 
 
   onImportExpense(values:any){
-    let id=sessionStorage.getItem('Id')?.split(' ')[1];
+    let id=this.getUserIdFromSS();
     let date=values.expense_date.split('/');
     date=(new Date(date[2],date[1]-1,date[0])).toString();
     date=date.split(' ');
@@ -106,6 +119,7 @@ export class BusinessDataService {
     this.userId=sessionStorage.getItem('Id')?.split(' ')[1];
     return this.http.get(this.apiUrl+'GET_CATEGORY/'+this.userId);
   }
+  
   onGithub(){
     const link=document.createElement('a');
     link.target="_blank";
@@ -118,17 +132,17 @@ export class BusinessDataService {
     link.href="https://www.linkedin.com/in/raghavgarg2002/";
     link.click();
   }
-
-  onGetAppVersion(){
-    return this.http.get(this.apiUrl+'USER/APP_VERSION/');
+  
+  updateProfile(body:any){
+    return this.http.post(this.apiUrl+'UPDATE_PROFILE/'+this.getUserIdFromSS(),body);
   }
 
-  onProvideFeedback(body:any){
-    return this.http.post(this.apiUrl+'USER/USER_FEEDBACK/',body)
+  updateWholeInfo(body:any){
+    return this.http.post(this.apiUrl+'UPDATE_NAME/'+this.getUserIdFromSS(),body);
   }
 
-  onConfirmAccess(body:any){
-    return this.http.post(this.apiUrl+'USER/CONFIRM_ACCESS/',body);
+  getAllSaveData(){
+    return this.http.get(this.apiUrl+'GET_SAVE_DATA/'+this.getUserIdFromSS());
   }
 
 }
