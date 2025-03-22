@@ -26,10 +26,9 @@
   <img src="https://img.shields.io/github/last-commit/grraghav120/expense-tracker?style=for-the-badge" />
 </div>  
 
-# Quick Acces 😏
-
-- Email 📧 - abc@gmail.com
-- password 🔑 - 12345678 🤫🤐
+# Quick Access 😏
+Click Below link:
+[Quick Access](https://expense-tracker-120.netlify.app/welcome?email=abc@gmail.com&pass=12345678)
 
 
 # How to Use 👥 (Features of Application)
