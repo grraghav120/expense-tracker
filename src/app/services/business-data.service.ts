@@ -22,9 +22,18 @@ export class BusinessDataService {
   data:any;
   apiUrl = environment.apiUrl;
   userId:any;
-  appVersion:any;
+  private appVersion:any='';
   private comingSrc:any='Direct';
   constructor(private route: Router, public http: HttpClient) {
+  }
+
+  getAppVersion(){
+    return this.appVersion;
+  }
+
+  setAppVersion(version:any){
+    this.appVersion = version;
+    sessionStorage.setItem('Version',this.appVersion);
   }
 
   setComingSrc(val:any){
