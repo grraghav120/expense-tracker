@@ -13,7 +13,6 @@ import { environment } from 'src/environments/environment';
 export class WelcomeComponent implements OnInit{
   isLogging:boolean=true;
   appVersion:any='';
-  urlToRedirect:any = 'blank'
   private pressTimer: any = null;
   private readonly LONG_PRESS_TIME = 1500;
   private longPressTriggered = false;
@@ -103,8 +102,7 @@ export class WelcomeComponent implements OnInit{
 
   private goToAdmin() {
     if (this.longPressTriggered || true) {
-      this.urlToRedirect = '';
-      window.location.href = this.urlToRedirect
+      window.location.href = environment.WEBSITE_URL;
     }
   }
 }
