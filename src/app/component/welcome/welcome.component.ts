@@ -35,9 +35,8 @@ export class WelcomeComponent implements OnInit{
     }
     if(!sessionStorage.getItem('Version')){
       this.authService.onGetAppVersion().subscribe((res:any)=>{
-        this.businessData.appVersion=res.version;
-        this.appVersion=res.version;
-        sessionStorage.setItem('Version',this.appVersion);
+        this.businessData.setAppVersion(res.version);
+        this.appVersion=this.businessData.getAppVersion();
       });
     }
     else{
@@ -57,6 +56,4 @@ export class WelcomeComponent implements OnInit{
   onLinkedin(){
     this.businessData.onLinkedin();
   }
-
-
 }
