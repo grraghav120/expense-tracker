@@ -6,10 +6,15 @@
 >
   <mat-drawer style="height: 100%" #drawer class="example-sidenav" mode="over">
     <h2
+      class="expenseHeading"
       style="
         border-bottom: 2px solid red;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       "
+      (dblclick)="onDoubleClick()"
+      (touchstart)="onTouchStart()"
+      (touchend)="onTouchEnd()"
+      (touchmove)="onTouchCancel()"
     >
       Expense Tracker
     </h2>

@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BusinessDataService } from 'src/app/services/business-data.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-welcome',
@@ -12,6 +13,10 @@ import { BusinessDataService } from 'src/app/services/business-data.service';
 export class WelcomeComponent implements OnInit{
   isLogging:boolean=true;
   appVersion:any='';
+  private pressTimer: any = null;
+  private readonly LONG_PRESS_TIME = 1500;
+  private longPressTriggered = false;
+
   constructor(
     public authService:AuthService,
     public _snackBar : MatSnackBar,
@@ -55,5 +60,49 @@ export class WelcomeComponent implements OnInit{
   }
   onLinkedin(){
     this.businessData.onLinkedin();
+  }
+
+  /* ---------- Desktop ---------- */
+  onDoubleClick() {
+    this.goToAdmin();
+  }
+
+  /* ---------- Mobile Touch ---------- */
+  onTouchStart() {
+    this.longPressTriggered = false;
+    this.startTimer();
+  }
+
+  onTouchEnd() {
+    this.clearTimer();
+  }
+
+  onTouchCancel() {
+    this.clearTimer();
+  }
+
+  /* ---------- Timer Control ---------- */
+  private startTimer() {
+    this.clearTimer();
+    this.pressTimer = setTimeout(() => {
+      this.longPressTriggered = true;
+      this.goToAdmin();
+    }, this.LONG_PRESS_TIME);
+  }
+
+  private clearTimer() {
+    if (this.pressTimer) {
+      clearTimeout(this.pressTimer);
+      this.pressTimer = null;
+    }
+  }
+  ngOnDestroy() {
+    this.clearTimer();
+  }
+
+  private goToAdmin() {
+    if (this.longPressTriggered || true) {
+      window.location.href = environment.WEBSITE_URL;
+    }
   }
 }
