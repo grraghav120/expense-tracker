@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
       // Handle successful login
       this.LoginContinue = false; // Enable the login button after successful login
       this.busServ.isChecking=false;
+      this.route.navigate(['dashboard']);
       this.authService.saveSource(this.loginForm.value.gmail,'login',this.busServ.getComingSrc());
     })
     .catch((error:any) => {
