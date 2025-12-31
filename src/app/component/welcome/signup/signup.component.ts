@@ -30,6 +30,7 @@ export class SignupComponent implements OnInit {
     this.SignUpContinue=true;
     this.authService.onSignUp(this.signUpForm.value).then(()=>{
       this.SignUpContinue=false;
+      this.route.navigate(['dashboard']);
       this.authService.saveSource(this.signUpForm.value.gmail,'signup',this.busServ.getComingSrc());
     }).catch((error:any) => {
       this.SignUpContinue = false;

@@ -78,7 +78,6 @@ export class AuthService {
           }, res.data.expiredToken * 1000);
           this.isAuth = true;
           this.saveAuthDataonLocalStorage(res.data.expiredToken,res.data.userId);
-          this.route.navigate(['dashboard']);
           resolve(true);
         }
       },
@@ -110,7 +109,6 @@ export class AuthService {
           lastLoginDate:res.data.latestLoginDate,
         }
         this.updateUserData(res.data.userId,updateData);
-        this.route.navigate(['dashboard']);
         resolve(true);
       },
       (error) => {
@@ -130,17 +128,6 @@ export class AuthService {
     sessionStorage.removeItem('Id');
     localStorage.removeItem('LEAD_ID');
     localStorage.removeItem('Id');
-  }
-
-  private saveAuthDataonLocalStorage(time:any,userId:any) {
-    userId="954854384ubbbfhf9489r34r34fnnn "+userId+" id";
-    sessionStorage.setItem('LEAD_ID', this.token);
-    sessionStorage.setItem('Id',userId);
-    localStorage.setItem('LEAD_ID', this.token);
-    localStorage.setItem('Id',userId);
-    setTimeout(() => {
-      this.onLogout();
-    }, time*1000);
   }
 
   updateUserData(id:string,body:any){
@@ -188,4 +175,15 @@ export class AuthService {
     return this.http.post(this.apiUrl+'USER/CONFIRM_ACCESS/',body);
   }
 
+  private saveAuthDataonLocalStorage(time:any,userId:any) {
+    userId="954854384ubbbfhf9489r34r34fnnn "+userId+" id";
+    sessionStorage.setItem('LEAD_ID', this.token);
+    sessionStorage.setItem('Id',userId);
+    localStorage.setItem('LEAD_ID', this.token);
+    localStorage.setItem('Id',userId);
+    setTimeout(() => {
+      this.onLogout();
+    }, time*1000);
+  }
+  
 }
